@@ -167,7 +167,7 @@ namespace sim_tp2.Distribution
         {
             // MathNet.Numerics.Distributions.Normal resultado = new MathNet.Numerics.Distributions.Normal(mu, sigma);
             //   return resultado.CumulativeDistribution(x);
-            return;
+            return 0;
         }
 
         public double CalcularFrecuenciaEsperada(double limiteInferior, double limiteSuperior)
