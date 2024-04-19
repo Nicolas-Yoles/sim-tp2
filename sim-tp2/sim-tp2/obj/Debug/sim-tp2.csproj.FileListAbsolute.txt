@@ -1,0 +1,10 @@
+C:\Users\Asus\Source\Repos\Nicolas-Yoles\sim-tp2\sim-tp2\sim-tp2\bin\Debug\sim-tp2.exe.config
+C:\Users\Asus\Source\Repos\Nicolas-Yoles\sim-tp2\sim-tp2\sim-tp2\bin\Debug\sim-tp2.exe
+C:\Users\Asus\Source\Repos\Nicolas-Yoles\sim-tp2\sim-tp2\sim-tp2\bin\Debug\sim-tp2.pdb
+C:\Users\Asus\Source\Repos\Nicolas-Yoles\sim-tp2\sim-tp2\sim-tp2\obj\Debug\sim-tp2.csproj.AssemblyReference.cache
+C:\Users\Asus\Source\Repos\Nicolas-Yoles\sim-tp2\sim-tp2\sim-tp2\obj\Debug\sim_tp2.Form1.resources
+C:\Users\Asus\Source\Repos\Nicolas-Yoles\sim-tp2\sim-tp2\sim-tp2\obj\Debug\sim_tp2.Properties.Resources.resources
+C:\Users\Asus\Source\Repos\Nicolas-Yoles\sim-tp2\sim-tp2\sim-tp2\obj\Debug\sim-tp2.csproj.GenerateResource.cache
+C:\Users\Asus\Source\Repos\Nicolas-Yoles\sim-tp2\sim-tp2\sim-tp2\obj\Debug\sim-tp2.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Source\Repos\Nicolas-Yoles\sim-tp2\sim-tp2\sim-tp2\obj\Debug\sim-tp2.exe
+C:\Users\Asus\Source\Repos\Nicolas-Yoles\sim-tp2\sim-tp2\sim-tp2\obj\Debug\sim-tp2.pdb
