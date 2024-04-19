@@ -1,10 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\nicoy\\code\\sim-tp2\\sim-tp2\\",
+  "WorkspaceRootPath": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|c:\\users\\nicoy\\code\\sim-tp2\\sim-tp2\\sim-tp2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|c:\\users\\asus\\source\\repos\\nicolas-yoles\\sim-tp2\\sim-tp2\\sim-tp2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|solutionrelative:sim-tp2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\distribution\\normal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|solutionrelative:sim-tp2\\distribution\\normal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\distribution\\exponentialnegative.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|solutionrelative:sim-tp2\\distribution\\exponentialnegative.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|solutionrelative:sim-tp2\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|solutionrelative:sim-tp2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\dto\\exponentialnegativedistribution.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|solutionrelative:sim-tp2\\dto\\exponentialnegativedistribution.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\distribution\\uniform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|solutionrelative:sim-tp2\\distribution\\uniform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\dto\\uniformdistribution.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|solutionrelative:sim-tp2\\dto\\uniformdistribution.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\dto\\normaldistribution.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB973D5C-3AFC-4B87-B5ED-A0E732D73B71}|sim-tp2\\sim-tp2.csproj|solutionrelative:sim-tp2\\dto\\normaldistribution.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,23 +46,190 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 17,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\nicoy\\code\\sim-tp2\\sim-tp2\\sim-tp2\\Form1.cs",
-              "RelativeDocumentMoniker": "sim-tp2\\Form1.cs",
-              "ToolTip": "C:\\Users\\nicoy\\code\\sim-tp2\\sim-tp2\\sim-tp2\\Form1.cs [Design]",
-              "RelativeToolTip": "sim-tp2\\Form1.cs [Design]",
+              "DocumentIndex": 6,
+              "Title": "Uniform.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\Distribution\\Uniform.cs",
+              "RelativeDocumentMoniker": "sim-tp2\\Distribution\\Uniform.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\Distribution\\Uniform.cs",
+              "RelativeToolTip": "sim-tp2\\Distribution\\Uniform.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAxwC4AAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-13T16:35:12.835Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-04-17T16:15:12.292Z",
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:843913609:0:{83107a3e-496a-485e-b455-16ddb978e55e}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2011499102:0:{83107a3e-496a-485e-b455-16ddb978e55e}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:172270452:0:{83107a3e-496a-485e-b455-16ddb978e55e}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1520281562:0:{83107a3e-496a-485e-b455-16ddb978e55e}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:138:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:139:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:140:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:907281699:0:{83107a3e-496a-485e-b455-16ddb978e55e}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{131369f2-062d-44a2-8671-91ff31efb4f4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\Form1.cs",
+              "RelativeDocumentMoniker": "sim-tp2\\Form1.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\Form1.cs",
+              "RelativeToolTip": "sim-tp2\\Form1.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAMwCMAAAA+AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-18T23:03:40.903Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "sim-tp2\\Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\Form1.Designer.cs",
+              "RelativeToolTip": "sim-tp2\\Form1.Designer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-18T23:04:11.374Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ExponentialNegative.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\Distribution\\ExponentialNegative.cs",
+              "RelativeDocumentMoniker": "sim-tp2\\Distribution\\ExponentialNegative.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\Distribution\\ExponentialNegative.cs",
+              "RelativeToolTip": "sim-tp2\\Distribution\\ExponentialNegative.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAUwCEAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-17T17:35:16.569Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Normal.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\Distribution\\Normal.cs",
+              "RelativeDocumentMoniker": "sim-tp2\\Distribution\\Normal.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\Distribution\\Normal.cs*",
+              "RelativeToolTip": "sim-tp2\\Distribution\\Normal.cs*",
+              "ViewState": "AQIAABEAAAAAAAAAAAAAwDQAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-17T16:45:58.46Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ExponentialNegativeDistribution.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\DTO\\ExponentialNegativeDistribution.cs",
+              "RelativeDocumentMoniker": "sim-tp2\\DTO\\ExponentialNegativeDistribution.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\DTO\\ExponentialNegativeDistribution.cs",
+              "RelativeToolTip": "sim-tp2\\DTO\\ExponentialNegativeDistribution.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-17T14:33:59.769Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\Form1.cs",
+              "RelativeDocumentMoniker": "sim-tp2\\Form1.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\Form1.cs [Design]",
+              "RelativeToolTip": "sim-tp2\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-13T16:35:12.835Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "NormalDistribution.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\DTO\\NormalDistribution.cs",
+              "RelativeDocumentMoniker": "sim-tp2\\DTO\\NormalDistribution.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\DTO\\NormalDistribution.cs",
+              "RelativeToolTip": "sim-tp2\\DTO\\NormalDistribution.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-17T14:29:05.263Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UniformDistribution.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\DTO\\UniformDistribution.cs",
+              "RelativeDocumentMoniker": "sim-tp2\\DTO\\UniformDistribution.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Nicolas-Yoles\\sim-tp2\\sim-tp2\\sim-tp2\\DTO\\UniformDistribution.cs",
+              "RelativeToolTip": "sim-tp2\\DTO\\UniformDistribution.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-17T14:45:28.721Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1202,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }
