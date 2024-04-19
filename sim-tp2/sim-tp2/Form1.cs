@@ -17,6 +17,13 @@ namespace sim_tp2
         public Form1()
         {
             InitializeComponent();
+            btn_calcular.Hide();
+
+            checkBoxUniforme.Checked = false;
+            checkBoxNormal.Checked= false;
+            checkBoxExponencialNegativa.Checked = false;
+
+            DeshabilitarElementos();
         }
         private void resetearCheckBox()
         {
@@ -33,7 +40,7 @@ namespace sim_tp2
         }
         
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_calcular_Click(object sender, EventArgs e)
         {
             if (checkBoxExponencialNegativa.Checked == true)
             {
@@ -62,15 +69,30 @@ namespace sim_tp2
             }
             if (checkBoxUniforme.Checked == true)
             {
-                UniformDistribution Objectuniform = new UniformDistribution
+               /* UniformDistribution Objectuniform = new UniformDistribution
                 {
                     Maximo = Convert.ToInt32(numericUpDownMaximoUniforme.Text.Trim()),
                     Minimo = Convert.ToInt32(numericUpDownMinimoUniforme.Text.Trim()),
                     cantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim()),
                     cantidadMuestra = Convert.ToInt32(numericUpDownMuestra.Text.Trim())
-                };
-                Uniform uniform = new Uniform();
-                listBoxVariablesAleatorias.Items.Add(uniform.GenerarDistribucion(Objectuniform));
+                };*/
+
+                Uniform uniforme = new Uniform();
+
+                uniforme.cantidadMuestra = Convert.ToInt32(numericUpDownMuestra.Text.Trim());
+                uniforme.Minimo = Convert.ToDouble(numericUpDownMinimoUniforme.Text.Trim());
+                uniforme.Maximo = Convert.ToDouble(numericUpDownMaximoUniforme.Text.Trim());
+                uniforme.cantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim());
+                uniforme.Lista = listBoxVariablesAleatorias;
+                /* uniforme.Grafico = chartDistribucion;
+                 uniforme.Grilla = dgvDatos;*/
+
+
+                uniforme.GenerarDistribucion(uniforme);
+
+
+               /* listBoxVariablesAleatorias.Items.Add(uniform.GenerarDistribucion(Objectuniform));*/
+                listBoxVariablesAleatorias.Visible = true;
 
             }
         }
@@ -79,16 +101,19 @@ namespace sim_tp2
         {
             numericUpDownLambdaExponencialNegativa.Visible = false;
             labelLambdaExponencialNegativa.Visible = false;
+            checkBoxExponencialNegativa.Checked = false;
             numericUpDownMediaNormal.Visible = false;
             numericUpDownDesviacionNormal.Visible = false;
             labelDesviacion.Visible = false;
             labelMediaNormal.Visible = false;
-            checkBoxExponencialNegativa.Checked = false;
             checkBoxNormal.Checked = false;
             numericUpDownMinimoUniforme.Visible = true;
             labelMinimoUniforme.Visible = true;
             numericUpDownMaximoUniforme .Visible = true;
             labelMaximoUniforme.Visible = true;
+            btn_calcular.Show();
+
+
         }
 
         private void checkBoxExponencialNegativa_Click(object sender, EventArgs e)
@@ -122,5 +147,15 @@ namespace sim_tp2
             numericUpDownMediaNormal .Visible = true ;
             numericUpDownDesviacionNormal .Visible = true ;
         }
+
+        private void DeshabilitarElementos()
+        {
+            listBoxVariablesAleatorias.Visible = false;
+            // dgvDatos.Visible = false;
+            // chartDistribucion.Visible = false;
+        }
+
+
+
     }
 }
