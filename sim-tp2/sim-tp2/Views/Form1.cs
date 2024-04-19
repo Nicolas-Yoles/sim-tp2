@@ -96,25 +96,7 @@ namespace sim_tp2
             }
             if (checkBoxUniforme.Checked == true)
             {
-
-                Uniform uniforme = new Uniform();
-
-                uniforme.cantidadMuestra = Convert.ToInt32(numericUpDownMuestra.Text.Trim());
-                uniforme.Minimo = Convert.ToDouble(numericUpDownMinimoUniforme.Text.Trim());
-                uniforme.Maximo = Convert.ToDouble(numericUpDownMaximoUniforme.Text.Trim());
-                uniforme.cantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim());
-                uniforme.Lista = listBoxVariablesAleatorias;
-                uniforme.Grafico = chartDistribucion;
-                uniforme.Grilla = dgvDatos;
-
-
-                uniforme.GenerarDistribucion(uniforme);
-
-
-                listBoxVariablesAleatorias.Visible = true;
-                dgvDatos.Visible = true;
-                chartDistribucion.Visible = true;
-
+                ImprimirDistribucionUniforme();
             }
         }
 
@@ -177,6 +159,28 @@ namespace sim_tp2
             chartDistribucion.Visible = false;
         }
 
+        /// <summary>
+        /// Muestra en pantalla una distribucion uniforme segun parametros
+        /// </summary>
+        private void ImprimirDistribucionUniforme()
+        {
+            var uniforme = new Uniform();
+
+            var tamMuestra = Convert.ToInt32(numericUpDownMuestra.Text.Trim());
+            var minimo = Convert.ToDouble(numericUpDownMinimoUniforme.Text.Trim());
+            var maximo = Convert.ToDouble(numericUpDownMaximoUniforme.Text.Trim());
+            var cantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim());
+
+            uniforme.Lista = listBoxVariablesAleatorias;
+            uniforme.Grafico = chartDistribucion;
+            uniforme.Grilla = dgvDatos;
+
+            uniforme.ImprimirHistogramaDistribucionUniforme(tamMuestra, cantidadIntervalos, minimo, maximo);
+
+            listBoxVariablesAleatorias.Visible = true;
+            dgvDatos.Visible = true;
+            chartDistribucion.Visible = true;
+        }
       
     }
 }
