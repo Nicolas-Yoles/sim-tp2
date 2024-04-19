@@ -44,38 +44,58 @@ namespace sim_tp2
         {
             if (checkBoxExponencialNegativa.Checked == true)
             {
-                ExponentialNegativeDistribution ObjectExponentialNegative = new ExponentialNegativeDistribution
-                {
-                    lambda = Convert.ToInt32(numericUpDownLambdaExponencialNegativa.Text.Trim()),
-                    cantidadMuestra = Convert.ToInt32(numericUpDownMuestra.Text.Trim()),
-                    cantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim())
-
-                };
+          
                 ExponentialNegative exponencialNegativa = new ExponentialNegative();
-                listBoxVariablesAleatorias.Items.Add(exponencialNegativa.GenerarDistribucion(ObjectExponentialNegative));
+
+                exponencialNegativa.CantidadMuestra = Convert.ToInt32(numericUpDownMuestra.Text.Trim());
+                exponencialNegativa.CantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim());
+                exponencialNegativa.Lambda = (double)numericUpDownLambdaExponencialNegativa.Value;
+                exponencialNegativa.Lista = listBoxVariablesAleatorias;
+                exponencialNegativa.Grafico = chartDistribucion;
+
+                exponencialNegativa.Grilla = dgvDatos;
+
+                if (exponencialNegativa.CantidadMuestra > 0)
+                {
+                    exponencialNegativa.GenerarDistribucion(exponencialNegativa);
+                    listBoxVariablesAleatorias.Visible = true;
+                    dgvDatos.Visible = true;
+                    chartDistribucion.Visible = true;
+                }
+                else
+                {
+                    MessageBox.Show("Error: La muestra no puede ser 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                
+
+
             }
             if (checkBoxNormal.Checked == true)
-            {
-                NormalDistribution ObjectNormal = new NormalDistribution
-                {
-                    Media = Convert.ToInt32(numericUpDownMediaNormal.Text.Trim()),
-                    Desviacion = Convert.ToInt32(numericUpDownDesviacionNormal.Text.Trim()),
-                    cantMuestras = Convert.ToInt32(numericUpDownMuestra.Text.Trim()),
-                    cantIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim())
-                };
-                Normal Normal = new Normal();
-                listBoxVariablesAleatorias.Items.Add(Normal.GenerarDistribucion(ObjectNormal));
+            {              
 
+                Normal normal = new Normal();
+
+                normal.CantidadMuestra = Convert.ToInt32(numericUpDownMuestra.Text.Trim());
+                normal.Desviacion = Convert.ToDouble(numericUpDownDesviacionNormal.Text.Trim());
+                normal.Media = Convert.ToDouble(numericUpDownMediaNormal.Text.Trim());
+                normal.CantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim());
+                normal.Lista = listBoxVariablesAleatorias;
+                normal.Grafico = chartDistribucion;
+                normal.Grilla = dgvDatos;
+
+                if (normal.CantidadMuestra == 0 || normal.CantidadIntervalos == 0)
+                {
+                    MessageBox.Show("Error: La cantidad de muestra o la cantidad de intervalos no pueden ser 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    normal.GenerarDistribucion(normal);
+           
+                }
             }
             if (checkBoxUniforme.Checked == true)
             {
-               /* UniformDistribution Objectuniform = new UniformDistribution
-                {
-                    Maximo = Convert.ToInt32(numericUpDownMaximoUniforme.Text.Trim()),
-                    Minimo = Convert.ToInt32(numericUpDownMinimoUniforme.Text.Trim()),
-                    cantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim()),
-                    cantidadMuestra = Convert.ToInt32(numericUpDownMuestra.Text.Trim())
-                };*/
 
                 Uniform uniforme = new Uniform();
 
@@ -84,15 +104,16 @@ namespace sim_tp2
                 uniforme.Maximo = Convert.ToDouble(numericUpDownMaximoUniforme.Text.Trim());
                 uniforme.cantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim());
                 uniforme.Lista = listBoxVariablesAleatorias;
-                /* uniforme.Grafico = chartDistribucion;
-                 uniforme.Grilla = dgvDatos;*/
+                uniforme.Grafico = chartDistribucion;
+                uniforme.Grilla = dgvDatos;
 
 
                 uniforme.GenerarDistribucion(uniforme);
 
 
-               /* listBoxVariablesAleatorias.Items.Add(uniform.GenerarDistribucion(Objectuniform));*/
                 listBoxVariablesAleatorias.Visible = true;
+                dgvDatos.Visible = true;
+                chartDistribucion.Visible = true;
 
             }
         }
@@ -129,7 +150,8 @@ namespace sim_tp2
             checkBoxNormal.Checked = false;
             checkBoxUniforme.Checked = false;
             labelLambdaExponencialNegativa.Visible = true;
-            numericUpDownLambdaExponencialNegativa .Visible = true;
+            numericUpDownLambdaExponencialNegativa.Visible = true;
+            btn_calcular.Show();
         }
 
         private void checkBoxNormal_Click(object sender, EventArgs e)
@@ -151,11 +173,10 @@ namespace sim_tp2
         private void DeshabilitarElementos()
         {
             listBoxVariablesAleatorias.Visible = false;
-            // dgvDatos.Visible = false;
-            // chartDistribucion.Visible = false;
+            dgvDatos.Visible = false;
+            chartDistribucion.Visible = false;
         }
 
-
-
+      
     }
 }
