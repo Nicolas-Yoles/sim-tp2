@@ -1,8 +1,10 @@
 ﻿using sim_tp2.DTO;
+using sim_tp2.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,163 +14,126 @@ namespace sim_tp2.Distribution
 {
     public class ExponentialNegative
     {       
-        public int CantidadMuestra { get; set; }
-        public int CantidadIntervalos { get; set; }
-        public double Lambda { get; set; }
         public ListBox Lista { get; set; }
+
         public Chart Grafico { get; set; }
-        private List<double> Datos = new List<double>();
+
         public DataGridView Grilla { get; set; }
 
-        private Random rnd = new Random();
+        /// <summary>
+        /// Devuelve un número aleatorio para una distribución exponencial
+        /// negativa
+        /// </summary>
+        /// <param name="lambda"></param>
+        /// <returns></returns>
+        public static double GenerarAleatorio(double lambda)
+            => NumerosUtility.Truncar4Decimales(-1 / lambda * Math.Log(1 - NumerosUtility.GetAleatorio()));
 
-        public double GenerarAleatorio()
+        /// <summary>
+        /// Obtiene una secuencia de números correspondiente a una distribución 
+        /// exponencial negativa, a partir de lambda.
+        /// </summary>
+        /// <param name="tamMuestra"></param>
+        /// <param name="lambda"></param>
+        /// <returns></returns>
+        public static List<double> GenerarDistribucion(int tamMuestra, double lambda)
+            => Enumerable.Range(0, tamMuestra).Select(_ => GenerarAleatorio(lambda)).ToList();
+
+        /// <summary>
+        /// Calcula la frecuencia esperada para una distribucion Exponencial negativa.
+        /// Utiliza la función acumulada, calcula el area del limite superior y le resta
+        /// el del inferior, obteniendo la del intervalo.
+        /// </summary>
+        /// <param name="limiteInferior"></param>
+        /// <param name="limiteSuperior"></param>
+        /// <param name="lambda"></param>
+        /// <param name="tamMuestra"></param>
+        /// <returns></returns>
+        public static double CalcularFrecuenciaEsperada(double limiteInferior, double limiteSuperior, double lambda, int tamMuestra)
+            => (1 - Math.Exp((-lambda) * limiteSuperior) - (1 - Math.Exp((-lambda) * limiteInferior))) * tamMuestra;
+
+        /// <summary>
+        /// Devuelve la frecuencia observada
+        /// </summary>
+        /// <param name="ListaDatos"></param>
+        /// <param name="limiteInferior"></param>
+        /// <param name="limiteSuperior"></param>
+        /// <returns></returns>
+        public static int DeterminarFrecuenciaObservada(List<double> distribucion, double limiteInferior, double limiteSuperior)
+            => distribucion.Where(x => limiteInferior <= x && x <= limiteSuperior).Count();
+
+        public void ImprimirHistogramaDistribucionExponencialNegativa(int tamMuestra, int cantIntervalos, double? lambda = null, double? media = null)
         {
-            return rnd.NextDouble();
+            if(tamMuestra  == 0 || (!lambda.HasValue && !media.HasValue))
+                return;
+
+            lambda = lambda ?? 1 / media;
+
+            var distribucion = GenerarDistribucion(tamMuestra, lambda.Value);
+
+            if (!distribucion.Any())
+                return;
+
+            CrearHistograma(distribucion, cantIntervalos, tamMuestra, lambda.Value);
         }
 
-        public void GenerarDistribucion(ExponentialNegative exponencialNegativa)
+        private void CrearHistograma(List<double> distribucion, int cantIntervalos, int tamMuestra, double lambda)
         {
             Lista.Items.Clear();
-            Grilla.Rows.Clear();
-
-            Lista.BeginUpdate();
-            for (int i = 0; i < CantidadMuestra; i++)
-            {
-                double random = GenerarAleatorio();
-               // X = -1 / lambda * ln (1- RND) = -media * ln (1-RND)
-                double variableAleatoria = (-1 / Lambda) * (Math.Log(1 - random));
-                double variableAleatoriaTruncada = Math.Truncate(variableAleatoria * 10000) / 10000;
-
-                Lista.Items.Add(variableAleatoriaTruncada);
-                Datos.Add(variableAleatoriaTruncada);
-
-            }
-            Lista.EndUpdate();
-
-            GenerarHistograma();
-        }
-
-
-        public void GenerarHistograma()
-        {
-
             Grafico.Series.Clear();
             Grilla.Rows.Clear();
 
-            double limiteInferior = 0;
-            double limiteSuperior = 0;
+            Lista.BeginUpdate();
+            distribucion.ForEach(x => Lista.Items.Add(x));
+            Lista.EndUpdate();
 
-            double valorMaximo = Datos.Max();
-            double valorMinimo = Datos.Min();
-            double precision = 0.0001;
+            AgregarIntervalos(distribucion, cantIntervalos, tamMuestra, lambda);
+        }
 
-            double ancho_intervalo = ((valorMaximo - valorMinimo) / CantidadIntervalos) + precision;
+        private void AgregarIntervalos(List<double> distribucion, int cantIntervalos, int tamMuestra, double lambda)
+        {
+            var anchoIntervalo = ((distribucion.Max() - distribucion.Min()) / cantIntervalos) + 0.0001;
+            var limiteInferior = distribucion.Min();
+            var limiteSuperior = limiteInferior + anchoIntervalo;
 
-            int frecuenciaObservada = 0;
-            double frecuenciaEsperada = 0;
             double frecuenciaObservadaAcumulada = 0;
             double frecuenciaEsperadaAcumulada = 0;
-            double marcaClase = 0;
 
-
-            for (int i = 0; i < CantidadIntervalos; i++)
+            for (int i = 0; i < cantIntervalos; i++)
             {
+                var marcaClase = (limiteInferior + limiteSuperior) / 2;
+                var frecuenciaObservada = DeterminarFrecuenciaObservada(distribucion, limiteInferior, limiteSuperior);
+                var frecuenciaEsperada = CalcularFrecuenciaEsperada(limiteInferior, limiteSuperior, lambda, tamMuestra);
 
-                
-                // Determina el primer intervalo del histograma y determinar cuantos valores entran en el.
-                 
+                frecuenciaObservadaAcumulada += frecuenciaObservada;
+                frecuenciaEsperadaAcumulada += frecuenciaEsperada;
 
-                if (i == 0)
-                {
-                    limiteInferior = valorMinimo;
-                    limiteSuperior = valorMinimo + ancho_intervalo;
-                    marcaClase = (limiteInferior + limiteSuperior) / 2;
-
-                    frecuenciaObservada = DeterminarFrecuenciaObservada(Datos, limiteInferior, limiteSuperior);
-                    frecuenciaObservadaAcumulada = frecuenciaObservada;
-                    frecuenciaEsperada = CalcularFrecuenciaEsperada(limiteInferior, limiteSuperior);
-                    frecuenciaEsperadaAcumulada = frecuenciaEsperada;
-
-                    AgregarFilaGrilla(limiteInferior, limiteSuperior, marcaClase, frecuenciaObservada, frecuenciaEsperada, frecuenciaObservadaAcumulada, frecuenciaEsperadaAcumulada);
-                }
-
-                
-                // Determinar el resto de intervalos del histograma y determinar cuantos valores entran en ellos.
-                 
-
-
-                else
-                {
-                    limiteInferior = limiteSuperior;
-                    limiteSuperior = limiteSuperior + ancho_intervalo;
-                    marcaClase = (limiteInferior + limiteSuperior) / 2;
-
-                    frecuenciaObservada = DeterminarFrecuenciaObservada(Datos, limiteInferior, limiteSuperior);
-                    frecuenciaObservadaAcumulada += frecuenciaObservada;
-                    frecuenciaEsperada = CalcularFrecuenciaEsperada(limiteInferior, limiteSuperior);
-                    frecuenciaEsperadaAcumulada += frecuenciaEsperada;
-
-                    AgregarFilaGrilla(limiteInferior, limiteSuperior, marcaClase, frecuenciaObservada, frecuenciaEsperada, frecuenciaObservadaAcumulada, frecuenciaEsperadaAcumulada);
-
-                }
-
-                
-               //  Genera la etiqueta del mínimo y máximo de cada intervalo y lo agrega a la serie de intervalos del histograma.
-                // Los valores se truncan a 4 decimales.
-                 
-
+                AgregarFilaGrilla(limiteInferior, limiteSuperior, marcaClase, frecuenciaObservada, frecuenciaEsperada, frecuenciaObservadaAcumulada, frecuenciaEsperadaAcumulada);
                 string etiquetaInferiorIntervalo = (Math.Truncate(limiteInferior * 10000) / 10000).ToString();
                 string etiquetaSuperiorIntervalo = (Math.Truncate(limiteSuperior * 10000) / 10000).ToString();
                 string etiquetaIntervalo = etiquetaInferiorIntervalo + " - " + etiquetaSuperiorIntervalo;
-
                 Series serie = Grafico.Series.Add(etiquetaIntervalo);
                 serie.Points.AddXY("Intervalos", frecuenciaObservada);
 
+                limiteInferior = limiteSuperior;
+                limiteSuperior += anchoIntervalo;
             }
-
         }
 
-        public int DeterminarFrecuenciaObservada(List<double> ListaDatos, double limite_inferior, double limite_superior)
-        {
-
-            int frecuenciaObservada = 0;
-
-            foreach (double valor in ListaDatos)
-            {
-                if (limite_inferior <= valor && valor <= limite_superior)
-                {
-                    frecuenciaObservada++;
-                }
-            }
-
-            return frecuenciaObservada;
-        }
-
-        public double CalcularFrecuenciaEsperada(double limiteInferior, double limiteSuperior)
-        {
-            
-            double frecuenciaEsperada = ((1 - Math.Exp((-Lambda) * limiteSuperior)) - (1 - Math.Exp((-Lambda) * limiteInferior))) * CantidadMuestra;
-
-            return frecuenciaEsperada;
-        }
-
-        public void AgregarFilaGrilla(double limiteInferior, double limiteSuperior, double marcaClase, double frecuenciaObservada,
+        private void AgregarFilaGrilla(double limiteInferior, double limiteSuperior, double marcaClase, double frecuenciaObservada,
             double frecuenciaEsperada, double frecuenciaObservadaAcumulada, double frecuenciaEsperadaAcumulada)
         {
-            limiteInferior = Math.Truncate(limiteInferior * 10000) / 10000;
-            limiteSuperior = Math.Truncate(limiteSuperior * 10000) / 10000;
-            marcaClase = Math.Truncate(marcaClase * 10000) / 10000;
-            frecuenciaObservada = Math.Truncate(frecuenciaObservada * 10000) / 10000;
-            frecuenciaEsperada = Math.Truncate(frecuenciaEsperada * 10000) / 10000;
-            frecuenciaObservadaAcumulada = Math.Truncate(frecuenciaObservadaAcumulada * 10000) / 10000;
-            frecuenciaEsperadaAcumulada = Math.Truncate(frecuenciaEsperadaAcumulada * 10000) / 10000;
+            limiteInferior = NumerosUtility.Truncar4Decimales(limiteInferior);
+            limiteSuperior = NumerosUtility.Truncar4Decimales(limiteSuperior);
+            marcaClase = NumerosUtility.Truncar4Decimales(marcaClase);
+            frecuenciaObservada = NumerosUtility.Truncar4Decimales(frecuenciaObservada);
+            frecuenciaEsperada = NumerosUtility.Truncar4Decimales(frecuenciaEsperada);
+            frecuenciaObservadaAcumulada = NumerosUtility.Truncar4Decimales(frecuenciaObservadaAcumulada);
+            frecuenciaEsperadaAcumulada = NumerosUtility.Truncar4Decimales(frecuenciaEsperadaAcumulada);
 
             Grilla.Rows.Add(limiteInferior, limiteSuperior, marcaClase, frecuenciaObservada, frecuenciaEsperada,
                 frecuenciaObservadaAcumulada, frecuenciaEsperadaAcumulada);
-
         }
-
     }
 }
 

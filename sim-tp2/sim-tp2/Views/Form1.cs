@@ -39,65 +39,102 @@ namespace sim_tp2
             labelMaximoUniforme.Visible = true ;
         }
         
-
+        /// <summary>
+        /// Onclick botón calcular. Devuelve la impresión de la distribución seleccionada.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_calcular_Click(object sender, EventArgs e)
         {
-            if (checkBoxExponencialNegativa.Checked == true)
+            if (checkBoxExponencialNegativa.Checked)
             {
-          
-                ExponentialNegative exponencialNegativa = new ExponentialNegative();
-
-                exponencialNegativa.CantidadMuestra = Convert.ToInt32(numericUpDownMuestra.Text.Trim());
-                exponencialNegativa.CantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim());
-                exponencialNegativa.Lambda = (double)numericUpDownLambdaExponencialNegativa.Value;
-                exponencialNegativa.Lista = listBoxVariablesAleatorias;
-                exponencialNegativa.Grafico = chartDistribucion;
-
-                exponencialNegativa.Grilla = dgvDatos;
-
-                if (exponencialNegativa.CantidadMuestra > 0)
-                {
-                    exponencialNegativa.GenerarDistribucion(exponencialNegativa);
-                    listBoxVariablesAleatorias.Visible = true;
-                    dgvDatos.Visible = true;
-                    chartDistribucion.Visible = true;
-                }
-                else
-                {
-                    MessageBox.Show("Error: La muestra no puede ser 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                
-
-
+                ImprimirDistribucionExponencialNegativa();
             }
-            if (checkBoxNormal.Checked == true)
-            {              
-
-                Normal normal = new Normal();
-
-                normal.CantidadMuestra = Convert.ToInt32(numericUpDownMuestra.Text.Trim());
-                normal.Desviacion = Convert.ToDouble(numericUpDownDesviacionNormal.Text.Trim());
-                normal.Media = Convert.ToDouble(numericUpDownMediaNormal.Text.Trim());
-                normal.CantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim());
-                normal.Lista = listBoxVariablesAleatorias;
-                normal.Grafico = chartDistribucion;
-                normal.Grilla = dgvDatos;
-
-                if (normal.CantidadMuestra == 0 || normal.CantidadIntervalos == 0)
-                {
-                    MessageBox.Show("Error: La cantidad de muestra o la cantidad de intervalos no pueden ser 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    normal.GenerarDistribucion(normal);
-           
-                }
+            if (checkBoxNormal.Checked)
+            {
+                ImprimirDistribucionNormal();
             }
-            if (checkBoxUniforme.Checked == true)
+            if (checkBoxUniforme.Checked)
             {
                 ImprimirDistribucionUniforme();
             }
+        }
+
+        /// <summary>
+        /// Muestra en pantalla una distribucion normal segun parametros
+        /// </summary>
+        private void ImprimirDistribucionNormal()
+        {
+            var normal = new Normal()
+            {
+                Lista = listBoxVariablesAleatorias,
+                Grafico = chartDistribucion,
+                Grilla = dgvDatos
+            };
+
+            var cantidadMuestra = Convert.ToInt32(numericUpDownMuestra.Text.Trim());
+            var cantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim());
+            var desviacion = Convert.ToDouble(numericUpDownDesviacionNormal.Text.Trim());
+            var media = Convert.ToDouble(numericUpDownMediaNormal.Text.Trim());
+
+            if (cantidadMuestra == 0 || cantidadIntervalos == 0)
+            {
+                MessageBox.Show("Error: La cantidad de muestra o la cantidad de intervalos no pueden ser 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            normal.ImprimirHistogramaDistribucionNormal(cantidadMuestra, cantidadIntervalos, media, desviacion);
+        }
+
+        /// <summary>
+        /// Muestra en pantalla una distribucion exponencial negativa segun parametros
+        /// </summary>
+        private void ImprimirDistribucionExponencialNegativa()
+        {
+            var exponencialNegativa = new ExponentialNegative()
+            {
+                Lista = listBoxVariablesAleatorias,
+                Grafico = chartDistribucion,
+                Grilla = dgvDatos
+            };
+
+            var cantidadMuestra = Convert.ToInt32(numericUpDownMuestra.Text.Trim());
+            var cantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim());
+            var lambda = (double)numericUpDownLambdaExponencialNegativa.Value;
+
+            if (cantidadMuestra <= 0)
+            {
+                MessageBox.Show("Error: La muestra no puede ser 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            exponencialNegativa.ImprimirHistogramaDistribucionExponencialNegativa(cantidadMuestra, cantidadIntervalos, lambda);
+            listBoxVariablesAleatorias.Visible = true;
+            dgvDatos.Visible = true;
+            chartDistribucion.Visible = true;
+        }
+
+        /// <summary>
+        /// Muestra en pantalla una distribucion uniforme segun parametros
+        /// </summary>
+        private void ImprimirDistribucionUniforme()
+        {
+            var uniforme = new Uniform()
+            {
+                Lista = listBoxVariablesAleatorias,
+                Grafico = chartDistribucion,
+                Grilla = dgvDatos
+            };
+
+            var tamMuestra = Convert.ToInt32(numericUpDownMuestra.Text.Trim());
+            var minimo = Convert.ToDouble(numericUpDownMinimoUniforme.Text.Trim());
+            var maximo = Convert.ToDouble(numericUpDownMaximoUniforme.Text.Trim());
+            var cantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim());
+
+            uniforme.ImprimirHistogramaDistribucionUniforme(tamMuestra, cantidadIntervalos, minimo, maximo);
+            listBoxVariablesAleatorias.Visible = true;
+            dgvDatos.Visible = true;
+            chartDistribucion.Visible = true;
         }
 
         private void checkBoxUniforme_Click(object sender, EventArgs e)
@@ -115,8 +152,6 @@ namespace sim_tp2
             numericUpDownMaximoUniforme .Visible = true;
             labelMaximoUniforme.Visible = true;
             btn_calcular.Show();
-
-
         }
 
         private void checkBoxExponencialNegativa_Click(object sender, EventArgs e)
@@ -157,29 +192,6 @@ namespace sim_tp2
             listBoxVariablesAleatorias.Visible = false;
             dgvDatos.Visible = false;
             chartDistribucion.Visible = false;
-        }
-
-        /// <summary>
-        /// Muestra en pantalla una distribucion uniforme segun parametros
-        /// </summary>
-        private void ImprimirDistribucionUniforme()
-        {
-            var uniforme = new Uniform();
-
-            var tamMuestra = Convert.ToInt32(numericUpDownMuestra.Text.Trim());
-            var minimo = Convert.ToDouble(numericUpDownMinimoUniforme.Text.Trim());
-            var maximo = Convert.ToDouble(numericUpDownMaximoUniforme.Text.Trim());
-            var cantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim());
-
-            uniforme.Lista = listBoxVariablesAleatorias;
-            uniforme.Grafico = chartDistribucion;
-            uniforme.Grilla = dgvDatos;
-
-            uniforme.ImprimirHistogramaDistribucionUniforme(tamMuestra, cantidadIntervalos, minimo, maximo);
-
-            listBoxVariablesAleatorias.Visible = true;
-            dgvDatos.Visible = true;
-            chartDistribucion.Visible = true;
         }
       
     }
