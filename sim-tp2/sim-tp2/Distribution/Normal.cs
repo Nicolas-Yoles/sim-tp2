@@ -36,25 +36,34 @@ namespace sim_tp2.Distribution
         /// <param name="media"></param>
         /// <param name="desviacion"></param>
         /// <returns></returns>
-        public static (double, double) GenerarAleatoriosBoxMuller(double media, double desviacion)
+        public static List<double> GenerarAleatoriosBoxMuller(double media, double desviacion, int cantidadMuestras)
         {
-            var aleatorioUniforme1 = NumerosUtility.GetAleatorio();
-            var aleatorioUniforme2 = NumerosUtility.GetAleatorio();
+            List<double> aleatorios = new List<double>();
 
-            var aleatorioBoxMuller1 = Math.Sqrt(-2 * Math.Log(aleatorioUniforme1)) * Math.Cos(2 * Math.PI * aleatorioUniforme2) * desviacion + media;
-            var aleatorioBoxMuller2 = Math.Sqrt(-2 * Math.Log(aleatorioUniforme1)) * Math.Sin(2 * Math.PI * aleatorioUniforme2) * desviacion + media;
+            for (int i = 0; i < cantidadMuestras; i += 2)
+            {
+                double aleatorioUniforme1 = NumerosUtility.GetAleatorio();
+                double aleatorioUniforme2 = NumerosUtility.GetAleatorio();
 
-            return (aleatorioBoxMuller1, aleatorioBoxMuller2);
+                double z1 = Math.Sqrt(-2 * Math.Log(aleatorioUniforme1)) * Math.Cos(2 * Math.PI * aleatorioUniforme2) * desviacion + media;
+                double z2 = Math.Sqrt(-2 * Math.Log(aleatorioUniforme1)) * Math.Sin(2 * Math.PI * aleatorioUniforme2) * desviacion + media;
+              
+                aleatorios.Add(media + desviacion * z1);
+                if (i + 1 < cantidadMuestras)
+                    aleatorios.Add(media + desviacion * z2);
+            }
+
+            return aleatorios;
         }
 
-        /// <summary>
-        /// Devuelve un numero aleatorio para una distribución normal
-        /// utilizando Convolusion
-        /// </summary>
-        /// <param name="media"></param>
-        /// <param name="desviacion"></param>
-        /// <returns></returns>
-        public static double GenerarAleatorioConvolusion(double media = 0, double desviacion = 1)
+            /// <summary>
+            /// Devuelve un numero aleatorio para una distribución normal
+            /// utilizando Convolusion
+            /// </summary>
+            /// <param name="media"></param>
+            /// <param name="desviacion"></param>
+            /// <returns></returns>
+            public static double GenerarAleatorioConvolusion(double media = 0, double desviacion = 1)
         {
             var aleatoriosUniformes = Enumerable.Range(0, 12).Select(_ => NumerosUtility.GetAleatorio()).ToList();
             return (aleatoriosUniformes.Sum() - 6) * desviacion + media;
@@ -67,8 +76,7 @@ namespace sim_tp2.Distribution
         /// <param name="tamMuestra"></param>
         /// <param name="lambda"></param>
         /// <returns></returns>
-        public static List<double> GenerarDistribucion(int tamMuestra, double media = 0, double desviacion = 1)
-            => Enumerable.Range(0, tamMuestra).Select(_ => GenerarAleatorioConvolusion(media, desviacion)).ToList();
+
 
         /// <summary>
         /// Devuelve la frecuencia observada
@@ -90,16 +98,17 @@ namespace sim_tp2.Distribution
         /// <param name="limiteInferior"></param>
         /// <param name="limiteSuperior"></param>
         /// <returns></returns>
-        static double CalcularFrecuenciaEsperada(double media, double desviacion, double limiteInferior, double limiteSuperior)
+        public double FrecuenciaNormal(double x, double mu, double sigma)
         {
-            double marcaIntervalo = (limiteInferior + limiteSuperior) / 2;
-            var coeficiente = 1 / (Math.Sqrt(2 * Math.PI) * desviacion);
-            var exponente = -(Math.Pow(marcaIntervalo - media, 2) / (2 * Math.Pow(desviacion, 2)));
+            MathNet.Numerics.Distributions.Normal resultado = new MathNet.Numerics.Distributions.Normal(mu, sigma);
+            return resultado.CumulativeDistribution(x);
+        }
 
-            var densidadProbabilidad = coeficiente * Math.Exp(exponente);
+        public double CalcularFrecuenciaEsperada(double limiteInferior, double limiteSuperior,double Media,double Desviacion,int CantidadMuestra)
+        {
+            double frecuenciaEsperada = (FrecuenciaNormal(limiteSuperior, Media, Desviacion) - FrecuenciaNormal(limiteInferior, Media, Desviacion)) * CantidadMuestra;
 
-            var anchoIntervalo = limiteSuperior - limiteInferior;
-            return densidadProbabilidad * anchoIntervalo;
+            return frecuenciaEsperada;
         }
 
         /// <summary>
@@ -111,10 +120,7 @@ namespace sim_tp2.Distribution
         /// <param name="desviacion"></param>
         public void ImprimirHistogramaDistribucionNormal(int tamMuestra, int cantIntervalos, double media = 0, double desviacion = 1)
         {
-            if (tamMuestra == 0)
-                return;
-
-            var distribucion = GenerarDistribucion(tamMuestra, media, desviacion);
+            var distribucion = GenerarAleatoriosBoxMuller(media, desviacion, tamMuestra);
 
             if (!distribucion.Any())
                 return;
@@ -152,9 +158,9 @@ namespace sim_tp2.Distribution
         /// <param name="desviacion"></param>
         private void AgregarIntervalos(List<double> distribucion, int cantIntervalos, int tamMuestra, double media, double desviacion)
         {
-            var anchoIntervalo = ((distribucion.Max() - distribucion.Min()) / tamMuestra) + 0.0001;
+            var anchoIntervalo = ((distribucion.Max() - distribucion.Min()) / cantIntervalos) + 0.0001;
             var limiteInferior = distribucion.Min();
-            var limiteSuperior = limiteInferior + anchoIntervalo;
+            var limiteSuperior = limiteInferior + anchoIntervalo; 
 
             double frecuenciaObservadaAcumulada = 0;
             double frecuenciaEsperadaAcumulada = 0;
@@ -163,7 +169,7 @@ namespace sim_tp2.Distribution
             {
                 var marcaClase = (limiteInferior + limiteSuperior) / 2;
                 var frecuenciaObservada = DeterminarFrecuenciaObservada(distribucion, limiteInferior, limiteSuperior);
-                var frecuenciaEsperada = CalcularFrecuenciaEsperada(media, desviacion, limiteInferior, limiteSuperior);
+                var frecuenciaEsperada = CalcularFrecuenciaEsperada(limiteInferior, limiteSuperior, media, desviacion,tamMuestra);
 
                 frecuenciaObservadaAcumulada += frecuenciaObservada;
                 frecuenciaEsperadaAcumulada += frecuenciaEsperada;

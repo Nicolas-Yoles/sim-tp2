@@ -84,6 +84,9 @@ namespace sim_tp2
             }
 
             normal.ImprimirHistogramaDistribucionNormal(cantidadMuestra, cantidadIntervalos, media, desviacion);
+            listBoxVariablesAleatorias.Visible = true;
+            dgvDatos.Visible = true;
+            chartDistribucion.Visible = true;
         }
 
         /// <summary>
@@ -185,6 +188,7 @@ namespace sim_tp2
             labelMediaNormal .Visible = true ;
             numericUpDownMediaNormal .Visible = true ;
             numericUpDownDesviacionNormal .Visible = true ;
+            btn_calcular.Show();
         }
 
         private void DeshabilitarElementos()
