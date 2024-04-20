@@ -56,19 +56,7 @@ namespace sim_tp2.Distribution
             return aleatorios;
         }
 
-        /// <summary>
-        /// Devuelve un numero aleatorio para una distribución normal
-        /// utilizando Convolusion
-        /// </summary>
-        /// <param name="media"></param>
-        /// <param name="desviacion"></param>
-        /// <returns></returns>
-        public static double GenerarAleatorioConvolusion(double media = 0, double desviacion = 1)
-        {
-            var aleatoriosUniformes = Enumerable.Range(0, 12).Select(_ => NumerosUtility.GetAleatorio()).ToList();
-            return (aleatoriosUniformes.Sum() - 6) * desviacion + media;
-        }
-
+       
 
         /// <summary>
         /// Devuelve la frecuencia observada
@@ -82,20 +70,6 @@ namespace sim_tp2.Distribution
 
 
         /// <summary>
-        /// Obtiene una secuencia de números correspondiente a una distribución 
-        /// normal.
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="mu"></param>
-        /// <param name="sigma"></param>
-        /// <returns></returns>
-        public double FrecuenciaNormal(double x, double mu, double sigma)
-        {
-            MathNet.Numerics.Distributions.Normal resultado = new MathNet.Numerics.Distributions.Normal(mu, sigma);
-            return resultado.CumulativeDistribution(x);
-        }
-
-        /// <summary>
         /// Obtiene la frecuencia esperada para un intervalo de una distribucion normal.
         /// Calcula la probabilidad en el punto medio del intervalo,
         /// luego aproxima esa probabilidad multiplicando por el ancho del intervalo.
@@ -106,11 +80,18 @@ namespace sim_tp2.Distribution
         /// <param name="Desviacion"></param>
         /// <param name="CantidadMuestra"></param>
         /// <returns></returns>
-        public double CalcularFrecuenciaEsperada(double limiteInferior, double limiteSuperior,double Media,double Desviacion,int CantidadMuestra)
+        public double CalcularFrecuenciaEsperada(double limiteInferior, double limiteSuperior,double media,double desviacion,int cantidadMuestra)
         {
-            double frecuenciaEsperada = (FrecuenciaNormal(limiteSuperior, Media, Desviacion) - FrecuenciaNormal(limiteInferior, Media, Desviacion)) * CantidadMuestra;
+           
+            double mc = (limiteSuperior + limiteInferior) / 2;
+            double part1 = Math.Pow((mc - media) / desviacion, 2);
+            double part2 = -0.5 * part1;
+            double part3 = Math.Pow(Math.E, part2);
+            double part4 = desviacion * Math.Sqrt(2 * Math.PI);
+            double fe = (part3 / part4) * (limiteSuperior - limiteInferior) * cantidadMuestra;
+            NumerosUtility.Truncar4Decimales(fe);
 
-            return frecuenciaEsperada;
+            return fe;
         }
 
         /// <summary>
