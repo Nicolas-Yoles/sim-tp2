@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using sim_tp2.DTO;
 using System.Windows.Forms.DataVisualization.Charting;
 using sim_tp2.Utilities;
 
