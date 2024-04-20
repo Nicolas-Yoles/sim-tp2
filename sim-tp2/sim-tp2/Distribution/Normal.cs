@@ -44,9 +44,9 @@ namespace sim_tp2.Distribution
                 double z1 = Math.Sqrt(-2 * Math.Log(aleatorioUniforme1)) * Math.Cos(2 * Math.PI * aleatorioUniforme2) * desviacion + media;
                 double z2 = Math.Sqrt(-2 * Math.Log(aleatorioUniforme1)) * Math.Sin(2 * Math.PI * aleatorioUniforme2) * desviacion + media;
               
-                aleatorios.Add(NumerosUtility.Truncar4Decimales(media + desviacion * z1));
+                aleatorios.Add(NumerosUtility.Truncar4Decimales(z1));
                 if (i + 1 < cantidadMuestras)
-                    aleatorios.Add(NumerosUtility.Truncar4Decimales(media + desviacion * z2));
+                    aleatorios.Add(NumerosUtility.Truncar4Decimales(z2));
             }
 
             return aleatorios;
@@ -149,7 +149,7 @@ namespace sim_tp2.Distribution
                 var marcaClase = (limiteInferior + limiteSuperior) / 2;
                 var frecuenciaObservada = DeterminarFrecuenciaObservada(distribucion, limiteInferior, limiteSuperior);
                 var frecuenciaEsperada = CalcularFrecuenciaEsperada(limiteInferior, limiteSuperior, media, desviacion,tamMuestra);
-
+                Console.WriteLine(frecuenciaEsperada + "FRECUENCIA ESPERADA");
                 frecuenciaObservadaAcumulada += frecuenciaObservada;
                 frecuenciaEsperadaAcumulada += frecuenciaEsperada;
 
