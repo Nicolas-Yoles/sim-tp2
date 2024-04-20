@@ -293,7 +293,7 @@
             this.numericUpDownMuestra.Location = new System.Drawing.Point(567, 203);
             this.numericUpDownMuestra.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownMuestra.Maximum = new decimal(new int[] {
-            100000,
+            1000000,
             0,
             0,
             0});
