@@ -13,12 +13,19 @@ using System.Windows.Forms.DataVisualization.Charting;
 namespace sim_tp2.Distribution
 {
     public class ExponentialNegative
-    {       
+    {
+        /// <summary>
+        /// Lista de datos
+        /// </summary>
         public ListBox Lista { get; set; }
 
-        public Chart Grafico { get; set; }
-
+        /// <summary>
+        /// Grilla de datos
+        /// </summary>
         public DataGridView Grilla { get; set; }
+
+        /// Grafico de histograma
+        public Chart Grafico { get; set; }
 
         /// <summary>
         /// Devuelve un número aleatorio para una distribución exponencial
@@ -62,6 +69,13 @@ namespace sim_tp2.Distribution
         public static int DeterminarFrecuenciaObservada(List<double> distribucion, double limiteInferior, double limiteSuperior)
             => distribucion.Where(x => limiteInferior <= x && x <= limiteSuperior).Count();
 
+        /// <summary>
+        /// Muestra el histograma en pantalla
+        /// </summary>
+        /// <param name="tamMuestra"></param>
+        /// <param name="cantIntervalos"></param>
+        /// <param name="lambda"></param>
+        /// <param name="media"></param>
         public void ImprimirHistogramaDistribucionExponencialNegativa(int tamMuestra, int cantIntervalos, double? lambda = null, double? media = null)
         {
             if(tamMuestra  == 0 || (!lambda.HasValue && !media.HasValue))
@@ -77,6 +91,13 @@ namespace sim_tp2.Distribution
             CrearHistograma(distribucion, cantIntervalos, tamMuestra, lambda.Value);
         }
 
+        /// <summary>
+        /// Limpia las variables existentes y crea el histograma
+        /// </summary>
+        /// <param name="distribucion"></param>
+        /// <param name="cantIntervalos"></param>
+        /// <param name="tamMuestra"></param>
+        /// <param name="lambda"></param>
         private void CrearHistograma(List<double> distribucion, int cantIntervalos, int tamMuestra, double lambda)
         {
             Lista.Items.Clear();
@@ -90,6 +111,13 @@ namespace sim_tp2.Distribution
             AgregarIntervalos(distribucion, cantIntervalos, tamMuestra, lambda);
         }
 
+        /// <summary>
+        /// Obtiene los intervalos de la grilla
+        /// </summary>
+        /// <param name="distribucion"></param>
+        /// <param name="cantIntervalos"></param>
+        /// <param name="tamMuestra"></param>
+        /// <param name="lambda"></param>
         private void AgregarIntervalos(List<double> distribucion, int cantIntervalos, int tamMuestra, double lambda)
         {
             var anchoIntervalo = ((distribucion.Max() - distribucion.Min()) / cantIntervalos) + 0.0001;
@@ -120,6 +148,16 @@ namespace sim_tp2.Distribution
             }
         }
 
+        /// <summary>
+        /// Obtiene los datos de la grilla
+        /// </summary>
+        /// <param name="limiteInferior"></param>
+        /// <param name="limiteSuperior"></param>
+        /// <param name="marcaClase"></param>
+        /// <param name="frecuenciaObservada"></param>
+        /// <param name="frecuenciaEsperada"></param>
+        /// <param name="frecuenciaObservadaAcumulada"></param>
+        /// <param name="frecuenciaEsperadaAcumulada"></param>
         private void AgregarFilaGrilla(double limiteInferior, double limiteSuperior, double marcaClase, double frecuenciaObservada,
             double frecuenciaEsperada, double frecuenciaObservadaAcumulada, double frecuenciaEsperadaAcumulada)
         {
