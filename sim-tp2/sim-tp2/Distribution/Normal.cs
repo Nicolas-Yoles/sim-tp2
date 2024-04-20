@@ -13,11 +13,21 @@ namespace sim_tp2.Distribution
 {
     public class Normal
     {
-        public Chart Grafico { get; set; }
 
+        /// <summary>
+        /// Lista de datos
+        /// </summary>
+        public ListBox Lista { get; set; }
+        
+        /// <summary>
+        /// Grilla de datos
+        /// </summary>
         public DataGridView Grilla { get; set; }
 
-        public ListBox Lista { get; set; }
+        /// <summary>
+        /// Grafico de histograma
+        /// </summary>
+        public Chart Grafico { get; set; }
 
         /// <summary>
         /// Devuelve un par de numeros aleatorios para una distribución normal
@@ -92,6 +102,13 @@ namespace sim_tp2.Distribution
             return densidadProbabilidad * anchoIntervalo;
         }
 
+        /// <summary>
+        /// Muestra el histograma en pantalla
+        /// </summary>
+        /// <param name="tamMuestra"></param>
+        /// <param name="cantIntervalos"></param>
+        /// <param name="media"></param>
+        /// <param name="desviacion"></param>
         public void ImprimirHistogramaDistribucionNormal(int tamMuestra, int cantIntervalos, double media = 0, double desviacion = 1)
         {
             if (tamMuestra == 0)
@@ -105,6 +122,14 @@ namespace sim_tp2.Distribution
             CrearHistograma(distribucion, cantIntervalos, tamMuestra, media, desviacion);
         }
 
+        /// <summary>
+        /// Limpia las variables existentes y crea el histograma
+        /// </summary>
+        /// <param name="distribucion"></param>
+        /// <param name="cantIntervalos"></param>
+        /// <param name="tamMuestra"></param>
+        /// <param name="media"></param>
+        /// <param name="desviacion"></param>
         private void CrearHistograma(List<double> distribucion, int cantIntervalos, int tamMuestra, double media, double desviacion)
         {
             Lista.Items.Clear();
@@ -117,6 +142,14 @@ namespace sim_tp2.Distribution
             AgregarIntervalos(distribucion, cantIntervalos, tamMuestra, media, desviacion);
         }
 
+        /// <summary>
+        /// Obtiene los intervalos de la grilla
+        /// </summary>
+        /// <param name="distribucion"></param>
+        /// <param name="cantIntervalos"></param>
+        /// <param name="tamMuestra"></param>
+        /// <param name="media"></param>
+        /// <param name="desviacion"></param>
         private void AgregarIntervalos(List<double> distribucion, int cantIntervalos, int tamMuestra, double media, double desviacion)
         {
             var anchoIntervalo = ((distribucion.Max() - distribucion.Min()) / tamMuestra) + 0.0001;
@@ -147,6 +180,16 @@ namespace sim_tp2.Distribution
             }
         }
 
+        /// <summary>
+        /// Obtiene los datos de la grilla
+        /// </summary>
+        /// <param name="limiteInferior"></param>
+        /// <param name="limiteSuperior"></param>
+        /// <param name="marcaClase"></param>
+        /// <param name="frecuenciaObservada"></param>
+        /// <param name="frecuenciaEsperada"></param>
+        /// <param name="frecuenciaObservadaAcumulada"></param>
+        /// <param name="frecuenciaEsperadaAcumulada"></param>
         private void AgregarFilaGrilla(double limiteInferior, double limiteSuperior, double marcaClase, double frecuenciaObservada,
             double frecuenciaEsperada, double frecuenciaObservadaAcumulada, double frecuenciaEsperadaAcumulada)
         {
