@@ -85,14 +85,14 @@ namespace sim_tp2.Distribution
         /// Obtiene una secuencia de números correspondiente a una distribución 
         /// normal.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="mu"></param>
-        /// <param name="sigma"></param>
+        /// <param name="limite/supOinf"></param>
+        /// <param name="media"></param>
+        /// <param name="desviacion"></param>
         /// <returns></returns>
-        public double FrecuenciaNormal(double x, double mu, double sigma)
+        public double FrecuenciaNormal(double limite, double media, double desviacion)
         {
-            MathNet.Numerics.Distributions.Normal resultado = new MathNet.Numerics.Distributions.Normal(mu, sigma);
-            return resultado.CumulativeDistribution(x);
+            MathNet.Numerics.Distributions.Normal resultado = new MathNet.Numerics.Distributions.Normal(media, desviacion);
+            return resultado.CumulativeDistribution(limite);
         }
 
         /// <summary>
