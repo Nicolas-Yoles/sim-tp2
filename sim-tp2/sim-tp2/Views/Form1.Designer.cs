@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.checkBoxUniforme = new System.Windows.Forms.CheckBox();
             this.checkBoxExponencialNegativa = new System.Windows.Forms.CheckBox();
             this.checkBoxNormal = new System.Windows.Forms.CheckBox();
@@ -81,7 +81,7 @@
             this.checkBoxUniforme.Font = new System.Drawing.Font("Rockwell Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxUniforme.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.checkBoxUniforme.Location = new System.Drawing.Point(26, 63);
-            this.checkBoxUniforme.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxUniforme.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxUniforme.Name = "checkBoxUniforme";
             this.checkBoxUniforme.Size = new System.Drawing.Size(91, 29);
             this.checkBoxUniforme.TabIndex = 0;
@@ -96,7 +96,7 @@
             this.checkBoxExponencialNegativa.Font = new System.Drawing.Font("Rockwell Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxExponencialNegativa.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.checkBoxExponencialNegativa.Location = new System.Drawing.Point(254, 63);
-            this.checkBoxExponencialNegativa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxExponencialNegativa.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxExponencialNegativa.Name = "checkBoxExponencialNegativa";
             this.checkBoxExponencialNegativa.Size = new System.Drawing.Size(175, 29);
             this.checkBoxExponencialNegativa.TabIndex = 1;
@@ -111,7 +111,7 @@
             this.checkBoxNormal.Font = new System.Drawing.Font("Rockwell Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxNormal.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.checkBoxNormal.Location = new System.Drawing.Point(495, 63);
-            this.checkBoxNormal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxNormal.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxNormal.Name = "checkBoxNormal";
             this.checkBoxNormal.Size = new System.Drawing.Size(78, 29);
             this.checkBoxNormal.TabIndex = 2;
@@ -123,7 +123,7 @@
             // 
             this.listBoxVariablesAleatorias.FormattingEnabled = true;
             this.listBoxVariablesAleatorias.Location = new System.Drawing.Point(29, 286);
-            this.listBoxVariablesAleatorias.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBoxVariablesAleatorias.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxVariablesAleatorias.Name = "listBoxVariablesAleatorias";
             this.listBoxVariablesAleatorias.Size = new System.Drawing.Size(223, 290);
             this.listBoxVariablesAleatorias.TabIndex = 3;
@@ -147,7 +147,7 @@
             this.numericUpDownMinimoUniforme.Font = new System.Drawing.Font("Rockwell Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDownMinimoUniforme.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.numericUpDownMinimoUniforme.Location = new System.Drawing.Point(101, 93);
-            this.numericUpDownMinimoUniforme.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownMinimoUniforme.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownMinimoUniforme.Name = "numericUpDownMinimoUniforme";
             this.numericUpDownMinimoUniforme.Size = new System.Drawing.Size(90, 32);
             this.numericUpDownMinimoUniforme.TabIndex = 5;
@@ -171,7 +171,7 @@
             this.numericUpDownMaximoUniforme.Font = new System.Drawing.Font("Rockwell Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDownMaximoUniforme.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.numericUpDownMaximoUniforme.Location = new System.Drawing.Point(101, 128);
-            this.numericUpDownMaximoUniforme.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownMaximoUniforme.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownMaximoUniforme.Name = "numericUpDownMaximoUniforme";
             this.numericUpDownMaximoUniforme.Size = new System.Drawing.Size(90, 32);
             this.numericUpDownMaximoUniforme.TabIndex = 7;
@@ -195,7 +195,7 @@
             this.numericUpDownLambdaExponencialNegativa.Font = new System.Drawing.Font("Rockwell Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDownLambdaExponencialNegativa.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.numericUpDownLambdaExponencialNegativa.Location = new System.Drawing.Point(339, 98);
-            this.numericUpDownLambdaExponencialNegativa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownLambdaExponencialNegativa.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownLambdaExponencialNegativa.Name = "numericUpDownLambdaExponencialNegativa";
             this.numericUpDownLambdaExponencialNegativa.Size = new System.Drawing.Size(90, 32);
             this.numericUpDownLambdaExponencialNegativa.TabIndex = 9;
@@ -232,7 +232,7 @@
             this.numericUpDownMediaNormal.Font = new System.Drawing.Font("Rockwell Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDownMediaNormal.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.numericUpDownMediaNormal.Location = new System.Drawing.Point(576, 94);
-            this.numericUpDownMediaNormal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownMediaNormal.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownMediaNormal.Name = "numericUpDownMediaNormal";
             this.numericUpDownMediaNormal.Size = new System.Drawing.Size(90, 32);
             this.numericUpDownMediaNormal.TabIndex = 12;
@@ -243,7 +243,7 @@
             this.numericUpDownDesviacionNormal.Font = new System.Drawing.Font("Rockwell Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDownDesviacionNormal.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.numericUpDownDesviacionNormal.Location = new System.Drawing.Point(576, 128);
-            this.numericUpDownDesviacionNormal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownDesviacionNormal.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownDesviacionNormal.Name = "numericUpDownDesviacionNormal";
             this.numericUpDownDesviacionNormal.Size = new System.Drawing.Size(90, 32);
             this.numericUpDownDesviacionNormal.TabIndex = 13;
@@ -280,7 +280,7 @@
             this.numericUpDownIntervalos.Font = new System.Drawing.Font("Rockwell Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDownIntervalos.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.numericUpDownIntervalos.Location = new System.Drawing.Point(252, 208);
-            this.numericUpDownIntervalos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownIntervalos.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownIntervalos.Name = "numericUpDownIntervalos";
             this.numericUpDownIntervalos.Size = new System.Drawing.Size(90, 32);
             this.numericUpDownIntervalos.TabIndex = 16;
@@ -291,7 +291,12 @@
             this.numericUpDownMuestra.Font = new System.Drawing.Font("Rockwell Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDownMuestra.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.numericUpDownMuestra.Location = new System.Drawing.Point(482, 206);
-            this.numericUpDownMuestra.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownMuestra.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDownMuestra.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericUpDownMuestra.Name = "numericUpDownMuestra";
             this.numericUpDownMuestra.Size = new System.Drawing.Size(90, 32);
             this.numericUpDownMuestra.TabIndex = 17;
@@ -299,7 +304,7 @@
             // btn_calcular
             // 
             this.btn_calcular.Location = new System.Drawing.Point(576, 208);
-            this.btn_calcular.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_calcular.Margin = new System.Windows.Forms.Padding(2);
             this.btn_calcular.Name = "btn_calcular";
             this.btn_calcular.Size = new System.Drawing.Size(100, 28);
             this.btn_calcular.TabIndex = 18;
@@ -335,16 +340,16 @@
             // 
             // chartDistribucion
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartDistribucion.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartDistribucion.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chartDistribucion.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartDistribucion.Legends.Add(legend1);
             this.chartDistribucion.Location = new System.Drawing.Point(273, 287);
             this.chartDistribucion.Name = "chartDistribucion";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartDistribucion.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartDistribucion.Series.Add(series1);
             this.chartDistribucion.Size = new System.Drawing.Size(300, 300);
             this.chartDistribucion.TabIndex = 21;
             this.chartDistribucion.Text = "chart1";
@@ -476,7 +481,7 @@
             this.Controls.Add(this.checkBoxUniforme);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinimoUniforme)).EndInit();
