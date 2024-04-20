@@ -56,26 +56,18 @@ namespace sim_tp2.Distribution
             return aleatorios;
         }
 
-            /// <summary>
-            /// Devuelve un numero aleatorio para una distribución normal
-            /// utilizando Convolusion
-            /// </summary>
-            /// <param name="media"></param>
-            /// <param name="desviacion"></param>
-            /// <returns></returns>
-            public static double GenerarAleatorioConvolusion(double media = 0, double desviacion = 1)
+        /// <summary>
+        /// Devuelve un numero aleatorio para una distribución normal
+        /// utilizando Convolusion
+        /// </summary>
+        /// <param name="media"></param>
+        /// <param name="desviacion"></param>
+        /// <returns></returns>
+        public static double GenerarAleatorioConvolusion(double media = 0, double desviacion = 1)
         {
             var aleatoriosUniformes = Enumerable.Range(0, 12).Select(_ => NumerosUtility.GetAleatorio()).ToList();
             return (aleatoriosUniformes.Sum() - 6) * desviacion + media;
         }
-
-        /// <summary>
-        /// Obtiene una secuencia de números correspondiente a una distribución 
-        /// normal.
-        /// </summary>
-        /// <param name="tamMuestra"></param>
-        /// <param name="lambda"></param>
-        /// <returns></returns>
 
 
         /// <summary>
@@ -88,15 +80,14 @@ namespace sim_tp2.Distribution
         public static int DeterminarFrecuenciaObservada(List<double> distribucion, double limiteInferior, double limiteSuperior)
             => distribucion.Where(x => limiteInferior <= x && x <= limiteSuperior).Count();
 
+
         /// <summary>
-        /// Obtiene la frecuencia esperada para un intervalo de una distribucion normal.
-        /// Calcula la probabilidad en el punto medio del intervalo,
-        /// luego aproxima esa probabilidad multiplicando por el ancho del intervalo.
+        /// Obtiene una secuencia de números correspondiente a una distribución 
+        /// normal.
         /// </summary>
-        /// <param name="media"></param>
-        /// <param name="desviacion"></param>
-        /// <param name="limiteInferior"></param>
-        /// <param name="limiteSuperior"></param>
+        /// <param name="x"></param>
+        /// <param name="mu"></param>
+        /// <param name="sigma"></param>
         /// <returns></returns>
         public double FrecuenciaNormal(double x, double mu, double sigma)
         {
@@ -104,6 +95,17 @@ namespace sim_tp2.Distribution
             return resultado.CumulativeDistribution(x);
         }
 
+        /// <summary>
+        /// Obtiene la frecuencia esperada para un intervalo de una distribucion normal.
+        /// Calcula la probabilidad en el punto medio del intervalo,
+        /// luego aproxima esa probabilidad multiplicando por el ancho del intervalo.
+        /// </summary>
+        /// <param name="limiteInferior"></param>
+        /// <param name="limiteSuperior"></param>
+        /// <param name="Media"></param>
+        /// <param name="Desviacion"></param>
+        /// <param name="CantidadMuestra"></param>
+        /// <returns></returns>
         public double CalcularFrecuenciaEsperada(double limiteInferior, double limiteSuperior,double Media,double Desviacion,int CantidadMuestra)
         {
             double frecuenciaEsperada = (FrecuenciaNormal(limiteSuperior, Media, Desviacion) - FrecuenciaNormal(limiteInferior, Media, Desviacion)) * CantidadMuestra;
