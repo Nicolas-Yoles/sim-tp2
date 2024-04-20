@@ -18,6 +18,7 @@ namespace sim_tp2
         {
             InitializeComponent();
             btn_calcular.Hide();
+            btn_limpiar.Hide();
 
             checkBoxUniforme.Checked = false;
             checkBoxNormal.Checked= false;
@@ -155,6 +156,7 @@ namespace sim_tp2
             numericUpDownMuestra.Visible = true;
             lblMuestra.Visible = true;
             btn_calcular.Show();
+            btn_limpiar.Show();
         }
 
         private void checkBoxExponencialNegativa_Click(object sender, EventArgs e)
@@ -176,6 +178,7 @@ namespace sim_tp2
             numericUpDownMuestra.Visible = true;
             lblMuestra.Visible = true;
             btn_calcular.Show();
+            btn_limpiar.Show();
         }
 
         private void checkBoxNormal_Click(object sender, EventArgs e)
@@ -197,6 +200,7 @@ namespace sim_tp2
             numericUpDownMuestra.Visible = true;
             lblMuestra.Visible = true;
             btn_calcular.Show();
+            btn_limpiar.Show();
         }
 
         private void DeshabilitarElementos()
@@ -223,6 +227,16 @@ namespace sim_tp2
             lblGrilla.Visible = false;
 
         }
-      
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            numericUpDownMinimoUniforme.Value = 0;
+            numericUpDownMaximoUniforme.Value = 0;
+            numericUpDownLambdaExponencialNegativa.Value = 0; 
+            numericUpDownMediaNormal.Value = 0; 
+            numericUpDownDesviacionNormal.Value = 0; 
+            numericUpDownIntervalos.Value = 0;
+            numericUpDownMuestra.Value = 0; 
+        }
     }
 }
