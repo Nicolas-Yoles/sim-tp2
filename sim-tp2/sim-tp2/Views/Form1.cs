@@ -25,20 +25,7 @@ namespace sim_tp2
 
             DeshabilitarElementos();
         }
-        private void resetearCheckBox()
-        {
-            numericUpDownDesviacionNormal.Visible = true;
-            numericUpDownLambdaExponencialNegativa.Visible = true;
-            numericUpDownMaximoUniforme.Visible = true;
-            numericUpDownMinimoUniforme.Visible= true;
-            numericUpDownMediaNormal.Visible = true;
-            labelDesviacion.Visible = true;
-            labelLambdaExponencialNegativa.Visible = true;
-            labelMediaNormal.Visible = true;
-            labelMinimoUniforme.Visible = true;
-            labelMaximoUniforme.Visible = true ;
-        }
-        
+       
         /// <summary>
         /// Onclick botón calcular. Devuelve la impresión de la distribución seleccionada.
         /// </summary>
@@ -84,6 +71,9 @@ namespace sim_tp2
             }
 
             normal.ImprimirHistogramaDistribucionNormal(cantidadMuestra, cantidadIntervalos, media, desviacion);
+            lblVariablesAleatorias.Visible = true;
+            lblHistograma.Visible = true;
+            lblGrilla.Visible = true;
             listBoxVariablesAleatorias.Visible = true;
             dgvDatos.Visible = true;
             chartDistribucion.Visible = true;
@@ -112,6 +102,9 @@ namespace sim_tp2
             }
 
             exponencialNegativa.ImprimirHistogramaDistribucionExponencialNegativa(cantidadMuestra, cantidadIntervalos, lambda);
+            lblVariablesAleatorias.Visible = true;
+            lblHistograma.Visible = true;
+            lblGrilla.Visible = true;
             listBoxVariablesAleatorias.Visible = true;
             dgvDatos.Visible = true;
             chartDistribucion.Visible = true;
@@ -135,6 +128,9 @@ namespace sim_tp2
             var cantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim());
 
             uniforme.ImprimirHistogramaDistribucionUniforme(tamMuestra, cantidadIntervalos, minimo, maximo);
+            lblVariablesAleatorias.Visible = true;
+            lblHistograma.Visible = true;
+            lblGrilla.Visible = true;
             listBoxVariablesAleatorias.Visible = true;
             dgvDatos.Visible = true;
             chartDistribucion.Visible = true;
@@ -154,6 +150,10 @@ namespace sim_tp2
             labelMinimoUniforme.Visible = true;
             numericUpDownMaximoUniforme .Visible = true;
             labelMaximoUniforme.Visible = true;
+            numericUpDownIntervalos.Visible = true;
+            labelIntervalos.Visible = true;
+            numericUpDownMuestra.Visible = true;
+            lblMuestra.Visible = true;
             btn_calcular.Show();
         }
 
@@ -171,6 +171,10 @@ namespace sim_tp2
             checkBoxUniforme.Checked = false;
             labelLambdaExponencialNegativa.Visible = true;
             numericUpDownLambdaExponencialNegativa.Visible = true;
+            numericUpDownIntervalos.Visible = true;
+            labelIntervalos.Visible = true;
+            numericUpDownMuestra.Visible = true;
+            lblMuestra.Visible = true;
             btn_calcular.Show();
         }
 
@@ -185,9 +189,13 @@ namespace sim_tp2
             checkBoxUniforme.Checked = false;
             checkBoxExponencialNegativa.Checked = false;
             labelDesviacion.Visible = true ;
-            labelMediaNormal .Visible = true ;
-            numericUpDownMediaNormal .Visible = true ;
-            numericUpDownDesviacionNormal .Visible = true ;
+            labelMediaNormal.Visible = true ;
+            numericUpDownMediaNormal.Visible = true ;
+            numericUpDownDesviacionNormal.Visible = true ;
+            numericUpDownIntervalos.Visible = true;
+            labelIntervalos.Visible = true;
+            numericUpDownMuestra.Visible = true;
+            lblMuestra.Visible = true;
             btn_calcular.Show();
         }
 
@@ -196,6 +204,24 @@ namespace sim_tp2
             listBoxVariablesAleatorias.Visible = false;
             dgvDatos.Visible = false;
             chartDistribucion.Visible = false;
+            numericUpDownMaximoUniforme.Visible = false;
+            numericUpDownMinimoUniforme.Visible = false;
+            labelMinimoUniforme.Visible = false;
+            labelMaximoUniforme.Visible = false;
+            numericUpDownLambdaExponencialNegativa.Visible = false;
+            labelLambdaExponencialNegativa.Visible = false;
+            labelDesviacion.Visible = false;
+            labelMediaNormal.Visible = false;
+            numericUpDownMediaNormal.Visible = false;
+            numericUpDownDesviacionNormal.Visible = false;
+            numericUpDownIntervalos.Visible = false;
+            labelIntervalos.Visible = false;
+            numericUpDownMuestra.Visible = false;
+            lblMuestra.Visible = false;
+            lblVariablesAleatorias.Visible = false;
+            lblHistograma.Visible = false;
+            lblGrilla.Visible = false;
+
         }
       
     }
