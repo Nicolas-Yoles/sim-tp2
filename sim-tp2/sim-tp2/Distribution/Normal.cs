@@ -48,9 +48,9 @@ namespace sim_tp2.Distribution
                 double z1 = Math.Sqrt(-2 * Math.Log(aleatorioUniforme1)) * Math.Cos(2 * Math.PI * aleatorioUniforme2) * desviacion + media;
                 double z2 = Math.Sqrt(-2 * Math.Log(aleatorioUniforme1)) * Math.Sin(2 * Math.PI * aleatorioUniforme2) * desviacion + media;
               
-                aleatorios.Add(media + desviacion * z1);
+                aleatorios.Add(NumerosUtility.Truncar4Decimales(media + desviacion * z1));
                 if (i + 1 < cantidadMuestras)
-                    aleatorios.Add(media + desviacion * z2);
+                    aleatorios.Add(NumerosUtility.Truncar4Decimales(media + desviacion * z2));
             }
 
             return aleatorios;
