@@ -24,7 +24,9 @@ namespace sim_tp2.Distribution
         /// </summary>
         public DataGridView Grilla { get; set; }
 
+        /// <summary>
         /// Grafico de histograma
+        /// </summary>
         public Chart Grafico { get; set; }
 
         /// <summary>
