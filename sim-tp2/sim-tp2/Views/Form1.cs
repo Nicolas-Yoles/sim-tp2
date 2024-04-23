@@ -62,7 +62,11 @@ namespace sim_tp2
                 MessageBox.Show("Error: La cantidad de muestra o la cantidad de intervalos no pueden ser 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            if (desviacion == 0 || media == 0)
+            {
+                MessageBox.Show("Error: La media o la desviación no pueden ser 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             normal.ImprimirHistogramaDistribucionNormal(cantidadMuestra, cantidadIntervalos, media, desviacion);
             lblVariablesAleatorias.Visible = true;
             lblHistograma.Visible = true;
@@ -94,6 +98,11 @@ namespace sim_tp2
                 return;
             }
 
+            if (lambda == 0)
+            {
+                MessageBox.Show("Error: La lambda no pueden ser 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             exponencialNegativa.ImprimirHistogramaDistribucionExponencialNegativa(cantidadMuestra, cantidadIntervalos, lambda);
             lblVariablesAleatorias.Visible = true;
             lblHistograma.Visible = true;
@@ -119,6 +128,17 @@ namespace sim_tp2
             var minimo = Convert.ToDouble(numericUpDownMinimoUniforme.Text.Trim());
             var maximo = Convert.ToDouble(numericUpDownMaximoUniforme.Text.Trim());
             var cantidadIntervalos = Convert.ToInt32(numericUpDownIntervalos.Text.Trim());
+            if (tamMuestra <= 0)
+            {
+                MessageBox.Show("Error: La muestra no puede ser 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (maximo == 0)
+            {
+                MessageBox.Show("Error: La maximo no pueden ser 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             uniforme.ImprimirHistogramaDistribucionUniforme(tamMuestra, cantidadIntervalos, minimo, maximo);
             lblVariablesAleatorias.Visible = true;
@@ -230,5 +250,6 @@ namespace sim_tp2
             numericUpDownIntervalos.Value = 0;
             numericUpDownMuestra.Value = 0; 
         }
+
     }
 }
