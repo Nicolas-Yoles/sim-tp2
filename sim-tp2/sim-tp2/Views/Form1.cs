@@ -26,6 +26,9 @@ namespace sim_tp2
         /// <param name="e"></param>
         private void btn_calcular_Click(object sender, EventArgs e)
         {
+            chartDistribucion.ResetText();
+            chartDistribucion.ResetAutoValues();
+
             if (checkBoxExponencialNegativa.Checked)
             {
                 ImprimirDistribucionExponencialNegativa();
