@@ -59,6 +59,8 @@
     <Compile Include="Distribution\Normal.cs" />
     <Compile Include="Distribution\Uniform.cs" />
     <Compile Include="DTOs\RondaBowlingDTO.cs" />
+    <Compile Include="Services\BowlingMontecarloSimulationService.cs" />
+    <Compile Include="Services\Interfaces\IBowlingMontecarloSimulationService.cs" />
     <Compile Include="Views\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
