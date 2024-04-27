@@ -103,8 +103,6 @@
   <ItemGroup>
     <None Include="Resources\blue-images-for-backgrounds-desktop-wallpaper-preview.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DTO\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
