@@ -58,6 +58,7 @@
     <Compile Include="Distribution\ExponentialNegative.cs" />
     <Compile Include="Distribution\Normal.cs" />
     <Compile Include="Distribution\Uniform.cs" />
+    <Compile Include="DTOs\RondaBowlingDTO.cs" />
     <Compile Include="Views\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
