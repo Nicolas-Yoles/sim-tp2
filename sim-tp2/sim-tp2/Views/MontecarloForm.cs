@@ -55,8 +55,7 @@ namespace sim_tp2.Views
                 return;
             }
 
-            BowlingMontecarloSimulationService bowlingMontecarloSimulationService = new BowlingMontecarloSimulationService();
-            List<RondaBowlingDto> rondaBowlingDtos = bowlingMontecarloSimulationService.ImprimirMontecarlo(cantRondas, rondaInicial, rondaFinal);
+            var rondaBowlingDtos = BowlingMontecarloSimulationService.ImprimirMontecarlo(cantRondas, rondaInicial, rondaFinal);
             dgvMontecarlo.DataSource = rondaBowlingDtos;
         }
 

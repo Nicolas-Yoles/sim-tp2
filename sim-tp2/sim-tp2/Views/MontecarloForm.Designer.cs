@@ -102,7 +102,7 @@
             this.dgvMontecarlo.Name = "dgvMontecarlo";
             this.dgvMontecarlo.RowHeadersWidth = 51;
             this.dgvMontecarlo.RowTemplate.Height = 24;
-            this.dgvMontecarlo.Size = new System.Drawing.Size(1456, 893);
+            this.dgvMontecarlo.Size = new System.Drawing.Size(1456, 858);
             this.dgvMontecarlo.TabIndex = 6;
             // 
             // button1

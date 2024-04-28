@@ -61,7 +61,6 @@
     <Compile Include="DTOs\MontecarloDTO.cs" />
     <Compile Include="DTOs\RondaBowlingDTO.cs" />
     <Compile Include="Services\BowlingMontecarloSimulationService.cs" />
-    <Compile Include="Services\Interfaces\IBowlingMontecarloSimulationService.cs" />
     <Compile Include="Views\Distribuciones.cs">
       <SubType>Form</SubType>
     </Compile>

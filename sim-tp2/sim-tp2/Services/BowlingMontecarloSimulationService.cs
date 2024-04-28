@@ -1,16 +1,10 @@
 ﻿using sim_tp2.DTOs;
 using sim_tp2.Utilities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace sim_tp2.Services
 {
-    public class BowlingMontecarloSimulationService : IBowlingMontecarloSimulationService
+    public static class BowlingMontecarloSimulationService
     {
         /// <summary>
         /// Determina los pinos tirados por el primer tiro.
@@ -18,7 +12,7 @@ namespace sim_tp2.Services
         /// <param name="ronda"></param>
         private static void RealizarPrimerTiro(ref RondaBowlingDto ronda)
         {
-            ronda.RandomPrimerTiro = NumerosUtility.GetAleatorio();
+            ronda.RandomPrimerTiro = NumerosUtility.Truncar4Decimales(NumerosUtility.GetAleatorio());
 
             if(ronda.RandomPrimerTiro <= 0.16)
             {
@@ -52,7 +46,7 @@ namespace sim_tp2.Services
         /// <returns></returns>
         private static void RealizarSegundoTiro(ref RondaBowlingDto ronda)
         {
-            ronda.RandomSegundoTiro = NumerosUtility.GetAleatorio();
+            ronda.RandomSegundoTiro = NumerosUtility.Truncar4Decimales(NumerosUtility.GetAleatorio());
 
             if (ronda.PinosTiradosPrimerTiro == 6)
             {
@@ -157,7 +151,7 @@ namespace sim_tp2.Services
         /// </summary>
         /// <param name="rondaAnterior"></param>
         /// <returns></returns>
-        private RondaBowlingDto SimularRondaBowling(RondaBowlingDto rondaAnterior)
+        private static RondaBowlingDto SimularRondaBowling(RondaBowlingDto rondaAnterior)
         {
             // Seteo de acumuladores y resultados de ronda anterior
             var ronda = new RondaBowlingDto()
@@ -183,8 +177,8 @@ namespace sim_tp2.Services
 
             if (terminoJuego)
             {
-                ronda.ContadorExitos = ronda.PuntajeAcumuladoJuego >= 120 ? ronda.ContadorExitos++ : ronda.ContadorExitos;
-                ronda.ProbabilidadExito = ronda.ContadorExitos / (ronda.NumeroRonda / 10);
+                ronda.ContadorExitos = ronda.PuntajeAcumuladoJuego >= 120 ? ronda.ContadorExitos + 1 : ronda.ContadorExitos;
+                ronda.ProbabilidadExito = NumerosUtility.Truncar4Decimales(ronda.ContadorExitos / (ronda.NumeroRonda / 10d));
                 ronda.PuntajeAcumuladoJuego = 0;
             }
 
@@ -199,7 +193,7 @@ namespace sim_tp2.Services
         /// <param name="mostrarRondaDesde"></param>
         /// <param name="mostrarRondaHasta"></param>
         /// <returns></returns>
-        public List<RondaBowlingDto> SimularBowling(int numeroRondas, int mostrarRondaDesde, int mostrarRondaHasta)
+        private static List<RondaBowlingDto> SimularBowling(int numeroRondas, int mostrarRondaDesde, int mostrarRondaHasta)
         {
             var rondasAMostrar = new List<RondaBowlingDto>();
 
@@ -223,10 +217,15 @@ namespace sim_tp2.Services
             return rondasAMostrar;
         }
 
-        public List<RondaBowlingDto> ImprimirMontecarlo(int cantRondas, int rondaInicial, int rondaFinal)
-        {
-            return  SimularBowling( cantRondas,  rondaInicial,  rondaFinal);
-        }
-
+        /// <summary>
+        /// Imprime la simulación de un intervalo de filas y la última fila
+        /// del Bowling.
+        /// </summary>
+        /// <param name="cantRondas"></param>
+        /// <param name="rondaInicial"></param>
+        /// <param name="rondaFinal"></param>
+        /// <returns></returns>
+        public static List<RondaBowlingDto> ImprimirMontecarlo(int cantRondas, int rondaInicial, int rondaFinal)
+            => SimularBowling( cantRondas,  rondaInicial,  rondaFinal);
     }
 }
