@@ -4,9 +4,9 @@ using sim_tp2.Distribution;
 
 namespace sim_tp2
 {
-    public partial class Form1 : Form
+    public partial class Distribuciones : Form
     {
-        public Form1()
+        public Distribuciones()
         {
             InitializeComponent();
             btn_calcular.Hide();

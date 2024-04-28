@@ -58,20 +58,33 @@
     <Compile Include="Distribution\ExponentialNegative.cs" />
     <Compile Include="Distribution\Normal.cs" />
     <Compile Include="Distribution\Uniform.cs" />
+    <Compile Include="DTOs\MontecarloDTO.cs" />
     <Compile Include="DTOs\RondaBowlingDTO.cs" />
     <Compile Include="Services\BowlingMontecarloSimulationService.cs" />
     <Compile Include="Services\Interfaces\IBowlingMontecarloSimulationService.cs" />
-    <Compile Include="Views\Form1.cs">
+    <Compile Include="Views\Distribuciones.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Views\Distribuciones.Designer.cs">
+      <DependentUpon>Distribuciones.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\NumerosUtility.cs" />
-    <EmbeddedResource Include="Views\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Views\MenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MenuPrincipal.Designer.cs">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MontecarloForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MontecarloForm.Designer.cs">
+      <DependentUpon>MontecarloForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\Distribuciones.resx">
+      <DependentUpon>Distribuciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -83,6 +96,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\MenuPrincipal.resx">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MontecarloForm.resx">
+      <DependentUpon>MontecarloForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
