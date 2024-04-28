@@ -223,5 +223,10 @@ namespace sim_tp2.Services
             return rondasAMostrar;
         }
 
+        public List<RondaBowlingDto> ImprimirMontecarlo(int cantRondas, int rondaInicial, int rondaFinal)
+        {
+            return  SimularBowling( cantRondas,  rondaInicial,  rondaFinal);
+        }
+
     }
 }
