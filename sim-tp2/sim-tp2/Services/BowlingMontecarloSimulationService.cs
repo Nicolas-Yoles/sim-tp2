@@ -20,27 +20,27 @@ namespace sim_tp2.Services
         {
             ronda.RandomPrimerTiro = NumerosUtility.Truncar4Decimales(NumerosUtility.GetAleatorio());
 
-            var limiteSeis = ProbabilidadesPrimerTiro.ProbabilidadSeis - 0.01;
+            var limiteSeis = ProbabilidadesPrimerTiro.ProbabilidadSeis;
             var limiteSiete = limiteSeis + ProbabilidadesPrimerTiro.ProbabilidadSiete;
             var limiteOcho = limiteSiete + ProbabilidadesPrimerTiro.ProbabilidadOcho;
             var limiteNueve = limiteOcho + ProbabilidadesPrimerTiro.ProbabilidadNueve;
 
-            if (ronda.RandomPrimerTiro <= limiteSeis)
+            if (ronda.RandomPrimerTiro < limiteSeis)
             {
                 ronda.PinosTiradosPrimerTiro = 6;
                 return;
             }
-            else if(ronda.RandomPrimerTiro <= limiteSiete)
+            else if(ronda.RandomPrimerTiro < limiteSiete)
             {
                 ronda.PinosTiradosPrimerTiro = 7;
                 return;
             }
-            else if(ronda.RandomPrimerTiro <= limiteOcho)
+            else if(ronda.RandomPrimerTiro < limiteOcho)
             {
                 ronda.PinosTiradosPrimerTiro = 8;
                 return;
             }
-            else if (ronda.RandomPrimerTiro <= limiteNueve)
+            else if (ronda.RandomPrimerTiro < limiteNueve)
             {
                 ronda.PinosTiradosPrimerTiro = 9;
                 return;
@@ -61,27 +61,27 @@ namespace sim_tp2.Services
 
             if (ronda.PinosTiradosPrimerTiro == 6)
             {
-                var limiteCero = ProbabilidadesSegundoTiro.ProbabilidadSeisCero - 0.01;
+                var limiteCero = ProbabilidadesSegundoTiro.ProbabilidadSeisCero;
                 var limiteUno = limiteCero + ProbabilidadesSegundoTiro.ProbabilidadSeisUno;
                 var limiteDos = limiteUno + ProbabilidadesSegundoTiro.ProbabilidadSeisDos;
                 var limiteTres = limiteDos + ProbabilidadesSegundoTiro.ProbabilidadSeisTres;
 
-                if (ronda.RandomSegundoTiro <= limiteCero)
+                if (ronda.RandomSegundoTiro < limiteCero)
                 {
                     ronda.PinosTiradosSegundoTiro = 0;
                     return;
                 }
-                else if (ronda.RandomSegundoTiro <= limiteUno)
+                else if (ronda.RandomSegundoTiro < limiteUno)
                 {
                     ronda.PinosTiradosSegundoTiro = 1;
                     return;
                 }
-                else if (ronda.RandomSegundoTiro <= limiteDos)
+                else if (ronda.RandomSegundoTiro < limiteDos)
                 {
                     ronda.PinosTiradosSegundoTiro = 2;
                     return;
                 }
-                else if (ronda.RandomSegundoTiro <= limiteTres)
+                else if (ronda.RandomSegundoTiro < limiteTres)
                 {
                     ronda.PinosTiradosSegundoTiro = 3;
                     return;
@@ -92,21 +92,21 @@ namespace sim_tp2.Services
             }
             else if (ronda.PinosTiradosPrimerTiro == 7)
             {
-                var limiteCero = ProbabilidadesSegundoTiro.ProbabilidadSieteCero - 0.01;
+                var limiteCero = ProbabilidadesSegundoTiro.ProbabilidadSieteCero;
                 var limiteUno = limiteCero + ProbabilidadesSegundoTiro.ProbabilidadSieteUno;
                 var limiteDos = limiteUno + ProbabilidadesSegundoTiro.ProbabilidadSieteDos;
 
-                if (ronda.RandomSegundoTiro <= limiteCero)
+                if (ronda.RandomSegundoTiro < limiteCero)
                 {
                     ronda.PinosTiradosSegundoTiro = 0;
                     return;
                 }
-                else if (ronda.RandomSegundoTiro <= limiteUno)
+                else if (ronda.RandomSegundoTiro < limiteUno)
                 {
                     ronda.PinosTiradosSegundoTiro = 1;
                     return;
                 }
-                else if (ronda.RandomSegundoTiro <= limiteDos)
+                else if (ronda.RandomSegundoTiro < limiteDos)
                 {
                     ronda.PinosTiradosSegundoTiro = 2;
                     return;
@@ -117,15 +117,15 @@ namespace sim_tp2.Services
             }
             else if (ronda.PinosTiradosPrimerTiro == 8)
             {
-                var limiteCero = ProbabilidadesSegundoTiro.ProbabilidadOchoCero - 0.01;
+                var limiteCero = ProbabilidadesSegundoTiro.ProbabilidadOchoCero;
                 var limiteUno = limiteCero + ProbabilidadesSegundoTiro.ProbabilidadOchoUno;
 
-                if (ronda.RandomSegundoTiro <= limiteCero)
+                if (ronda.RandomSegundoTiro < limiteCero)
                 {
                     ronda.PinosTiradosSegundoTiro = 0;
                     return;
                 }
-                else if (ronda.RandomSegundoTiro <= limiteUno)
+                else if (ronda.RandomSegundoTiro < limiteUno)
                 {
                     ronda.PinosTiradosSegundoTiro = 1;
                     return;
@@ -136,7 +136,7 @@ namespace sim_tp2.Services
             }
             else
             {
-                if (ronda.RandomSegundoTiro <= (ProbabilidadesSegundoTiro.ProbabilidadNueveCero - 0.01))
+                if (ronda.RandomSegundoTiro < (ProbabilidadesSegundoTiro.ProbabilidadNueveCero))
                 {
                     ronda.PinosTiradosSegundoTiro = 0;
                     return;
