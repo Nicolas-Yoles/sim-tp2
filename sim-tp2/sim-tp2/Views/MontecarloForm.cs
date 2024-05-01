@@ -55,7 +55,16 @@ namespace sim_tp2.Views
                 return;
             }
 
-            var rondaBowlingDtos = BowlingMontecarloSimulationService.ImprimirMontecarlo(cantRondas, rondaInicial, rondaFinal);
+            // TODO: Crear inputs para parametros de reglas y probabilidades (mostrar valores por defecto)
+            // TODO: Crear propiedades del servicio con los valores tomados de interfaz grafica.
+            var bowlingService = new BowlingMontecarloSimulationService
+            {
+                Reglas = new ReglasBowlingDto(),
+                ProbabilidadesPrimerTiro = new ProbabilidadesPrimerTiroBowlingDto(),
+                ProbabilidadesSegundoTiro = new ProbabilidadesSegundoTiroBowlingDto()
+            };
+
+            var rondaBowlingDtos = bowlingService.ImprimirMontecarlo(cantRondas, rondaInicial, rondaFinal);
             dgvMontecarlo.DataSource = rondaBowlingDtos;
         }
 

@@ -59,6 +59,9 @@
     <Compile Include="Distribution\Normal.cs" />
     <Compile Include="Distribution\Uniform.cs" />
     <Compile Include="DTOs\MontecarloDTO.cs" />
+    <Compile Include="DTOs\ProbabilidadesPrimerTiroBowlingDTO.cs" />
+    <Compile Include="DTOs\ProbabilidadesSegundoTiroBowlingDTO.cs" />
+    <Compile Include="DTOs\ReglasBowlingDTO.cs" />
     <Compile Include="DTOs\RondaBowlingDTO.cs" />
     <Compile Include="Services\BowlingMontecarloSimulationService.cs" />
     <Compile Include="Views\Distribuciones.cs">

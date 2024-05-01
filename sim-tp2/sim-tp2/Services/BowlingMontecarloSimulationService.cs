@@ -4,32 +4,43 @@ using System.Collections.Generic;
 
 namespace sim_tp2.Services
 {
-    public static class BowlingMontecarloSimulationService
+    public class BowlingMontecarloSimulationService
     {
+        public ReglasBowlingDto Reglas { get; set; }
+
+        public ProbabilidadesPrimerTiroBowlingDto ProbabilidadesPrimerTiro {  get; set; }
+
+        public ProbabilidadesSegundoTiroBowlingDto ProbabilidadesSegundoTiro { get; set; }
+
         /// <summary>
         /// Determina los pinos tirados por el primer tiro.
         /// </summary>
         /// <param name="ronda"></param>
-        private static void RealizarPrimerTiro(ref RondaBowlingDto ronda)
+        private void RealizarPrimerTiro(ref RondaBowlingDto ronda)
         {
             ronda.RandomPrimerTiro = NumerosUtility.Truncar4Decimales(NumerosUtility.GetAleatorio());
 
-            if(ronda.RandomPrimerTiro <= 0.16)
+            var limiteSeis = ProbabilidadesPrimerTiro.ProbabilidadSeis - 0.01;
+            var limiteSiete = limiteSeis + ProbabilidadesPrimerTiro.ProbabilidadSiete;
+            var limiteOcho = limiteSiete + ProbabilidadesPrimerTiro.ProbabilidadOcho;
+            var limiteNueve = limiteOcho + ProbabilidadesPrimerTiro.ProbabilidadNueve;
+
+            if (ronda.RandomPrimerTiro <= limiteSeis)
             {
                 ronda.PinosTiradosPrimerTiro = 6;
                 return;
             }
-            else if(ronda.RandomPrimerTiro <= 0.26)
+            else if(ronda.RandomPrimerTiro <= limiteSiete)
             {
                 ronda.PinosTiradosPrimerTiro = 7;
                 return;
             }
-            else if(ronda.RandomPrimerTiro <= 0.41)
+            else if(ronda.RandomPrimerTiro <= limiteOcho)
             {
                 ronda.PinosTiradosPrimerTiro = 8;
                 return;
             }
-            else if (ronda.RandomPrimerTiro <= 0.59)
+            else if (ronda.RandomPrimerTiro <= limiteNueve)
             {
                 ronda.PinosTiradosPrimerTiro = 9;
                 return;
@@ -44,28 +55,33 @@ namespace sim_tp2.Services
         /// </summary>
         /// <param name="ronda"></param>
         /// <returns></returns>
-        private static void RealizarSegundoTiro(ref RondaBowlingDto ronda)
+        private void RealizarSegundoTiro(ref RondaBowlingDto ronda)
         {
             ronda.RandomSegundoTiro = NumerosUtility.Truncar4Decimales(NumerosUtility.GetAleatorio());
 
             if (ronda.PinosTiradosPrimerTiro == 6)
             {
-                if (ronda.RandomSegundoTiro <= 0.09)
+                var limiteCero = ProbabilidadesSegundoTiro.ProbabilidadSeisCero - 0.01;
+                var limiteUno = limiteCero + ProbabilidadesSegundoTiro.ProbabilidadSeisUno;
+                var limiteDos = limiteUno + ProbabilidadesSegundoTiro.ProbabilidadSeisDos;
+                var limiteTres = limiteDos + ProbabilidadesSegundoTiro.ProbabilidadSeisTres;
+
+                if (ronda.RandomSegundoTiro <= limiteCero)
                 {
                     ronda.PinosTiradosSegundoTiro = 0;
                     return;
                 }
-                else if (ronda.RandomSegundoTiro <= 0.29)
+                else if (ronda.RandomSegundoTiro <= limiteUno)
                 {
                     ronda.PinosTiradosSegundoTiro = 1;
                     return;
                 }
-                else if (ronda.RandomSegundoTiro <= 0.59)
+                else if (ronda.RandomSegundoTiro <= limiteDos)
                 {
                     ronda.PinosTiradosSegundoTiro = 2;
                     return;
                 }
-                else if (ronda.RandomSegundoTiro <= 0.89)
+                else if (ronda.RandomSegundoTiro <= limiteTres)
                 {
                     ronda.PinosTiradosSegundoTiro = 3;
                     return;
@@ -76,17 +92,21 @@ namespace sim_tp2.Services
             }
             else if (ronda.PinosTiradosPrimerTiro == 7)
             {
-                if (ronda.RandomSegundoTiro <= 0.01)
+                var limiteCero = ProbabilidadesSegundoTiro.ProbabilidadSieteCero - 0.01;
+                var limiteUno = limiteCero + ProbabilidadesSegundoTiro.ProbabilidadSieteUno;
+                var limiteDos = limiteUno + ProbabilidadesSegundoTiro.ProbabilidadSieteDos;
+
+                if (ronda.RandomSegundoTiro <= limiteCero)
                 {
                     ronda.PinosTiradosSegundoTiro = 0;
                     return;
                 }
-                else if (ronda.RandomSegundoTiro <= 0.11)
+                else if (ronda.RandomSegundoTiro <= limiteUno)
                 {
                     ronda.PinosTiradosSegundoTiro = 1;
                     return;
                 }
-                else if (ronda.RandomSegundoTiro <= 0.56)
+                else if (ronda.RandomSegundoTiro <= limiteDos)
                 {
                     ronda.PinosTiradosSegundoTiro = 2;
                     return;
@@ -97,12 +117,15 @@ namespace sim_tp2.Services
             }
             else if (ronda.PinosTiradosPrimerTiro == 8)
             {
-                if (ronda.RandomSegundoTiro <= 0.03)
+                var limiteCero = ProbabilidadesSegundoTiro.ProbabilidadOchoCero - 0.01;
+                var limiteUno = limiteCero + ProbabilidadesSegundoTiro.ProbabilidadOchoUno;
+
+                if (ronda.RandomSegundoTiro <= limiteCero)
                 {
                     ronda.PinosTiradosSegundoTiro = 0;
                     return;
                 }
-                else if (ronda.RandomSegundoTiro <= 0.23)
+                else if (ronda.RandomSegundoTiro <= limiteUno)
                 {
                     ronda.PinosTiradosSegundoTiro = 1;
                     return;
@@ -113,7 +136,7 @@ namespace sim_tp2.Services
             }
             else
             {
-                if (ronda.RandomSegundoTiro <= 0.05)
+                if (ronda.RandomSegundoTiro <= (ProbabilidadesSegundoTiro.ProbabilidadNueveCero - 0.01))
                 {
                     ronda.PinosTiradosSegundoTiro = 0;
                     return;
@@ -129,7 +152,7 @@ namespace sim_tp2.Services
         /// Si se tiraron los 10 con un tiro, devuelve 20, con dos tiros devuelve 15.
         /// </summary>
         /// <param name="ronda"></param>
-        private static void ObtenerPuntajeObtenido(ref RondaBowlingDto ronda)
+        private void ObtenerPuntajeObtenido(ref RondaBowlingDto ronda)
         {
             if (ronda.PinosTotales < 10)
             {
@@ -139,11 +162,11 @@ namespace sim_tp2.Services
 
             if (ronda.PinosTiradosSegundoTiro.HasValue)
             {
-                ronda.PuntajeObtenido = 15;
+                ronda.PuntajeObtenido = Reglas.PuntajeSpare;
                 return;
             }
 
-            ronda.PuntajeObtenido = 20;
+            ronda.PuntajeObtenido = Reglas.PuntajeStrike;
         }
 
         /// <summary>
@@ -151,7 +174,7 @@ namespace sim_tp2.Services
         /// </summary>
         /// <param name="rondaAnterior"></param>
         /// <returns></returns>
-        private static RondaBowlingDto SimularRondaBowling(RondaBowlingDto rondaAnterior)
+        private RondaBowlingDto SimularRondaBowling(RondaBowlingDto rondaAnterior)
         {
             // Seteo de acumuladores y resultados de ronda anterior
             var ronda = new RondaBowlingDto()
@@ -173,12 +196,12 @@ namespace sim_tp2.Services
             ronda.PuntajeAcumuladoJuego += ronda.PuntajeObtenido;
 
             //Recalculo de acumuladores y resultados
-            var terminoJuego = ronda.NumeroRonda % 10 == 0;
+            var terminoJuego = ronda.NumeroRonda % Reglas.RondasPorPartida == 0;
 
             if (terminoJuego)
             {
-                ronda.ContadorExitos = ronda.PuntajeAcumuladoJuego >= 120 ? ronda.ContadorExitos + 1 : ronda.ContadorExitos;
-                ronda.ProbabilidadExito = NumerosUtility.Truncar4Decimales(ronda.ContadorExitos / (ronda.NumeroRonda / 10d));
+                ronda.ContadorExitos = ronda.PuntajeAcumuladoJuego >= Reglas.PuntajeExito ? ronda.ContadorExitos + 1 : ronda.ContadorExitos;
+                ronda.ProbabilidadExito = NumerosUtility.Truncar4Decimales(ronda.ContadorExitos / (ronda.NumeroRonda / (double)Reglas.RondasPorPartida));
                 ronda.PuntajeAcumuladoJuego = 0;
             }
 
@@ -193,7 +216,7 @@ namespace sim_tp2.Services
         /// <param name="mostrarRondaDesde"></param>
         /// <param name="mostrarRondaHasta"></param>
         /// <returns></returns>
-        private static List<RondaBowlingDto> SimularBowling(int numeroRondas, int mostrarRondaDesde, int mostrarRondaHasta)
+        private List<RondaBowlingDto> SimularBowling(int numeroRondas, int mostrarRondaDesde, int mostrarRondaHasta)
         {
             var rondasAMostrar = new List<RondaBowlingDto>();
 
@@ -225,7 +248,7 @@ namespace sim_tp2.Services
         /// <param name="rondaInicial"></param>
         /// <param name="rondaFinal"></param>
         /// <returns></returns>
-        public static List<RondaBowlingDto> ImprimirMontecarlo(int cantRondas, int rondaInicial, int rondaFinal)
+        public List<RondaBowlingDto> ImprimirMontecarlo(int cantRondas, int rondaInicial, int rondaFinal)
             => SimularBowling( cantRondas,  rondaInicial,  rondaFinal);
     }
 }
