@@ -254,5 +254,9 @@ namespace sim_tp2
             numericUpDownMuestra.Value = 0; 
         }
 
+        private void Distribuciones_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

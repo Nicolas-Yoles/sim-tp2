@@ -14,6 +14,9 @@ namespace sim_tp2.Views
 {
     public partial class MontecarloForm : Form
     {
+        public ProbabilidadesPrimerTiroBowlingDto probabiladesPrimeraTirada = new ProbabilidadesPrimerTiroBowlingDto();
+
+        public ProbabilidadesSegundoTiroBowlingDto probabilidadesSegundaTirada = new ProbabilidadesSegundoTiroBowlingDto();
         public MontecarloForm()
         {
             InitializeComponent();
@@ -60,11 +63,9 @@ namespace sim_tp2.Views
             var bowlingService = new BowlingMontecarloSimulationService
             {
                 Reglas = new ReglasBowlingDto(),
-                ProbabilidadesPrimerTiro = new ProbabilidadesPrimerTiroBowlingDto(),
-                ProbabilidadesSegundoTiro = new ProbabilidadesSegundoTiroBowlingDto()
             };
 
-            var rondaBowlingDtos = bowlingService.ImprimirMontecarlo(cantRondas, rondaInicial, rondaFinal);
+            var rondaBowlingDtos = bowlingService.ImprimirMontecarlo(cantRondas, rondaInicial, rondaFinal, probabiladesPrimeraTirada, probabilidadesSegundaTirada);
             dgvMontecarlo.DataSource = rondaBowlingDtos;
         }
 
@@ -74,6 +75,23 @@ namespace sim_tp2.Views
             rondaInicialTxt.Text = "0";
             rondaFinalTxt.Text = "0";
             dgvMontecarlo.DataSource = new List<RondaBowlingDto>();
+        }
+
+        private void MontecarloForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ProbabilidadesMonteCarlo form2 = new ProbabilidadesMonteCarlo();
+            form2.FormularioPadre = this;
+            form2.Show();
+        }
+        public void RecibirProbabilidades(ProbabilidadesPrimerTiroBowlingDto probabiladesPrimeraTirada, ProbabilidadesSegundoTiroBowlingDto probabilidadesSegundaTirada)
+        {
+            this.probabiladesPrimeraTirada = probabiladesPrimeraTirada;
+            this.probabilidadesSegundaTirada = probabilidadesSegundaTirada;
         }
     }
 }

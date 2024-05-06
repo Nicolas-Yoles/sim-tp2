@@ -73,6 +73,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\NumerosUtility.cs" />
+    <Compile Include="Views\ProbabilidadesMonteCarlo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ProbabilidadesMonteCarlo.Designer.cs">
+      <DependentUpon>ProbabilidadesMonteCarlo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\MenuPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\ProbabilidadesMonteCarlo.resx">
+      <DependentUpon>ProbabilidadesMonteCarlo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>

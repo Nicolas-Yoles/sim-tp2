@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.checkBoxUniforme = new System.Windows.Forms.CheckBox();
             this.checkBoxExponencialNegativa = new System.Windows.Forms.CheckBox();
             this.checkBoxNormal = new System.Windows.Forms.CheckBox();
@@ -340,17 +340,17 @@
             // 
             // chartDistribucion
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartDistribucion.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartDistribucion.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chartDistribucion.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartDistribucion.Legends.Add(legend1);
             this.chartDistribucion.Location = new System.Drawing.Point(262, 381);
             this.chartDistribucion.Margin = new System.Windows.Forms.Padding(4);
             this.chartDistribucion.Name = "chartDistribucion";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartDistribucion.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartDistribucion.Series.Add(series1);
             this.chartDistribucion.Size = new System.Drawing.Size(700, 600);
             this.chartDistribucion.TabIndex = 21;
             this.chartDistribucion.Text = "chart1";
@@ -465,7 +465,7 @@
             this.btn_limpiar.UseVisualStyleBackColor = true;
             this.btn_limpiar.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // Distribuciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -502,9 +502,10 @@
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "Form1";
+            this.Name = "Distribuciones";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Distribuciones_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinimoUniforme)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaximoUniforme)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLambdaExponencialNegativa)).EndInit();

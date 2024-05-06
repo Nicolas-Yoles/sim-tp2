@@ -40,6 +40,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMontecarlo)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -137,6 +138,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.rondaFinalTxt);
@@ -147,7 +149,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 112);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(401, 185);
+            this.panel1.Size = new System.Drawing.Size(401, 210);
             this.panel1.TabIndex = 10;
             // 
             // button2
@@ -159,6 +161,16 @@
             this.button2.Text = "Limpiar";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(14, 140);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(109, 30);
+            this.button3.TabIndex = 9;
+            this.button3.Text = "Probabilidades";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // MontecarloForm
             // 
@@ -172,6 +184,7 @@
             this.Name = "MontecarloForm";
             this.Text = "MontecarloForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.MontecarloForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMontecarlo)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -194,5 +207,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
