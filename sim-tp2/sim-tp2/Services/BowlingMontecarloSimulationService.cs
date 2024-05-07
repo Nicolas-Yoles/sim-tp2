@@ -180,7 +180,7 @@ namespace sim_tp2.Services
             var ronda = new RondaBowlingDto()
             {
                 ProbabilidadExito = rondaAnterior.ProbabilidadExito,
-                PuntajeAcumuladoJuego = rondaAnterior.PuntajeAcumuladoJuego,
+                PuntajeAcumuladoJuego = rondaAnterior.TerminoJuego ? 0 : rondaAnterior.PuntajeAcumuladoJuego,
                 NumeroRonda = rondaAnterior.NumeroRonda + 1,
                 ContadorExitos = rondaAnterior.ContadorExitos
             };
@@ -202,7 +202,7 @@ namespace sim_tp2.Services
             {
                 ronda.ContadorExitos = ronda.PuntajeAcumuladoJuego >= Reglas.PuntajeExito ? ronda.ContadorExitos + 1 : ronda.ContadorExitos;
                 ronda.ProbabilidadExito = NumerosUtility.Truncar4Decimales(ronda.ContadorExitos / (ronda.NumeroRonda / (double)Reglas.RondasPorPartida));
-                ronda.PuntajeAcumuladoJuego = 0;
+                ronda.TerminoJuego = true;
             }
 
             return ronda;
