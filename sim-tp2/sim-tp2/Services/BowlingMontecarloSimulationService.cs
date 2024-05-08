@@ -1,6 +1,7 @@
 ﻿using sim_tp2.DTOs;
 using sim_tp2.Utilities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace sim_tp2.Services
 {
@@ -180,7 +181,7 @@ namespace sim_tp2.Services
             var ronda = new RondaBowlingDto()
             {
                 ProbabilidadExito = rondaAnterior.ProbabilidadExito,
-                PuntajeAcumuladoJuego = rondaAnterior.PuntajeAcumuladoJuego,
+                PuntajeAcumuladoJuego = rondaAnterior.TerminoJuego ? 0 : rondaAnterior.PuntajeAcumuladoJuego,
                 NumeroRonda = rondaAnterior.NumeroRonda + 1,
                 ContadorExitos = rondaAnterior.ContadorExitos
             };
@@ -202,7 +203,7 @@ namespace sim_tp2.Services
             {
                 ronda.ContadorExitos = ronda.PuntajeAcumuladoJuego >= Reglas.PuntajeExito ? ronda.ContadorExitos + 1 : ronda.ContadorExitos;
                 ronda.ProbabilidadExito = NumerosUtility.Truncar4Decimales(ronda.ContadorExitos / (ronda.NumeroRonda / (double)Reglas.RondasPorPartida));
-                ronda.PuntajeAcumuladoJuego = 0;
+                ronda.TerminoJuego = true;
             }
 
             return ronda;
@@ -216,10 +217,11 @@ namespace sim_tp2.Services
         /// <param name="mostrarRondaDesde"></param>
         /// <param name="mostrarRondaHasta"></param>
         /// <returns></returns>
-        private List<RondaBowlingDto> SimularBowling(int numeroRondas, int mostrarRondaDesde, int mostrarRondaHasta, ProbabilidadesPrimerTiroBowlingDto probabildadesPrimerTiro, ProbabilidadesSegundoTiroBowlingDto probabilidadSegundoTiro)
+        private List<RondaBowlingDto> SimularBowling(int numeroRondas, int mostrarRondaDesde, int mostrarRondaHasta, ProbabilidadesPrimerTiroBowlingDto probabildadesPrimerTiro, ProbabilidadesSegundoTiroBowlingDto probabilidadSegundoTiro, ReglasBowlingDto reglas)
         {
             this.ProbabilidadesPrimerTiro = probabildadesPrimerTiro;
             this.ProbabilidadesSegundoTiro = probabilidadSegundoTiro;
+            this.Reglas = reglas;
             var rondasAMostrar = new List<RondaBowlingDto>();
 
             var rondaSimulada = new RondaBowlingDto()
@@ -233,7 +235,7 @@ namespace sim_tp2.Services
             for(int i = 0; i < numeroRondas; i++)
             {
                 rondaSimulada = SimularRondaBowling(rondaSimulada);
-                if(i == (numeroRondas - 1) || (rondaSimulada.NumeroRonda >= mostrarRondaDesde && rondaSimulada.NumeroRonda <= mostrarRondaHasta))
+                if(i == (numeroRondas - 1 ) || (rondaSimulada.NumeroRonda >= mostrarRondaDesde && rondaSimulada.NumeroRonda <= mostrarRondaHasta))
                 {
                     rondasAMostrar.Add(rondaSimulada);
                 }
@@ -250,7 +252,7 @@ namespace sim_tp2.Services
         /// <param name="rondaInicial"></param>
         /// <param name="rondaFinal"></param>
         /// <returns></returns>
-        public List<RondaBowlingDto> ImprimirMontecarlo(int cantRondas, int rondaInicial, int rondaFinal,ProbabilidadesPrimerTiroBowlingDto probabildadesPrimerTiro,ProbabilidadesSegundoTiroBowlingDto probabilidadSegundoTiro)
-            => SimularBowling( cantRondas,  rondaInicial,  rondaFinal, probabildadesPrimerTiro, probabilidadSegundoTiro);
+        public List<RondaBowlingDto> ImprimirMontecarlo(int cantRondas, int rondaInicial, int rondaFinal,ProbabilidadesPrimerTiroBowlingDto probabildadesPrimerTiro,ProbabilidadesSegundoTiroBowlingDto probabilidadSegundoTiro,ReglasBowlingDto reglas)
+            => SimularBowling( cantRondas,  rondaInicial,  rondaFinal, probabildadesPrimerTiro, probabilidadSegundoTiro, reglas);
     }
 }

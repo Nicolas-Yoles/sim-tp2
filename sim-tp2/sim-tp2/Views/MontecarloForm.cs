@@ -45,6 +45,13 @@ namespace sim_tp2.Views
             var cantRondas = Convert.ToInt32(cantidadRondasTxt.Text.Trim());
             var rondaInicial = Convert.ToInt32(rondaInicialTxt.Text.Trim());
             var rondaFinal = Convert.ToInt32(rondaFinalTxt.Text.Trim());
+            var cantPuntosExito = Convert.ToInt32(textBoxCantPuntosExito.Text.Trim());
+            var cantPuntosStrike = Convert.ToInt32(textBoxCantidadPuntosStrike.Text.Trim());
+            var cantPuntosSpare = Convert.ToInt32(textBoxCantidadPuntosSpare.Text.Trim());
+            ReglasBowlingDto reglas = new ReglasBowlingDto();
+            reglas.PuntajeExito = cantPuntosExito;
+            reglas.PuntajeStrike = cantPuntosStrike;
+            reglas.PuntajeSpare = cantPuntosSpare;
 
             if (cantRondas == 0)
             {
@@ -57,15 +64,17 @@ namespace sim_tp2.Views
                 MessageBox.Show("Error: La ronda final debe ser superior a la ronda inicial.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (cantPuntosExito == 0 && cantPuntosStrike == 0 && cantPuntosSpare == 0)
+            {
+                MessageBox.Show("Error: Las reglas cantidad de puntos Exito, cantidad puntos strike, cantidad puntos spare no pueden ser 0 .", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             // TODO: Crear inputs para parametros de reglas y probabilidades (mostrar valores por defecto)
             // TODO: Crear propiedades del servicio con los valores tomados de interfaz grafica.
-            var bowlingService = new BowlingMontecarloSimulationService
-            {
-                Reglas = new ReglasBowlingDto(),
-            };
+            var bowlingService = new BowlingMontecarloSimulationService();
 
-            var rondaBowlingDtos = bowlingService.ImprimirMontecarlo(cantRondas, rondaInicial, rondaFinal, probabiladesPrimeraTirada, probabilidadesSegundaTirada);
+            var rondaBowlingDtos = bowlingService.ImprimirMontecarlo(cantRondas, rondaInicial, rondaFinal, probabiladesPrimeraTirada, probabilidadesSegundaTirada, reglas);
             dgvMontecarlo.DataSource = rondaBowlingDtos;
         }
 
