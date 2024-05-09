@@ -27,5 +27,7 @@ namespace sim_tp2.DTOs
         public int ContadorExitos { get; set; }
 
         public double ProbabilidadExito { get; set; }
+
+        public bool TerminoJuego { get; set; }
     }
 }
