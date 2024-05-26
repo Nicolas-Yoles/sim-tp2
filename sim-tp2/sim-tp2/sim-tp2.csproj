@@ -58,12 +58,20 @@
     <Compile Include="Distribution\ExponentialNegative.cs" />
     <Compile Include="Distribution\Normal.cs" />
     <Compile Include="Distribution\Uniform.cs" />
-    <Compile Include="DTOs\MontecarloDTO.cs" />
-    <Compile Include="DTOs\ProbabilidadesPrimerTiroBowlingDTO.cs" />
-    <Compile Include="DTOs\ProbabilidadesSegundoTiroBowlingDTO.cs" />
-    <Compile Include="DTOs\ReglasBowlingDTO.cs" />
-    <Compile Include="DTOs\RondaBowlingDTO.cs" />
+    <Compile Include="DTOs\Bowling\MontecarloDTO.cs" />
+    <Compile Include="DTOs\Bowling\ProbabilidadesPrimerTiroBowlingDTO.cs" />
+    <Compile Include="DTOs\Bowling\ProbabilidadesSegundoTiroBowlingDTO.cs" />
+    <Compile Include="DTOs\Bowling\ReglasBowlingDTO.cs" />
+    <Compile Include="DTOs\Bowling\RondaBowlingDTO.cs" />
+    <Compile Include="DTOs\Peluqueria\ClienteDTO.cs" />
+    <Compile Include="DTOs\Peluqueria\EstadoClienteEnum.cs" />
+    <Compile Include="DTOs\Peluqueria\EstadoServidorEnum.cs" />
+    <Compile Include="DTOs\Peluqueria\PeluqueriaEventoDTO.cs" />
+    <Compile Include="DTOs\Peluqueria\PeluqueriaObtencionTiempoDTO.cs" />
+    <Compile Include="DTOs\Peluqueria\PeluqueriaParametrizacionDTO.cs" />
+    <Compile Include="DTOs\Peluqueria\ServidorDTO.cs" />
     <Compile Include="Services\BowlingMontecarloSimulationService.cs" />
+    <Compile Include="Services\PeluqueriaVIPQueueSimulation.cs" />
     <Compile Include="Views\Distribuciones.cs">
       <SubType>Form</SubType>
     </Compile>
