@@ -10,13 +10,13 @@ namespace sim_tp2.DTOs.Peluqueria
     {
         public int NumeroIteracion { get; set; } = 0;
 
-        public TimeSpan Reloj { get; set; } = new TimeSpan(0, 0, 0);
+        public double Reloj { get; set; } = 0;
 
         public string EventoNombre { get; set; } = "Inicialización";
 
         public PeluqueriaObtencionTiempoDto LlegadaCliente { get; set; } = new PeluqueriaObtencionTiempoDto();
 
-        public decimal? RandomPeluquero { get; set; }
+        public double? RandomPeluquero { get; set; }
 
         public string Peluquero { get; set; }
 
@@ -26,11 +26,9 @@ namespace sim_tp2.DTOs.Peluqueria
 
         public PeluqueriaObtencionTiempoDto VeteranoBFinAtencion { get; set; } = new PeluqueriaObtencionTiempoDto();
 
-        public TimeSpan Cierre { get; set; }
+        public double Cierre { get; set; }
 
-        public TimeSpan Apertura { get; set; }
-
-        public TimeSpan Refrigerio { get; set; }
+        public double Apertura { get; set; }
 
         public ServidorDto Aprendiz {  get; set; }
 
@@ -41,6 +39,8 @@ namespace sim_tp2.DTOs.Peluqueria
         public int AcumuladorRecaudacionTotal { get; set; } = 0;
 
         public int ContadorDiasTrabajados { get; set; } = 0;
+
+        public int ClientesEnCola {  get; set; } = 0;
 
         public int MaximoClientesEnCola { get; set; } = 0;
 

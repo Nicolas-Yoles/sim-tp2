@@ -1,4 +1,6 @@
-﻿using sim_tp2.DTOs.Peluqueria;
+﻿using sim_tp2.Distribution;
+using sim_tp2.DTOs.Peluqueria;
+using sim_tp2.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,7 @@ namespace sim_tp2.Services
         /// <param name="horaDesdeAMostrar"></param>
         /// <param name="parametrizacion"></param>
         /// <returns></returns>
-        public List<PeluqueriaEventoDto> SimularPeluqueria(int numeroDiasASimular, int iteracionesAMostrar, TimeSpan horaDesdeAMostrar, PeluqueriaParametrizacionDto parametrizacion)
+        public List<PeluqueriaEventoDto> SimularPeluqueria(int numeroDiasASimular, int iteracionesAMostrar, double horaDesdeAMostrar, PeluqueriaParametrizacionDto parametrizacion)
         {
             _parametrizacion = parametrizacion;
             var iteracionesAImprimir = new List<PeluqueriaEventoDto>();
@@ -25,7 +27,8 @@ namespace sim_tp2.Services
 
             var iteracion = new PeluqueriaEventoDto()
             {
-                LlegadaCliente = new PeluqueriaObtencionTiempoDto() { ProximoEvento = new TimeSpan(0,0,0)}
+                Cierre = 8,
+                Apertura = 24
             };
 
             while (numeroDiasASimular <= iteracion.ContadorDiasTrabajados)
@@ -43,70 +46,219 @@ namespace sim_tp2.Services
 
         private PeluqueriaEventoDto SimularEvento(PeluqueriaEventoDto iteracionAnterior)
         {
-            var iteracionActual = new PeluqueriaEventoDto();
-            DeterminarEventoASimular(iteracionAnterior, ref iteracionActual);
+            var iteracionActual = new PeluqueriaEventoDto()
+            {
+                LlegadaCliente = new PeluqueriaObtencionTiempoDto() { ProximoEvento = iteracionAnterior.LlegadaCliente.ProximoEvento },
+                AprendizFinAtencion = new PeluqueriaObtencionTiempoDto { ProximoEvento = iteracionAnterior.AprendizFinAtencion.ProximoEvento },
+                VeteranoAFinAtencion = new PeluqueriaObtencionTiempoDto { ProximoEvento = iteracionAnterior.VeteranoAFinAtencion.ProximoEvento },
+                VeteranoBFinAtencion = new PeluqueriaObtencionTiempoDto { ProximoEvento = iteracionAnterior.VeteranoBFinAtencion.ProximoEvento },
+                Cierre = iteracionAnterior.Cierre,
+                Apertura = iteracionAnterior.Apertura,
+                Aprendiz = iteracionAnterior.Aprendiz,
+                VeteranoA = iteracionAnterior.VeteranoA,
+                VeteranoB = iteracionAnterior.VeteranoB,
+                AcumuladorRecaudacionTotal = iteracionAnterior.AcumuladorRecaudacionTotal,
+                ContadorDiasTrabajados = iteracionAnterior.ContadorDiasTrabajados,
+                MaximoClientesEnCola = iteracionAnterior.MaximoClientesEnCola,
+                Clientes = iteracionAnterior.Clientes
+            };
+
+            DeterminarEventoASimular(ref iteracionActual);
 
             switch(iteracionActual.EventoNombre)
             {
                 case nameof(iteracionActual.LlegadaCliente):
-                    LlegarCliente(iteracionAnterior, ref iteracionActual);
+                    LlegarCliente(ref iteracionActual);
                     break;
                 case nameof(iteracionActual.AprendizFinAtencion):
-                    FinalizarAtencionAprendiz(iteracionAnterior, ref iteracionActual);
+                    FinalizarAtencionAprendiz(ref iteracionActual);
                     break;
                 case nameof(iteracionActual.VeteranoAFinAtencion):
-                    FinalizarAtencionVeteranoA(iteracionAnterior, ref iteracionActual);
+                    FinalizarAtencionVeteranoA(ref iteracionActual);
                     break;
                 case nameof(iteracionActual.VeteranoBFinAtencion):
-                    FinalizarAtencionVeteranoB(iteracionAnterior, ref iteracionActual);
+                    FinalizarAtencionVeteranoB(ref iteracionActual);
                     break;
                 case nameof(iteracionActual.Cierre):
-                    Cerrar(iteracionAnterior, ref iteracionActual);
+                    Cerrar(ref iteracionActual);
                     break;
                 case nameof(iteracionActual.Apertura):
-                    Abrir(iteracionAnterior, ref iteracionActual);
+                    Abrir(ref iteracionActual);
                     break;
-                case nameof(iteracionActual.Refrigerio):
-                    DarRefrigerio(iteracionAnterior, ref iteracionActual);
+                case "Refrigerio":
+                    DarRefrigerio(ref iteracionActual);
+                    break;
+                case "Inicializacion":
+                    CalcularLlegadaCliente(ref iteracionActual);
                     break;
             }
+
+            iteracionActual.ClientesEnCola = iteracionActual.Clientes.Count(x => x.Estado != EstadoClienteEnum.SiendoAtendido);
+            iteracionActual.MaximoClientesEnCola = iteracionActual.ClientesEnCola > iteracionActual.MaximoClientesEnCola 
+                ? iteracionActual.ClientesEnCola 
+                : iteracionActual.MaximoClientesEnCola;
 
             return iteracionActual;
         }
 
-        private void DarRefrigerio(PeluqueriaEventoDto iteracionAnterior, ref PeluqueriaEventoDto iteracionActual)
+        private void CalcularLlegadaCliente(ref PeluqueriaEventoDto iteracionActual)
+        {
+            iteracionActual.LlegadaCliente.Random = NumerosUtility.GetAleatorio();
+            iteracionActual.LlegadaCliente.Tiempo = Uniform.GenerarAleatorio(
+                _parametrizacion.LlegadaClienteLimiteInferior,
+                _parametrizacion.LlegadaClienteLimiteSuperior,
+                iteracionActual.LlegadaCliente.Random);
+            iteracionActual.LlegadaCliente.ProximoEvento = iteracionActual.Reloj + iteracionActual.LlegadaCliente.Tiempo;
+        }
+
+        private void DarRefrigerio(ref PeluqueriaEventoDto iteracionActual)
         {
             throw new NotImplementedException();
         }
 
-        private void Abrir(PeluqueriaEventoDto iteracionAnterior, ref PeluqueriaEventoDto iteracionActual)
+        private void Abrir(ref PeluqueriaEventoDto iteracionActual)
         {
             throw new NotImplementedException();
         }
 
-        private void Cerrar(PeluqueriaEventoDto iteracionAnterior, ref PeluqueriaEventoDto iteracionActual)
+        private void Cerrar(ref PeluqueriaEventoDto iteracionActual)
         {
             throw new NotImplementedException();
         }
 
-        private void FinalizarAtencionVeteranoB(PeluqueriaEventoDto iteracionAnterior, ref PeluqueriaEventoDto iteracionActual)
+        private void FinalizarAtencionVeteranoB(ref PeluqueriaEventoDto iteracionActual)
         {
             throw new NotImplementedException();
         }
 
-        private void FinalizarAtencionVeteranoA(PeluqueriaEventoDto iteracionAnterior, ref PeluqueriaEventoDto iteracionActual)
+        private void FinalizarAtencionVeteranoA(ref PeluqueriaEventoDto iteracionActual)
         {
             throw new NotImplementedException();
         }
 
-        private void FinalizarAtencionAprendiz(PeluqueriaEventoDto iteracionAnterior, ref PeluqueriaEventoDto iteracionActual)
+        private void FinalizarAtencionAprendiz(ref PeluqueriaEventoDto iteracionActual)
         {
             throw new NotImplementedException();
         }
 
-        private void LlegarCliente(PeluqueriaEventoDto iteracionAnterior, ref PeluqueriaEventoDto iteracionActual)
+        private void LlegarCliente(ref PeluqueriaEventoDto iteracionActual)
         {
-            throw new NotImplementedException();
+            ClienteDto.UltimoId++;
+            var cliente = new ClienteDto()
+            {
+                HoraRefrigerio = iteracionActual.Reloj + 30,
+                ConRefrigerio = false,
+                Id = ClienteDto.UltimoId
+            };
+
+            CalcularLlegadaCliente(ref iteracionActual);
+
+            iteracionActual.RandomPeluquero = NumerosUtility.GetAleatorio();
+
+            if (iteracionActual.RandomPeluquero < _parametrizacion.AprendizProbabilidadAtender)
+            {
+                iteracionActual.Peluquero = nameof(iteracionActual.Aprendiz);
+                LlegarClienteAServidor(ref iteracionActual, nameof(iteracionActual.Aprendiz), cliente);
+            }
+            else if (iteracionActual.RandomPeluquero < (_parametrizacion.AprendizProbabilidadAtender + _parametrizacion.VeteranoAProbabilidadAtender))
+            {
+                iteracionActual.Peluquero = nameof(iteracionActual.VeteranoA);
+                LlegarClienteAServidor(ref iteracionActual, nameof(iteracionActual.VeteranoA), cliente);
+            }
+            else
+            {
+                iteracionActual.Peluquero = nameof(iteracionActual.VeteranoB);
+                LlegarClienteAServidor(ref iteracionActual, nameof(iteracionActual.VeteranoB), cliente);
+            }
+        }
+
+        private void LlegarClienteAServidor(ref PeluqueriaEventoDto iteracionActual, string servidor, ClienteDto cliente)
+        {
+            switch (servidor) 
+            {
+                case nameof(iteracionActual.Aprendiz):
+                    if(iteracionActual.Aprendiz.Estado == EstadoServidorEnum.Ocupado)
+                    {
+                        cliente.Estado = EstadoClienteEnum.EsperandoAtencionAprendiz;
+                        iteracionActual.Aprendiz.ColaClientes.Add(cliente);
+                        break;
+                    }
+
+                    cliente.Estado = EstadoClienteEnum.SiendoAtendido;
+                    iteracionActual.Aprendiz.Estado = EstadoServidorEnum.Ocupado;
+                    iteracionActual.AprendizFinAtencion = CalcularFinAtencionAprendiz(iteracionActual.Reloj);
+                    break;
+
+                case nameof(iteracionActual.VeteranoA):
+                    if (iteracionActual.VeteranoA.Estado == EstadoServidorEnum.Ocupado)
+                    {
+                        cliente.Estado = EstadoClienteEnum.EsperandoAtencionVeteranoA;
+                        iteracionActual.VeteranoA.ColaClientes.Add(cliente);
+                        break;
+                    }
+
+                    cliente.Estado = EstadoClienteEnum.SiendoAtendido;
+                    iteracionActual.VeteranoA.Estado = EstadoServidorEnum.Ocupado;
+                    iteracionActual.VeteranoAFinAtencion = CalcularFinAtencionVeteranoA(iteracionActual.Reloj);
+                    break;
+
+                case nameof(iteracionActual.VeteranoB):
+                    if (iteracionActual.VeteranoB.Estado == EstadoServidorEnum.Ocupado)
+                    {
+                        cliente.Estado = EstadoClienteEnum.EsperandoAtencionVeteranoB;
+                        iteracionActual.VeteranoB.ColaClientes.Add(cliente);
+                        break;
+                    }
+
+                    cliente.Estado = EstadoClienteEnum.SiendoAtendido;
+                    iteracionActual.VeteranoB.Estado = EstadoServidorEnum.Ocupado;
+                    iteracionActual.VeteranoBFinAtencion = CalcularFinAtencionVeteranoB(iteracionActual.Reloj);
+                    break;
+            }
+
+            iteracionActual.Clientes.Add(cliente);
+        }
+
+        private PeluqueriaObtencionTiempoDto CalcularFinAtencionVeteranoA(double reloj)
+        {
+            var finAtencion = new PeluqueriaObtencionTiempoDto();
+
+            finAtencion.Random = NumerosUtility.GetAleatorio();
+            finAtencion.Tiempo = Uniform.GenerarAleatorio(
+                _parametrizacion.VeteranoALimiteInferior,
+                _parametrizacion.VeteranoALimiteSuperior,
+                finAtencion.Random);
+            finAtencion.ProximoEvento = reloj + finAtencion.Tiempo;
+
+            return finAtencion;
+        }
+
+        private PeluqueriaObtencionTiempoDto CalcularFinAtencionVeteranoB(double reloj)
+        {
+            var finAtencion = new PeluqueriaObtencionTiempoDto();
+
+            finAtencion.Random = NumerosUtility.GetAleatorio();
+            finAtencion.Tiempo = Uniform.GenerarAleatorio(
+                _parametrizacion.VeteranoBLimiteInferior,
+                _parametrizacion.VeteranoBLimiteSuperior,
+                finAtencion.Random);
+            finAtencion.ProximoEvento = reloj + finAtencion.Tiempo;
+
+            return finAtencion;
+        }
+
+        private PeluqueriaObtencionTiempoDto CalcularFinAtencionAprendiz(double reloj)
+        {
+            var finAtencion = new PeluqueriaObtencionTiempoDto();
+
+            finAtencion.Random = NumerosUtility.GetAleatorio();
+            finAtencion.Tiempo = Uniform.GenerarAleatorio(
+                _parametrizacion.AprendizLimiteInferior,
+                _parametrizacion.AprendizLimiteSuperior,
+                finAtencion.Random);
+            finAtencion.ProximoEvento = reloj + finAtencion.Tiempo;
+
+            return finAtencion;
         }
 
         /// <summary>
@@ -114,21 +266,27 @@ namespace sim_tp2.Services
         /// </summary>
         /// <param name="iteracionAnterior"></param>
         /// <param name="iteracionActual"></param>
-        private void DeterminarEventoASimular(PeluqueriaEventoDto iteracionAnterior, ref PeluqueriaEventoDto iteracionActual)
+        private void DeterminarEventoASimular(ref PeluqueriaEventoDto iteracionActual)
         {
-            var diccionarioEventos = new Dictionary<string, TimeSpan?>
+            if (iteracionActual.NumeroIteracion == 0)
             {
-                {nameof(iteracionActual.LlegadaCliente), iteracionAnterior.LlegadaCliente.ProximoEvento },
-                {nameof(iteracionActual.AprendizFinAtencion), iteracionAnterior.AprendizFinAtencion.ProximoEvento },
-                {nameof(iteracionActual.VeteranoAFinAtencion), iteracionAnterior.VeteranoAFinAtencion.ProximoEvento },
-                {nameof(iteracionActual.VeteranoBFinAtencion), iteracionAnterior.VeteranoBFinAtencion.ProximoEvento },
-                {nameof(iteracionActual.Cierre), iteracionAnterior.Cierre },
-                {nameof(iteracionActual.Apertura), iteracionAnterior.Apertura },
-                {nameof(iteracionActual.Refrigerio), iteracionAnterior.Refrigerio }
+                iteracionActual.EventoNombre = "Inicializacion";
+                return;
+            }
+
+            var diccionarioEventos = new Dictionary<string, double?>
+            {
+                {nameof(iteracionActual.LlegadaCliente), iteracionActual.LlegadaCliente.ProximoEvento },
+                {nameof(iteracionActual.AprendizFinAtencion), iteracionActual.AprendizFinAtencion.ProximoEvento },
+                {nameof(iteracionActual.VeteranoAFinAtencion), iteracionActual.VeteranoAFinAtencion.ProximoEvento },
+                {nameof(iteracionActual.VeteranoBFinAtencion), iteracionActual.VeteranoBFinAtencion.ProximoEvento },
+                {nameof(iteracionActual.Cierre), iteracionActual.Cierre },
+                {nameof(iteracionActual.Apertura), iteracionActual.Apertura },
+                {"Refrigerio", iteracionActual.Clientes.Where(x => !x.ConRefrigerio).Min(x => x.HoraRefrigerio)}
             };
 
             var nombreEvento = string.Empty;
-            var menorTimeSpan = TimeSpan.MaxValue;
+            var menorTimeSpan = double.PositiveInfinity;
             foreach (var kvp in diccionarioEventos.Where(x => x.Value.HasValue))
             {
                 if (kvp.Value.Value < menorTimeSpan)

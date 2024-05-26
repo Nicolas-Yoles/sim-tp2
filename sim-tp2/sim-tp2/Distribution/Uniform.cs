@@ -32,8 +32,8 @@ namespace sim_tp2.Distribution
         /// <param name="minimo"></param>
         /// <param name="maximo"></param>
         /// <returns></returns>
-        public static double GenerarAleatorio(double minimo, double maximo)
-            => NumerosUtility.Truncar4Decimales(minimo + (NumerosUtility.GetAleatorio() * (maximo - minimo)));
+        public static double GenerarAleatorio(double minimo, double maximo, double? aleatorio = null)
+            => NumerosUtility.Truncar4Decimales(minimo + ((aleatorio ?? NumerosUtility.GetAleatorio()) * (maximo - minimo)));
 
         /// <summary>
         /// Genera una secuencia de número que corresponden a una

@@ -57,18 +57,13 @@ namespace sim_tp2.DTOs.Peluqueria
         public int LlegadaClienteLimiteSuperior{ get; set; }
 
         /// <summary>
-        /// Indica el porcentaje de clientes que va a atender el aprendiz.
+        /// Indica la probabilidad de que un cliente sea atendido por el aprendiz.
         /// </summary>
-        public int AprendizPorcentajeAAtender { get; set; }
+        public double AprendizProbabilidadAtender { get; set; }
 
         /// <summary>
-        /// Indica el porcentaje de clientes que va a atender el Veterano A.
+        /// Indica la probabilidad de que un cliente sea atendido por el Veterano A.
         /// </summary>
-        public int VeteranoAPorcentajeAAtender { get; set; }
-
-        /// <summary>
-        /// Indica el porcentaje de clientes que va a atender el Veterano B.
-        /// </summary>
-        public int VeteranoBPorcentajeAAtender { get; set; }
+        public double VeteranoAProbabilidadAtender{ get; set; }
     }
 }
