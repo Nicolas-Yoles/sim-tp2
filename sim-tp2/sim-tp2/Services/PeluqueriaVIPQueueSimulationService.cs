@@ -113,7 +113,10 @@ namespace sim_tp2.Services
 
         private void DarRefrigerio(ref PeluqueriaEventoDto iteracionActual)
         {
-            throw new NotImplementedException();
+            var cliente = iteracionActual.Clientes.Where(x => !x.ConRefrigerio).OrderBy(x => x.HoraRefrigerio).First();
+            cliente.ConRefrigerio = true;
+            // Se vende y los 1500 aumentan lo recaudado o se regala y se toma como costo? Definir si suma o resta
+            iteracionActual.AcumuladorRecaudacionTotal -= 1500;
         }
 
         private void Abrir(ref PeluqueriaEventoDto iteracionActual)
