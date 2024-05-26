@@ -8,10 +8,10 @@ namespace sim_tp2.DTOs.Peluqueria
 {
     public class PeluqueriaObtencionTiempoDto
     {
-        public decimal Random {  get; set; }
+        public decimal? Random {  get; set; }
 
-        public TimeSpan Tiempo { get; set; }
+        public TimeSpan? Tiempo { get; set; }
 
-        public DateTime ProximoEvento { get; set; }
+        public TimeSpan? ProximoEvento { get; set; }
     }
 }

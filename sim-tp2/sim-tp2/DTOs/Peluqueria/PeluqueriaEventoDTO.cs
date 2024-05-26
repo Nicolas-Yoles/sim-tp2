@@ -8,27 +8,29 @@ namespace sim_tp2.DTOs.Peluqueria
 {
     public class PeluqueriaEventoDto
     {
-        public DateTime Reloj { get; set; }
+        public int NumeroIteracion { get; set; } = 0;
 
-        public string EventoNombre { get; set; }
+        public TimeSpan Reloj { get; set; } = new TimeSpan(0, 0, 0);
 
-        public PeluqueriaObtencionTiempoDto LlegadaCliente { get; set; }
+        public string EventoNombre { get; set; } = "Inicialización";
 
-        public decimal RandomPeluquero { get; set; }
+        public PeluqueriaObtencionTiempoDto LlegadaCliente { get; set; } = new PeluqueriaObtencionTiempoDto();
+
+        public decimal? RandomPeluquero { get; set; }
 
         public string Peluquero { get; set; }
 
-        public PeluqueriaObtencionTiempoDto AprendizFinAtencion { get; set; }
+        public PeluqueriaObtencionTiempoDto AprendizFinAtencion { get; set; } = new PeluqueriaObtencionTiempoDto();
 
-        public PeluqueriaObtencionTiempoDto VeteranoAFinAtencion { get; set; }
+        public PeluqueriaObtencionTiempoDto VeteranoAFinAtencion { get; set; } = new PeluqueriaObtencionTiempoDto();
 
-        public PeluqueriaObtencionTiempoDto VeteranoBFinAtencion { get; set; }
+        public PeluqueriaObtencionTiempoDto VeteranoBFinAtencion { get; set; } = new PeluqueriaObtencionTiempoDto();
 
-        public DateTime HoraCierre { get; set; }
+        public TimeSpan Cierre { get; set; }
 
-        public DateTime HoraApertura { get; set; }
+        public TimeSpan Apertura { get; set; }
 
-        public DateTime HoraProximoRefrigerio { get; set; }
+        public TimeSpan Refrigerio { get; set; }
 
         public ServidorDto Aprendiz {  get; set; }
 
@@ -36,12 +38,12 @@ namespace sim_tp2.DTOs.Peluqueria
 
         public ServidorDto VeteranoB { get; set; }
 
-        public int AcumuladorRecaudacionTotal { get; set; }
+        public int AcumuladorRecaudacionTotal { get; set; } = 0;
 
-        public int ContadorDiasTrabajados { get; set; }
+        public int ContadorDiasTrabajados { get; set; } = 0;
 
-        public int MaximoClientesEnCola { get; set; }
+        public int MaximoClientesEnCola { get; set; } = 0;
 
-        public List<ClienteDto> Clientes { get; set; }
+        public List<ClienteDto> Clientes { get; set; } = new List<ClienteDto>();
     }
 }

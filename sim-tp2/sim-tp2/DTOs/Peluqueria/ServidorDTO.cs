@@ -8,8 +8,8 @@ namespace sim_tp2.DTOs.Peluqueria
 {
     public class ServidorDto
     {
-        public EstadoServidorEnum Estado {  get; set; }
+        public EstadoServidorEnum Estado { get; set; } = EstadoServidorEnum.Libre;
 
-        public List<ClienteDto> ColaClientes { get; set; }
+        public List<ClienteDto> ColaClientes { get; set; } = new List<ClienteDto>();
     }
 }
