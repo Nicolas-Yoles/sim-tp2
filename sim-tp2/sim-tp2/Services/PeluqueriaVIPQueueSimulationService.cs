@@ -128,17 +128,53 @@ namespace sim_tp2.Services
 
         private void FinalizarAtencionVeteranoB(ref PeluqueriaEventoDto iteracionActual)
         {
-            throw new NotImplementedException();
+            iteracionActual.AcumuladorRecaudacionTotal += 3500;
+
+            if (!iteracionActual.VeteranoB.ColaClientes.Any())
+            {
+                iteracionActual.VeteranoB.Estado = EstadoServidorEnum.Libre;
+                iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoVeteranoB).ToList();
+                return;
+            }
+
+            var cliente = iteracionActual.VeteranoB.ColaClientes.First();
+            iteracionActual.VeteranoB.ColaClientes.Remove(cliente);
+            iteracionActual.Clientes.Find(x => x.Id == cliente.Id).Estado = EstadoClienteEnum.SiendoAtendidoVeteranoB;
+            iteracionActual.VeteranoBFinAtencion = CalcularFinAtencionVeteranoB(iteracionActual.Reloj);
         }
 
         private void FinalizarAtencionVeteranoA(ref PeluqueriaEventoDto iteracionActual)
         {
-            throw new NotImplementedException();
+            iteracionActual.AcumuladorRecaudacionTotal += 3500;
+
+            if (!iteracionActual.VeteranoA.ColaClientes.Any())
+            {
+                iteracionActual.VeteranoA.Estado = EstadoServidorEnum.Libre;
+                iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoVeteranoA).ToList();
+                return;
+            }
+
+            var cliente = iteracionActual.VeteranoA.ColaClientes.First();
+            iteracionActual.VeteranoA.ColaClientes.Remove(cliente);
+            iteracionActual.Clientes.Find(x => x.Id == cliente.Id).Estado = EstadoClienteEnum.SiendoAtendidoVeteranoA;
+            iteracionActual.VeteranoAFinAtencion = CalcularFinAtencionVeteranoA(iteracionActual.Reloj);
         }
 
         private void FinalizarAtencionAprendiz(ref PeluqueriaEventoDto iteracionActual)
         {
-            throw new NotImplementedException();
+            iteracionActual.AcumuladorRecaudacionTotal += 1800;
+
+            if (!iteracionActual.Aprendiz.ColaClientes.Any())
+            {
+                iteracionActual.Aprendiz.Estado = EstadoServidorEnum.Libre;
+                iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoAprendiz).ToList();
+                return;
+            }
+
+            var cliente = iteracionActual.Aprendiz.ColaClientes.First();
+            iteracionActual.Aprendiz.ColaClientes.Remove(cliente);
+            iteracionActual.Clientes.Find(x => x.Id == cliente.Id).Estado = EstadoClienteEnum.SiendoAtendidoAprendiz;
+            iteracionActual.AprendizFinAtencion = CalcularFinAtencionAprendiz(iteracionActual.Reloj);
         }
 
         private void LlegarCliente(ref PeluqueriaEventoDto iteracionActual)
@@ -184,7 +220,7 @@ namespace sim_tp2.Services
                         break;
                     }
 
-                    cliente.Estado = EstadoClienteEnum.SiendoAtendido;
+                    cliente.Estado = EstadoClienteEnum.SiendoAtendidoAprendiz;
                     iteracionActual.Aprendiz.Estado = EstadoServidorEnum.Ocupado;
                     iteracionActual.AprendizFinAtencion = CalcularFinAtencionAprendiz(iteracionActual.Reloj);
                     break;
@@ -197,7 +233,7 @@ namespace sim_tp2.Services
                         break;
                     }
 
-                    cliente.Estado = EstadoClienteEnum.SiendoAtendido;
+                    cliente.Estado = EstadoClienteEnum.SiendoAtendidoVeteranoA;
                     iteracionActual.VeteranoA.Estado = EstadoServidorEnum.Ocupado;
                     iteracionActual.VeteranoAFinAtencion = CalcularFinAtencionVeteranoA(iteracionActual.Reloj);
                     break;
@@ -210,7 +246,7 @@ namespace sim_tp2.Services
                         break;
                     }
 
-                    cliente.Estado = EstadoClienteEnum.SiendoAtendido;
+                    cliente.Estado = EstadoClienteEnum.SiendoAtendidoVeteranoB;
                     iteracionActual.VeteranoB.Estado = EstadoServidorEnum.Ocupado;
                     iteracionActual.VeteranoBFinAtencion = CalcularFinAtencionVeteranoB(iteracionActual.Reloj);
                     break;

@@ -11,6 +11,8 @@ namespace sim_tp2.DTOs.Peluqueria
         EsperandoAtencionAprendiz,
         EsperandoAtencionVeteranoA,
         EsperandoAtencionVeteranoB,
-        SiendoAtendido
+        SiendoAtendidoAprendiz,
+        SiendoAtendidoVeteranoA,
+        SiendoAtendidoVeteranoB
     }
 }
