@@ -66,7 +66,8 @@ namespace sim_tp2.Services
                 AcumuladorRecaudacionTotal = iteracionAnterior.AcumuladorRecaudacionTotal,
                 ContadorDiasTrabajados = iteracionAnterior.ContadorDiasTrabajados,
                 MaximoClientesEnCola = iteracionAnterior.MaximoClientesEnCola,
-                Clientes = iteracionAnterior.Clientes
+                Clientes = iteracionAnterior.Clientes,
+                NumeroIteracion = iteracionAnterior.NumeroIteracion + 1
             };
 
             DeterminarEventoASimular(ref iteracionActual);
@@ -102,7 +103,8 @@ namespace sim_tp2.Services
                     break;
             }
 
-            iteracionActual.ClientesEnCola = iteracionActual.Clientes.Count(x => x.Estado != EstadoClienteEnum.SiendoAtendido);
+            var estadosAtencion = new List<EstadoClienteEnum> { EstadoClienteEnum.SiendoAtendidoVeteranoA, EstadoClienteEnum.SiendoAtendidoAprendiz, EstadoClienteEnum.SiendoAtendidoVeteranoB };
+            iteracionActual.ClientesEnCola = iteracionActual.Clientes.Count(x => !estadosAtencion.Contains(x.Estado));
             iteracionActual.MaximoClientesEnCola = iteracionActual.ClientesEnCola > iteracionActual.MaximoClientesEnCola 
                 ? iteracionActual.ClientesEnCola 
                 : iteracionActual.MaximoClientesEnCola;

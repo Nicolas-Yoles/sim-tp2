@@ -8,7 +8,7 @@ namespace sim_tp2.DTOs.Peluqueria
 {
     public class PeluqueriaEventoDto
     {
-        public int NumeroIteracion { get; set; } = 0;
+        public int NumeroIteracion { get; set; } = -1;
 
         public double Reloj { get; set; } = 0;
 
