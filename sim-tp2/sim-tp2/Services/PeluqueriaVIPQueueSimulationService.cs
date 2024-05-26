@@ -24,6 +24,7 @@ namespace sim_tp2.Services
             _parametrizacion = parametrizacion;
             var iteracionesAImprimir = new List<PeluqueriaEventoDto>();
             var mostrarIteracionHasta = int.MaxValue;
+            PeluqueriaEventoDto ultimaIteracion = null;
 
             var iteracion = new PeluqueriaEventoDto()
             {
@@ -31,9 +32,11 @@ namespace sim_tp2.Services
                 Apertura = 24
             };
 
-            while (numeroDiasASimular <= iteracion.ContadorDiasTrabajados)
+            while (true)
             {
                 iteracion = SimularEvento(iteracion);
+                if (iteracion.ContadorDiasTrabajados > numeroDiasASimular) break;
+
                 if (iteracion.Reloj >= horaDesdeAMostrar && mostrarIteracionHasta < iteracion.NumeroIteracion)
                 {
                     mostrarIteracionHasta = mostrarIteracionHasta == int.MaxValue ? iteracion.NumeroIteracion + iteracionesAMostrar : mostrarIteracionHasta;
@@ -41,6 +44,7 @@ namespace sim_tp2.Services
                 }
             }
 
+            iteracionesAImprimir.Add(iteracion);
             return iteracionesAImprimir;
         }
 
@@ -80,10 +84,13 @@ namespace sim_tp2.Services
                     FinalizarAtencionVeteranoB(ref iteracionActual);
                     break;
                 case nameof(iteracionActual.Cierre):
-                    Cerrar(ref iteracionActual);
+                    iteracionActual.LlegadaCliente.ProximoEvento = null;
+                    iteracionActual.Cierre = iteracionActual.Apertura + 8;
                     break;
                 case nameof(iteracionActual.Apertura):
-                    Abrir(ref iteracionActual);
+                    iteracionActual.ContadorDiasTrabajados++;
+                    CalcularLlegadaCliente(ref iteracionActual);
+                    iteracionActual.Apertura += 24;
                     break;
                 case "Refrigerio":
                     DarRefrigerio(ref iteracionActual);
@@ -117,16 +124,6 @@ namespace sim_tp2.Services
             cliente.ConRefrigerio = true;
             // Se vende y los 1500 aumentan lo recaudado o se regala y se toma como costo? Definir si suma o resta
             iteracionActual.AcumuladorRecaudacionTotal -= 1500;
-        }
-
-        private void Abrir(ref PeluqueriaEventoDto iteracionActual)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Cerrar(ref PeluqueriaEventoDto iteracionActual)
-        {
-            throw new NotImplementedException();
         }
 
         private void FinalizarAtencionVeteranoB(ref PeluqueriaEventoDto iteracionActual)
