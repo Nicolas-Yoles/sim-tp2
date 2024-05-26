@@ -24,7 +24,7 @@ namespace sim_tp2.Services
             _parametrizacion = parametrizacion;
             var iteracionesAImprimir = new List<PeluqueriaEventoDto>();
             var mostrarIteracionHasta = int.MaxValue;
-            PeluqueriaEventoDto ultimaIteracion = null;
+            var ultimaIteracionAgregada = false;
 
             var iteracion = new PeluqueriaEventoDto()
             {
@@ -36,15 +36,17 @@ namespace sim_tp2.Services
             {
                 iteracion = SimularEvento(iteracion);
                 if (iteracion.ContadorDiasTrabajados > numeroDiasASimular) break;
+                ultimaIteracionAgregada = false;
 
                 if (iteracion.Reloj >= horaDesdeAMostrar && mostrarIteracionHasta < iteracion.NumeroIteracion)
                 {
                     mostrarIteracionHasta = mostrarIteracionHasta == int.MaxValue ? iteracion.NumeroIteracion + iteracionesAMostrar : mostrarIteracionHasta;
                     iteracionesAImprimir.Add(iteracion);
+                    ultimaIteracionAgregada = true;
                 }
             }
 
-            iteracionesAImprimir.Add(iteracion);
+            if(!ultimaIteracionAgregada) iteracionesAImprimir.Add(iteracion);
             return iteracionesAImprimir;
         }
 
