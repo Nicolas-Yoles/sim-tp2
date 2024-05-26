@@ -14,7 +14,7 @@ namespace sim_tp2.DTOs.Peluqueria
 
         public EstadoClienteEnum Estado { get; set; }
 
-        public double HoraRefrigerio { get; set; }
+        public double? HoraRefrigerio { get; set; }
 
         public bool ConRefrigerio { get; set; }
     }

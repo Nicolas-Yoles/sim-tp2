@@ -126,8 +126,8 @@ namespace sim_tp2.Services
         {
             var cliente = iteracionActual.Clientes.Where(x => !x.ConRefrigerio).OrderBy(x => x.HoraRefrigerio).First();
             cliente.ConRefrigerio = true;
-            // Se vende y los 1500 aumentan lo recaudado o se regala y se toma como costo? Definir si suma o resta
-            iteracionActual.AcumuladorRecaudacionTotal -= 1500;
+            cliente.HoraRefrigerio = null;
+            iteracionActual.AcumuladorRecaudacionTotal += 1500;
         }
 
         private void FinalizarAtencionVeteranoB(ref PeluqueriaEventoDto iteracionActual)
@@ -144,6 +144,7 @@ namespace sim_tp2.Services
             var cliente = iteracionActual.VeteranoB.ColaClientes.First();
             iteracionActual.VeteranoB.ColaClientes.Remove(cliente);
             iteracionActual.Clientes.Find(x => x.Id == cliente.Id).Estado = EstadoClienteEnum.SiendoAtendidoVeteranoB;
+            iteracionActual.Clientes.Find(x => x.Id == cliente.Id).HoraRefrigerio = null;
             iteracionActual.VeteranoBFinAtencion = CalcularFinAtencionVeteranoB(iteracionActual.Reloj);
         }
 
@@ -161,6 +162,7 @@ namespace sim_tp2.Services
             var cliente = iteracionActual.VeteranoA.ColaClientes.First();
             iteracionActual.VeteranoA.ColaClientes.Remove(cliente);
             iteracionActual.Clientes.Find(x => x.Id == cliente.Id).Estado = EstadoClienteEnum.SiendoAtendidoVeteranoA;
+            iteracionActual.Clientes.Find(x => x.Id == cliente.Id).HoraRefrigerio = null;
             iteracionActual.VeteranoAFinAtencion = CalcularFinAtencionVeteranoA(iteracionActual.Reloj);
         }
 
@@ -178,6 +180,7 @@ namespace sim_tp2.Services
             var cliente = iteracionActual.Aprendiz.ColaClientes.First();
             iteracionActual.Aprendiz.ColaClientes.Remove(cliente);
             iteracionActual.Clientes.Find(x => x.Id == cliente.Id).Estado = EstadoClienteEnum.SiendoAtendidoAprendiz;
+            iteracionActual.Clientes.Find(x => x.Id == cliente.Id).HoraRefrigerio = null;
             iteracionActual.AprendizFinAtencion = CalcularFinAtencionAprendiz(iteracionActual.Reloj);
         }
 
