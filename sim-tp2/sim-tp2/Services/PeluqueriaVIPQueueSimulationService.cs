@@ -109,6 +109,8 @@ namespace sim_tp2.Services
                 ? iteracionActual.ClientesEnCola 
                 : iteracionActual.MaximoClientesEnCola;
 
+            iteracionActual.PromedioRecuadacionPorDia = iteracionActual.AcumuladorRecaudacionTotal / iteracionActual.ContadorDiasTrabajados;
+
             return iteracionActual;
         }
 

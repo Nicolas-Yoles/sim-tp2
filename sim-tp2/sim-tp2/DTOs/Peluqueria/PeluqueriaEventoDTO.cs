@@ -40,6 +40,8 @@ namespace sim_tp2.DTOs.Peluqueria
 
         public int ContadorDiasTrabajados { get; set; } = 0;
 
+        public decimal PromedioRecuadacionPorDia { get; set; } = 0;
+
         public int ClientesEnCola {  get; set; } = 0;
 
         public int MaximoClientesEnCola { get; set; } = 0;
