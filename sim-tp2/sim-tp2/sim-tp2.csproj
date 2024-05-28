@@ -99,6 +99,12 @@
     <Compile Include="Views\MontecarloForm.Designer.cs">
       <DependentUpon>MontecarloForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\SistemaColas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SistemaColas.Designer.cs">
+      <DependentUpon>SistemaColas.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Views\Distribuciones.resx">
       <DependentUpon>Distribuciones.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MontecarloForm.resx">
       <DependentUpon>MontecarloForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SistemaColas.resx">
+      <DependentUpon>SistemaColas.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -144,6 +153,20 @@
   <ItemGroup>
     <None Include="Resources\blue-images-for-backgrounds-desktop-wallpaper-preview.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\png-clipart-comb-cosmetologist-beauty-parlour-hairstyle-decal-hair-angle-people.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\e25a459d9b77bda9a00b6e8866bd46a5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\67320927-herramientas-de-peluquería-en-la-vista-superior-de-fondo-blanco.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\142433636-conjunto-de-peluquería-profesional-con-peines-y-secador-de-pelo-sobre-fondo-blanco-espacio-de-copia.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\208478232-composición-con-tijeras-y-otros-accesorios-de-peluquería-sobre-fondo-blanco-vista-superior.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
