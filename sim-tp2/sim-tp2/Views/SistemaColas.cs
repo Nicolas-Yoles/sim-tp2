@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using sim_tp2.DTOs.Peluqueria;
+using sim_tp2.Services;
+
 
 namespace sim_tp2.Views
 {
@@ -15,6 +18,51 @@ namespace sim_tp2.Views
         public SistemaColas()
         {
             InitializeComponent();
+        }
+
+        private void btnSimular_Click(object sender, EventArgs e)
+        {
+            simularPeluqueriaVIP();
+        }
+
+        private void simularPeluqueriaVIP()
+        {
+
+            var dias = Convert.ToInt32(inputDias.Value);
+            var cantIteraciones = Convert.ToInt32(inputIteraciones.Value);
+            var hora = Convert.ToInt32(inputHora.Value);
+            var tiempo = Convert.ToInt32(inputTiempo.Value);
+
+            var param = new PeluqueriaParametrizacionDto();
+
+
+            if (cantIteraciones == 0)
+            {
+                MessageBox.Show("Error: La cantidad de iteraciones debe ser mayor a 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (tiempo == 0)
+            {
+                MessageBox.Show("Error: El tiempo debe ser mayor a 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (dias == 0)
+            {
+                MessageBox.Show("Error: Los días deben ser mayor a 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+
+
+
+            // TODO: Crear inputs para parametros de reglas y probabilidades (mostrar valores por defecto)
+            // TODO: Crear propiedades del servicio con los valores tomados de interfaz grafica.
+            var peluqueriaService = new PeluqueriaVipQueueSimulationService();
+
+            var simulacion = peluqueriaService.SimularPeluqueria(dias, cantIteraciones, hora, param);
+            dgvPeluqueria.DataSource = simulacion;
         }
     }
 }

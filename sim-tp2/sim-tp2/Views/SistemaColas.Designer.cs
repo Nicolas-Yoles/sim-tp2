@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txTiempo = new System.Windows.Forms.TextBox();
             this.lblTiempo = new System.Windows.Forms.Label();
             this.lblPeluqueria = new System.Windows.Forms.Label();
-            this.txtIteraciones = new System.Windows.Forms.TextBox();
-            this.txHora = new System.Windows.Forms.TextBox();
             this.lblIteraciones = new System.Windows.Forms.Label();
             this.lblHora = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dgvPeluqueria = new System.Windows.Forms.DataGridView();
+            this.btnSimular = new System.Windows.Forms.Button();
+            this.inputTiempo = new System.Windows.Forms.NumericUpDown();
+            this.inputIteraciones = new System.Windows.Forms.NumericUpDown();
+            this.inputHora = new System.Windows.Forms.NumericUpDown();
+            this.lblDias = new System.Windows.Forms.Label();
+            this.inputDias = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPeluqueria)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputTiempo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputIteraciones)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputHora)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputDias)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txTiempo
-            // 
-            this.txTiempo.Location = new System.Drawing.Point(165, 84);
-            this.txTiempo.Name = "txTiempo";
-            this.txTiempo.Size = new System.Drawing.Size(100, 20);
-            this.txTiempo.TabIndex = 0;
             // 
             // lblTiempo
             // 
@@ -67,20 +67,6 @@
             this.lblPeluqueria.Size = new System.Drawing.Size(215, 43);
             this.lblPeluqueria.TabIndex = 2;
             this.lblPeluqueria.Text = "Peluqueria VIP";
-            // 
-            // txtIteraciones
-            // 
-            this.txtIteraciones.Location = new System.Drawing.Point(423, 84);
-            this.txtIteraciones.Name = "txtIteraciones";
-            this.txtIteraciones.Size = new System.Drawing.Size(100, 20);
-            this.txtIteraciones.TabIndex = 3;
-            // 
-            // txHora
-            // 
-            this.txHora.Location = new System.Drawing.Point(627, 84);
-            this.txHora.Name = "txHora";
-            this.txHora.Size = new System.Drawing.Size(100, 20);
-            this.txHora.TabIndex = 4;
             // 
             // lblIteraciones
             // 
@@ -106,13 +92,63 @@
             this.lblHora.TabIndex = 6;
             this.lblHora.Text = "Hora";
             // 
-            // dataGridView1
+            // dgvPeluqueria
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 212);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(776, 215);
-            this.dataGridView1.TabIndex = 7;
+            this.dgvPeluqueria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPeluqueria.Location = new System.Drawing.Point(12, 212);
+            this.dgvPeluqueria.Name = "dgvPeluqueria";
+            this.dgvPeluqueria.Size = new System.Drawing.Size(776, 215);
+            this.dgvPeluqueria.TabIndex = 7;
+            // 
+            // btnSimular
+            // 
+            this.btnSimular.Location = new System.Drawing.Point(693, 161);
+            this.btnSimular.Name = "btnSimular";
+            this.btnSimular.Size = new System.Drawing.Size(75, 23);
+            this.btnSimular.TabIndex = 8;
+            this.btnSimular.Text = "SIMULAR";
+            this.btnSimular.UseVisualStyleBackColor = true;
+            this.btnSimular.Click += new System.EventHandler(this.btnSimular_Click);
+            // 
+            // inputTiempo
+            // 
+            this.inputTiempo.Location = new System.Drawing.Point(165, 84);
+            this.inputTiempo.Name = "inputTiempo";
+            this.inputTiempo.Size = new System.Drawing.Size(120, 20);
+            this.inputTiempo.TabIndex = 9;
+            // 
+            // inputIteraciones
+            // 
+            this.inputIteraciones.Location = new System.Drawing.Point(433, 84);
+            this.inputIteraciones.Name = "inputIteraciones";
+            this.inputIteraciones.Size = new System.Drawing.Size(120, 20);
+            this.inputIteraciones.TabIndex = 10;
+            // 
+            // inputHora
+            // 
+            this.inputHora.Location = new System.Drawing.Point(627, 84);
+            this.inputHora.Name = "inputHora";
+            this.inputHora.Size = new System.Drawing.Size(120, 20);
+            this.inputHora.TabIndex = 11;
+            // 
+            // lblDias
+            // 
+            this.lblDias.AutoSize = true;
+            this.lblDias.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblDias.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDias.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblDias.Location = new System.Drawing.Point(33, 125);
+            this.lblDias.Name = "lblDias";
+            this.lblDias.Size = new System.Drawing.Size(126, 24);
+            this.lblDias.TabIndex = 12;
+            this.lblDias.Text = "Dias a simular";
+            // 
+            // inputDias
+            // 
+            this.inputDias.Location = new System.Drawing.Point(165, 125);
+            this.inputDias.Name = "inputDias";
+            this.inputDias.Size = new System.Drawing.Size(120, 20);
+            this.inputDias.TabIndex = 13;
             // 
             // SistemaColas
             // 
@@ -121,31 +157,40 @@
             this.BackgroundImage = global::sim_tp2.Properties.Resources._208478232_composición_con_tijeras_y_otros_accesorios_de_peluquería_sobre_fondo_blanco_vista_superior;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.inputDias);
+            this.Controls.Add(this.lblDias);
+            this.Controls.Add(this.inputHora);
+            this.Controls.Add(this.inputIteraciones);
+            this.Controls.Add(this.inputTiempo);
+            this.Controls.Add(this.btnSimular);
+            this.Controls.Add(this.dgvPeluqueria);
             this.Controls.Add(this.lblHora);
             this.Controls.Add(this.lblIteraciones);
-            this.Controls.Add(this.txHora);
-            this.Controls.Add(this.txtIteraciones);
             this.Controls.Add(this.lblPeluqueria);
             this.Controls.Add(this.lblTiempo);
-            this.Controls.Add(this.txTiempo);
             this.Name = "SistemaColas";
             this.Text = "SistemaColas";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPeluqueria)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputTiempo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputIteraciones)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputHora)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputDias)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txTiempo;
         private System.Windows.Forms.Label lblTiempo;
         private System.Windows.Forms.Label lblPeluqueria;
-        private System.Windows.Forms.TextBox txtIteraciones;
-        private System.Windows.Forms.TextBox txHora;
         private System.Windows.Forms.Label lblIteraciones;
         private System.Windows.Forms.Label lblHora;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvPeluqueria;
+        private System.Windows.Forms.Button btnSimular;
+        private System.Windows.Forms.NumericUpDown inputTiempo;
+        private System.Windows.Forms.NumericUpDown inputIteraciones;
+        private System.Windows.Forms.NumericUpDown inputHora;
+        private System.Windows.Forms.Label lblDias;
+        private System.Windows.Forms.NumericUpDown inputDias;
     }
 }
