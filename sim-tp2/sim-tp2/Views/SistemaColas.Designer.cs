@@ -34,16 +34,13 @@
             this.lblHora = new System.Windows.Forms.Label();
             this.dgvPeluqueria = new System.Windows.Forms.DataGridView();
             this.btnSimular = new System.Windows.Forms.Button();
-            this.inputTiempo = new System.Windows.Forms.NumericUpDown();
+            this.inputDias = new System.Windows.Forms.NumericUpDown();
             this.inputIteraciones = new System.Windows.Forms.NumericUpDown();
             this.inputHora = new System.Windows.Forms.NumericUpDown();
-            this.lblDias = new System.Windows.Forms.Label();
-            this.inputDias = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeluqueria)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inputTiempo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputDias)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputIteraciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputHora)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inputDias)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTiempo
@@ -52,11 +49,11 @@
             this.lblTiempo.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblTiempo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTiempo.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblTiempo.Location = new System.Drawing.Point(84, 84);
+            this.lblTiempo.Location = new System.Drawing.Point(8, 84);
             this.lblTiempo.Name = "lblTiempo";
-            this.lblTiempo.Size = new System.Drawing.Size(75, 24);
+            this.lblTiempo.Size = new System.Drawing.Size(195, 24);
             this.lblTiempo.TabIndex = 1;
-            this.lblTiempo.Text = "Tiempo";
+            this.lblTiempo.Text = "Dias a simular(tiempo)";
             // 
             // lblPeluqueria
             // 
@@ -74,7 +71,7 @@
             this.lblIteraciones.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblIteraciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIteraciones.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblIteraciones.Location = new System.Drawing.Point(316, 84);
+            this.lblIteraciones.Location = new System.Drawing.Point(366, 84);
             this.lblIteraciones.Name = "lblIteraciones";
             this.lblIteraciones.Size = new System.Drawing.Size(101, 24);
             this.lblIteraciones.TabIndex = 5;
@@ -86,7 +83,7 @@
             this.lblHora.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHora.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblHora.Location = new System.Drawing.Point(570, 84);
+            this.lblHora.Location = new System.Drawing.Point(620, 84);
             this.lblHora.Name = "lblHora";
             this.lblHora.Size = new System.Drawing.Size(51, 24);
             this.lblHora.TabIndex = 6;
@@ -110,45 +107,26 @@
             this.btnSimular.UseVisualStyleBackColor = true;
             this.btnSimular.Click += new System.EventHandler(this.btnSimular_Click);
             // 
-            // inputTiempo
+            // inputDias
             // 
-            this.inputTiempo.Location = new System.Drawing.Point(165, 84);
-            this.inputTiempo.Name = "inputTiempo";
-            this.inputTiempo.Size = new System.Drawing.Size(120, 20);
-            this.inputTiempo.TabIndex = 9;
+            this.inputDias.Location = new System.Drawing.Point(220, 84);
+            this.inputDias.Name = "inputDias";
+            this.inputDias.Size = new System.Drawing.Size(120, 20);
+            this.inputDias.TabIndex = 9;
             // 
             // inputIteraciones
             // 
-            this.inputIteraciones.Location = new System.Drawing.Point(433, 84);
+            this.inputIteraciones.Location = new System.Drawing.Point(483, 84);
             this.inputIteraciones.Name = "inputIteraciones";
             this.inputIteraciones.Size = new System.Drawing.Size(120, 20);
             this.inputIteraciones.TabIndex = 10;
             // 
             // inputHora
             // 
-            this.inputHora.Location = new System.Drawing.Point(627, 84);
+            this.inputHora.Location = new System.Drawing.Point(677, 84);
             this.inputHora.Name = "inputHora";
             this.inputHora.Size = new System.Drawing.Size(120, 20);
             this.inputHora.TabIndex = 11;
-            // 
-            // lblDias
-            // 
-            this.lblDias.AutoSize = true;
-            this.lblDias.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblDias.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDias.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblDias.Location = new System.Drawing.Point(33, 125);
-            this.lblDias.Name = "lblDias";
-            this.lblDias.Size = new System.Drawing.Size(126, 24);
-            this.lblDias.TabIndex = 12;
-            this.lblDias.Text = "Dias a simular";
-            // 
-            // inputDias
-            // 
-            this.inputDias.Location = new System.Drawing.Point(165, 125);
-            this.inputDias.Name = "inputDias";
-            this.inputDias.Size = new System.Drawing.Size(120, 20);
-            this.inputDias.TabIndex = 13;
             // 
             // SistemaColas
             // 
@@ -157,11 +135,9 @@
             this.BackgroundImage = global::sim_tp2.Properties.Resources._208478232_composición_con_tijeras_y_otros_accesorios_de_peluquería_sobre_fondo_blanco_vista_superior;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.inputDias);
-            this.Controls.Add(this.lblDias);
             this.Controls.Add(this.inputHora);
             this.Controls.Add(this.inputIteraciones);
-            this.Controls.Add(this.inputTiempo);
+            this.Controls.Add(this.inputDias);
             this.Controls.Add(this.btnSimular);
             this.Controls.Add(this.dgvPeluqueria);
             this.Controls.Add(this.lblHora);
@@ -171,10 +147,9 @@
             this.Name = "SistemaColas";
             this.Text = "SistemaColas";
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeluqueria)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inputTiempo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputDias)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputIteraciones)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputHora)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inputDias)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,10 +162,8 @@
         private System.Windows.Forms.Label lblHora;
         private System.Windows.Forms.DataGridView dgvPeluqueria;
         private System.Windows.Forms.Button btnSimular;
-        private System.Windows.Forms.NumericUpDown inputTiempo;
+        private System.Windows.Forms.NumericUpDown inputDias;
         private System.Windows.Forms.NumericUpDown inputIteraciones;
         private System.Windows.Forms.NumericUpDown inputHora;
-        private System.Windows.Forms.Label lblDias;
-        private System.Windows.Forms.NumericUpDown inputDias;
     }
 }

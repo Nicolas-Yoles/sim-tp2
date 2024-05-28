@@ -31,7 +31,7 @@ namespace sim_tp2.Views
             var dias = Convert.ToInt32(inputDias.Value);
             var cantIteraciones = Convert.ToInt32(inputIteraciones.Value);
             var hora = Convert.ToInt32(inputHora.Value);
-            var tiempo = Convert.ToInt32(inputTiempo.Value);
+            
 
             var param = new PeluqueriaParametrizacionDto();
 
@@ -42,11 +42,7 @@ namespace sim_tp2.Views
                 return;
             }
 
-            if (tiempo == 0)
-            {
-                MessageBox.Show("Error: El tiempo debe ser mayor a 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+           
             if (dias == 0)
             {
                 MessageBox.Show("Error: Los días deben ser mayor a 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
