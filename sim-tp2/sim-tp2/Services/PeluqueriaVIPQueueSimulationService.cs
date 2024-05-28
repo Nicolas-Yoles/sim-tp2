@@ -28,17 +28,17 @@ namespace sim_tp2.Services
 
             var iteracion = new PeluqueriaEventoDto()
             {
-                Cierre = 8,
-                Apertura = 24
+                Cierre = 8 * 60,
+                Apertura = 24 * 60
             };
 
             while (true)
             {
                 iteracion = SimularEvento(iteracion);
-                if (iteracion.ContadorDiasTrabajados > numeroDiasASimular) break;
+                if (iteracion.ContadorDiasTrabajados >= numeroDiasASimular) break;
                 ultimaIteracionAgregada = false;
 
-                if (iteracion.Reloj >= horaDesdeAMostrar && mostrarIteracionHasta < iteracion.NumeroIteracion)
+                if (iteracion.Reloj >= horaDesdeAMostrar && mostrarIteracionHasta >= iteracion.NumeroIteracion)
                 {
                     mostrarIteracionHasta = mostrarIteracionHasta == int.MaxValue ? iteracion.NumeroIteracion + iteracionesAMostrar : mostrarIteracionHasta;
                     iteracionesAImprimir.Add(iteracion);
@@ -88,12 +88,12 @@ namespace sim_tp2.Services
                     break;
                 case nameof(iteracionActual.Cierre):
                     iteracionActual.LlegadaCliente.ProximoEvento = null;
-                    iteracionActual.Cierre = iteracionActual.Apertura + 8;
+                    iteracionActual.Cierre = iteracionActual.Apertura + 8 * 60;
                     break;
                 case nameof(iteracionActual.Apertura):
                     iteracionActual.ContadorDiasTrabajados++;
                     CalcularLlegadaCliente(ref iteracionActual);
-                    iteracionActual.Apertura += 24;
+                    iteracionActual.Apertura += 24 * 60;
                     break;
                 case "Refrigerio":
                     DarRefrigerio(ref iteracionActual);
@@ -109,7 +109,9 @@ namespace sim_tp2.Services
                 ? iteracionActual.ClientesEnCola 
                 : iteracionActual.MaximoClientesEnCola;
 
-            iteracionActual.PromedioRecuadacionPorDia = iteracionActual.AcumuladorRecaudacionTotal / iteracionActual.ContadorDiasTrabajados;
+            iteracionActual.PromedioRecuadacionPorDia = iteracionActual.ContadorDiasTrabajados > 0
+                ? iteracionActual.AcumuladorRecaudacionTotal / iteracionActual.ContadorDiasTrabajados
+                : 0;
 
             return iteracionActual;
         }
