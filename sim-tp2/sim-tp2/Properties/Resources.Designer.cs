@@ -63,6 +63,38 @@ namespace sim_tp2.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _142433636_conjunto_de_peluquería_profesional_con_peines_y_secador_de_pelo_sobre_fondo_blanco_espacio_de_copia {
+            get {
+                object obj = ResourceManager.GetObject("142433636-conjunto-de-peluquería-profesional-con-peines-y-secador-de-pelo-sobre-f" +
+                        "ondo-blanco-espacio-de-copia", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _208478232_composición_con_tijeras_y_otros_accesorios_de_peluquería_sobre_fondo_blanco_vista_superior {
+            get {
+                object obj = ResourceManager.GetObject("208478232-composición-con-tijeras-y-otros-accesorios-de-peluquería-sobre-fondo-bl" +
+                        "anco-vista-superior", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _67320927_herramientas_de_peluquería_en_la_vista_superior_de_fondo_blanco {
+            get {
+                object obj = ResourceManager.GetObject("67320927-herramientas-de-peluquería-en-la-vista-superior-de-fondo-blanco", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap blue_images_for_backgrounds_desktop_wallpaper_preview {
             get {
                 object obj = ResourceManager.GetObject("blue-images-for-backgrounds-desktop-wallpaper-preview", resourceCulture);
@@ -83,9 +115,29 @@ namespace sim_tp2.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap e25a459d9b77bda9a00b6e8866bd46a5 {
+            get {
+                object obj = ResourceManager.GetObject("e25a459d9b77bda9a00b6e8866bd46a5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap imgSim {
             get {
                 object obj = ResourceManager.GetObject("imgSim", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap png_clipart_comb_cosmetologist_beauty_parlour_hairstyle_decal_hair_angle_people {
+            get {
+                object obj = ResourceManager.GetObject("png-clipart-comb-cosmetologist-beauty-parlour-hairstyle-decal-hair-angle-people", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

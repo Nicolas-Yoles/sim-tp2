@@ -30,5 +30,11 @@ namespace sim_tp2.Views
             montecarloForm.Show();
 
         }
+
+        private void button_colas_Click(object sender, EventArgs e)
+        {
+            SistemaColas sistemaColasForm = new SistemaColas();
+            sistemaColasForm.Show();
+        }
     }
 }
