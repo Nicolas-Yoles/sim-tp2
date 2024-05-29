@@ -24,7 +24,6 @@ namespace sim_tp2.Services
             _parametrizacion = parametrizacion;
             var iteracionesAImprimir = new List<PeluqueriaEventoDto>();
             var mostrarIteracionHasta = int.MaxValue;
-            var ultimaIteracionAgregada = false;
 
             var iteracion = new PeluqueriaEventoDto()
             {
@@ -32,21 +31,18 @@ namespace sim_tp2.Services
                 Apertura = 24 * 60
             };
 
-            while (true)
+            while (iteracion.ContadorDiasTrabajados < numeroDiasASimular)
             {
                 iteracion = SimularEvento(iteracion);
-                if (iteracion.ContadorDiasTrabajados >= numeroDiasASimular) break;
-                ultimaIteracionAgregada = false;
 
                 if (iteracion.Reloj >= horaDesdeAMostrar && mostrarIteracionHasta >= iteracion.NumeroIteracion)
                 {
                     mostrarIteracionHasta = mostrarIteracionHasta == int.MaxValue ? iteracion.NumeroIteracion + iteracionesAMostrar : mostrarIteracionHasta;
                     iteracionesAImprimir.Add(iteracion);
-                    ultimaIteracionAgregada = true;
                 }
             }
 
-            if(!ultimaIteracionAgregada) iteracionesAImprimir.Add(iteracion);
+            iteracionesAImprimir.Add(iteracion);
             return iteracionesAImprimir;
         }
 
@@ -128,7 +124,7 @@ namespace sim_tp2.Services
 
         private void DarRefrigerio(ref PeluqueriaEventoDto iteracionActual)
         {
-            var cliente = iteracionActual.Clientes.Where(x => !x.ConRefrigerio).OrderBy(x => x.HoraRefrigerio).First();
+            var cliente = iteracionActual.Clientes.Where(x => !x.ConRefrigerio && x.HoraRefrigerio != null).OrderBy(x => x.HoraRefrigerio).First();
             cliente.ConRefrigerio = true;
             cliente.HoraRefrigerio = null;
             iteracionActual.AcumuladorRecaudacionTotal += 1500;
@@ -142,6 +138,7 @@ namespace sim_tp2.Services
             {
                 iteracionActual.VeteranoB.Estado = EstadoServidorEnum.Libre;
                 iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoVeteranoB).ToList();
+                iteracionActual.VeteranoBFinAtencion = new PeluqueriaObtencionTiempoDto();
                 return;
             }
 
@@ -160,6 +157,7 @@ namespace sim_tp2.Services
             {
                 iteracionActual.VeteranoA.Estado = EstadoServidorEnum.Libre;
                 iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoVeteranoA).ToList();
+                iteracionActual.VeteranoAFinAtencion = new PeluqueriaObtencionTiempoDto();
                 return;
             }
 
@@ -178,6 +176,7 @@ namespace sim_tp2.Services
             {
                 iteracionActual.Aprendiz.Estado = EstadoServidorEnum.Libre;
                 iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoAprendiz).ToList();
+                iteracionActual.AprendizFinAtencion = new PeluqueriaObtencionTiempoDto();
                 return;
             }
 
