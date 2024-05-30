@@ -60,5 +60,20 @@ namespace sim_tp2.Views
             var simulacion = peluqueriaService.SimularPeluqueria(dias, cantIteraciones, hora, param);
             dgvPeluqueria.DataSource = simulacion;
         }
+
+        private void lblHora_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTiempo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SistemaColas_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
