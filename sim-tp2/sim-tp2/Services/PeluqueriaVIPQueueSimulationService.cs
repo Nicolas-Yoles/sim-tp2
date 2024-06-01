@@ -24,29 +24,30 @@ namespace sim_tp2.Services
             _parametrizacion = parametrizacion;
             var iteracionesAImprimir = new List<PeluqueriaEventoDto>();
             var mostrarIteracionHasta = int.MaxValue;
-            var ultimaIteracionAgregada = false;
+            PeluqueriaEventoDto iteracionAnterior = null;
+            var ultimaIteracionAgragada = false;
 
             var iteracion = new PeluqueriaEventoDto()
             {
-                Cierre = 8,
-                Apertura = 24
+                Cierre = 8 * 60,
+                Apertura = 24 * 60
             };
 
-            while (true)
+            while (iteracion.ContadorDiasTrabajados < numeroDiasASimular)
             {
-                iteracion = SimularEvento(iteracion);
-                if (iteracion.ContadorDiasTrabajados > numeroDiasASimular) break;
-                ultimaIteracionAgregada = false;
+                ultimaIteracionAgragada = false;
+                iteracionAnterior = iteracion;
+                iteracion = SimularEvento(iteracionAnterior);
 
-                if (iteracion.Reloj >= horaDesdeAMostrar && mostrarIteracionHasta < iteracion.NumeroIteracion)
+                if (iteracion.Reloj >= horaDesdeAMostrar && mostrarIteracionHasta >= iteracion.NumeroIteracion)
                 {
                     mostrarIteracionHasta = mostrarIteracionHasta == int.MaxValue ? iteracion.NumeroIteracion + iteracionesAMostrar : mostrarIteracionHasta;
                     iteracionesAImprimir.Add(iteracion);
-                    ultimaIteracionAgregada = true;
+                    ultimaIteracionAgragada = true;
                 }
             }
 
-            if(!ultimaIteracionAgregada) iteracionesAImprimir.Add(iteracion);
+            if(!ultimaIteracionAgragada) iteracionesAImprimir.Add(iteracionAnterior);
             return iteracionesAImprimir;
         }
 
@@ -88,12 +89,12 @@ namespace sim_tp2.Services
                     break;
                 case nameof(iteracionActual.Cierre):
                     iteracionActual.LlegadaCliente.ProximoEvento = null;
-                    iteracionActual.Cierre = iteracionActual.Apertura + 8;
+                    iteracionActual.Cierre = iteracionActual.Apertura + 8 * 60;
                     break;
                 case nameof(iteracionActual.Apertura):
                     iteracionActual.ContadorDiasTrabajados++;
                     CalcularLlegadaCliente(ref iteracionActual);
-                    iteracionActual.Apertura += 24;
+                    iteracionActual.Apertura += 24 * 60;
                     break;
                 case "Refrigerio":
                     DarRefrigerio(ref iteracionActual);
@@ -109,7 +110,9 @@ namespace sim_tp2.Services
                 ? iteracionActual.ClientesEnCola 
                 : iteracionActual.MaximoClientesEnCola;
 
-            iteracionActual.PromedioRecuadacionPorDia = iteracionActual.AcumuladorRecaudacionTotal / iteracionActual.ContadorDiasTrabajados;
+            iteracionActual.PromedioRecuadacionPorDia = iteracionActual.ContadorDiasTrabajados > 0
+                ? iteracionActual.AcumuladorRecaudacionTotal / iteracionActual.ContadorDiasTrabajados
+                : 0;
 
             return iteracionActual;
         }
@@ -126,7 +129,7 @@ namespace sim_tp2.Services
 
         private void DarRefrigerio(ref PeluqueriaEventoDto iteracionActual)
         {
-            var cliente = iteracionActual.Clientes.Where(x => !x.ConRefrigerio).OrderBy(x => x.HoraRefrigerio).First();
+            var cliente = iteracionActual.Clientes.Where(x => !x.ConRefrigerio && x.HoraRefrigerio != null).OrderBy(x => x.HoraRefrigerio).First();
             cliente.ConRefrigerio = true;
             cliente.HoraRefrigerio = null;
             iteracionActual.AcumuladorRecaudacionTotal += 1500;
@@ -140,6 +143,7 @@ namespace sim_tp2.Services
             {
                 iteracionActual.VeteranoB.Estado = EstadoServidorEnum.Libre;
                 iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoVeteranoB).ToList();
+                iteracionActual.VeteranoBFinAtencion = new PeluqueriaObtencionTiempoDto();
                 return;
             }
 
@@ -158,6 +162,7 @@ namespace sim_tp2.Services
             {
                 iteracionActual.VeteranoA.Estado = EstadoServidorEnum.Libre;
                 iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoVeteranoA).ToList();
+                iteracionActual.VeteranoAFinAtencion = new PeluqueriaObtencionTiempoDto();
                 return;
             }
 
@@ -176,6 +181,7 @@ namespace sim_tp2.Services
             {
                 iteracionActual.Aprendiz.Estado = EstadoServidorEnum.Libre;
                 iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoAprendiz).ToList();
+                iteracionActual.AprendizFinAtencion = new PeluqueriaObtencionTiempoDto();
                 return;
             }
 

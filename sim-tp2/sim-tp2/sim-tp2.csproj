@@ -140,6 +140,10 @@
       <DependentUpon>SistemaColas.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\sim_tp2.DTOs.Peluqueria.ClienteDto.datasource" />
+    <None Include="Properties\DataSources\sim_tp2.DTOs.Peluqueria.PeluqueriaEventoDto.datasource" />
+    <None Include="Properties\DataSources\sim_tp2.DTOs.Peluqueria.PeluqueriaObtencionTiempoDto.datasource" />
+    <None Include="Properties\DataSources\sim_tp2.DTOs.Peluqueria.ServidorDto.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -55,6 +55,21 @@ namespace sim_tp2.Views
             dgvPeluqueria.DataSource = simulacion;
         }
 
+        private void lblHora_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTiempo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SistemaColas_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             SistemaColasDistribucion form2 = new SistemaColasDistribucion();
