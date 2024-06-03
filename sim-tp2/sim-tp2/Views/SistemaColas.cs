@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.Remoting;
@@ -101,6 +102,13 @@ namespace sim_tp2.Views
             dgvPeluqueria.Columns.Add("ContadorDiasTrabajados", "Contador Días Trabajados");
             dgvPeluqueria.Columns.Add("ClientesEnCola", "Clientes En Cola");
             dgvPeluqueria.Columns.Add("MaximoClientesEnCola", "Máximo Clientes En Cola");
+            int numclientes = numeroClientes( eventos);
+            for (int i = 0; i < numclientes; i++)
+            {
+                dgvPeluqueria.Columns.Add($"Estado", $"Estado{i + 1}");
+                dgvPeluqueria.Columns.Add($"HoraRefrigerio", $"HoraRefrigerio{i + 1}");
+                dgvPeluqueria.Columns.Add($"ConRefrigerio", $"ConRefrigerio{i + 1}");
+            }
             foreach (PeluqueriaEventoDto evento in eventos)
             {
                 this.dgvPeluqueria.Rows.Add(
@@ -122,19 +130,36 @@ namespace sim_tp2.Views
                     evento.VeteranoBFinAtencion.ProximoEvento.ToString() ?? "-",
                     evento.Cierre.ToString() ?? "-",
                     evento.Apertura.ToString() ?? "-",
-                    evento.Aprendiz.Estado ,
+                    evento.Aprendiz.Estado.ToString(),
                     evento.Aprendiz.ColaClientes.ToString() ?? "-",
-                    evento.VeteranoA.Estado ,
+                    evento.VeteranoA.Estado. ,
                     evento.VeteranoA.ColaClientes.ToString() ?? "-",
-                    evento.VeteranoB.Estado ,
+                    evento.VeteranoB.Estado.ToString(),
                     evento.VeteranoB.ColaClientes.ToString() ?? "-",
                     evento.AcumuladorRecaudacionTotal.ToString() ?? "-",
                     evento.ContadorDiasTrabajados.ToString() ?? "-",
                     evento.ClientesEnCola.ToString() ?? "-",
                     evento.MaximoClientesEnCola.ToString() ?? "-"
                  );
+                foreach (ClienteDto cliente in evento.Clientes)
+                {
+                    this.dgvPeluqueria.Rows.Add(
+                        cliente.Estado.ToString() ?? "-",
+                        cliente.HoraRefrigerio.ToString() ?? "-",
+                        cliente.ConRefrigerio.ToString() ?? "-"
+                    );
+                }
 
             }
+        }
+        private int numeroClientes(List<PeluqueriaEventoDto> eventos)
+        {
+            int numcliente = new int();
+            foreach(PeluqueriaEventoDto evento in eventos)
+            {
+                numcliente = evento.Clientes.Count();
+            }
+            return numcliente;
         }
         private void button1_Click(object sender, EventArgs e)
         {
