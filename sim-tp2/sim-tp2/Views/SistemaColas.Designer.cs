@@ -39,9 +39,9 @@
             this.inputIteraciones = new System.Windows.Forms.NumericUpDown();
             this.inputHora = new System.Windows.Forms.NumericUpDown();
             this.clientesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.peluqueriaEventoDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.servidorDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeluqueria)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputDias)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputIteraciones)).BeginInit();
@@ -57,10 +57,9 @@
             this.lblTiempo.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblTiempo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTiempo.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblTiempo.Location = new System.Drawing.Point(1, 94);
-            this.lblTiempo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTiempo.Location = new System.Drawing.Point(234, 122);
             this.lblTiempo.Name = "lblTiempo";
-            this.lblTiempo.Size = new System.Drawing.Size(164, 29);
+            this.lblTiempo.Size = new System.Drawing.Size(126, 24);
             this.lblTiempo.TabIndex = 1;
             this.lblTiempo.Text = "Dias a simular";
             this.lblTiempo.Click += new System.EventHandler(this.lblTiempo_Click);
@@ -69,11 +68,10 @@
             // 
             this.lblPeluqueria.AutoSize = true;
             this.lblPeluqueria.BackColor = System.Drawing.SystemColors.Window;
-            this.lblPeluqueria.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPeluqueria.Location = new System.Drawing.Point(395, 11);
-            this.lblPeluqueria.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPeluqueria.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPeluqueria.Location = new System.Drawing.Point(589, 40);
             this.lblPeluqueria.Name = "lblPeluqueria";
-            this.lblPeluqueria.Size = new System.Drawing.Size(274, 54);
+            this.lblPeluqueria.Size = new System.Drawing.Size(266, 42);
             this.lblPeluqueria.TabIndex = 2;
             this.lblPeluqueria.Text = "Peluqueria VIP";
             // 
@@ -83,10 +81,9 @@
             this.lblIteraciones.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblIteraciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIteraciones.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblIteraciones.Location = new System.Drawing.Point(386, 96);
-            this.lblIteraciones.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblIteraciones.Location = new System.Drawing.Point(523, 120);
             this.lblIteraciones.Name = "lblIteraciones";
-            this.lblIteraciones.Size = new System.Drawing.Size(237, 29);
+            this.lblIteraciones.Size = new System.Drawing.Size(183, 24);
             this.lblIteraciones.TabIndex = 5;
             this.lblIteraciones.Text = "Iteraciones a mostrar";
             // 
@@ -96,10 +93,9 @@
             this.lblHora.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHora.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblHora.Location = new System.Drawing.Point(827, 95);
-            this.lblHora.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblHora.Location = new System.Drawing.Point(860, 119);
             this.lblHora.Name = "lblHora";
-            this.lblHora.Size = new System.Drawing.Size(245, 29);
+            this.lblHora.Size = new System.Drawing.Size(191, 24);
             this.lblHora.TabIndex = 6;
             this.lblHora.Text = "Hora desde a mostrar";
             this.lblHora.Click += new System.EventHandler(this.lblHora_Click);
@@ -108,19 +104,17 @@
             // 
             this.dgvPeluqueria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dgvPeluqueria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPeluqueria.Location = new System.Drawing.Point(16, 261);
-            this.dgvPeluqueria.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvPeluqueria.Location = new System.Drawing.Point(73, 212);
             this.dgvPeluqueria.Name = "dgvPeluqueria";
             this.dgvPeluqueria.RowHeadersWidth = 51;
-            this.dgvPeluqueria.Size = new System.Drawing.Size(1035, 265);
+            this.dgvPeluqueria.Size = new System.Drawing.Size(1300, 550);
             this.dgvPeluqueria.TabIndex = 7;
             // 
             // btnSimular
             // 
-            this.btnSimular.Location = new System.Drawing.Point(924, 198);
-            this.btnSimular.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSimular.Location = new System.Drawing.Point(780, 169);
             this.btnSimular.Name = "btnSimular";
-            this.btnSimular.Size = new System.Drawing.Size(100, 28);
+            this.btnSimular.Size = new System.Drawing.Size(75, 23);
             this.btnSimular.TabIndex = 8;
             this.btnSimular.Text = "SIMULAR";
             this.btnSimular.UseVisualStyleBackColor = true;
@@ -128,43 +122,51 @@
             // 
             // inputDias
             // 
-            this.inputDias.Location = new System.Drawing.Point(196, 104);
-            this.inputDias.Margin = new System.Windows.Forms.Padding(4);
+            this.inputDias.Location = new System.Drawing.Point(369, 126);
             this.inputDias.Name = "inputDias";
-            this.inputDias.Size = new System.Drawing.Size(160, 22);
+            this.inputDias.Size = new System.Drawing.Size(120, 20);
             this.inputDias.TabIndex = 9;
             // 
             // inputIteraciones
             // 
-            this.inputIteraciones.Location = new System.Drawing.Point(644, 103);
-            this.inputIteraciones.Margin = new System.Windows.Forms.Padding(4);
+            this.inputIteraciones.Location = new System.Drawing.Point(715, 121);
             this.inputIteraciones.Maximum = new decimal(new int[] {
             -727379969,
             232,
             0,
             0});
             this.inputIteraciones.Name = "inputIteraciones";
-            this.inputIteraciones.Size = new System.Drawing.Size(160, 22);
+            this.inputIteraciones.Size = new System.Drawing.Size(120, 20);
             this.inputIteraciones.TabIndex = 10;
             // 
             // inputHora
             // 
             this.inputHora.DecimalPlaces = 2;
-            this.inputHora.Location = new System.Drawing.Point(1080, 102);
-            this.inputHora.Margin = new System.Windows.Forms.Padding(4);
+            this.inputHora.Location = new System.Drawing.Point(1056, 122);
             this.inputHora.Maximum = new decimal(new int[] {
             -727379969,
             232,
             0,
             0});
             this.inputHora.Name = "inputHora";
-            this.inputHora.Size = new System.Drawing.Size(160, 22);
+            this.inputHora.Size = new System.Drawing.Size(120, 20);
             this.inputHora.TabIndex = 11;
             // 
             // clientesBindingSource
             // 
             this.clientesBindingSource.DataMember = "Clientes";
             this.clientesBindingSource.DataSource = this.peluqueriaEventoDtoBindingSource;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(630, 169);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(134, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Parametros Distribucion";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // peluqueriaEventoDtoBindingSource
             // 
@@ -174,24 +176,14 @@
             // 
             this.servidorDtoBindingSource.DataSource = typeof(sim_tp2.DTOs.Peluqueria.ServidorDto);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(724, 198);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(178, 28);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Parametros Distribucion";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // SistemaColas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackgroundImage = global::sim_tp2.Properties.Resources._208478232_composición_con_tijeras_y_otros_accesorios_de_peluquería_sobre_fondo_blanco_vista_superior;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1918, 1018);
+            this.ClientSize = new System.Drawing.Size(1438, 827);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.inputHora);
             this.Controls.Add(this.inputIteraciones);
@@ -203,12 +195,11 @@
             this.Controls.Add(this.lblPeluqueria);
             this.Controls.Add(this.lblTiempo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximumSize = new System.Drawing.Size(1920, 1080);
-            this.MinimumSize = new System.Drawing.Size(1918, 1018);
+            this.MaximumSize = new System.Drawing.Size(1440, 878);
+            this.MinimumSize = new System.Drawing.Size(1438, 827);
             this.Name = "SistemaColas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SistemaColas";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.SistemaColas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeluqueria)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputDias)).EndInit();
