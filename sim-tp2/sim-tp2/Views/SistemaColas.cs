@@ -111,7 +111,8 @@ namespace sim_tp2.Views
             }
             foreach (PeluqueriaEventoDto evento in eventos)
             {
-                this.dgvPeluqueria.Rows.Add(
+                var rowValues = new List<string>
+                {
                     evento.EventoNombre ?? "-",
                     evento.Reloj.ToString() ?? "-",
                     evento.LlegadaCliente.Random?.ToString() ?? "-",
@@ -130,26 +131,24 @@ namespace sim_tp2.Views
                     evento.VeteranoBFinAtencion.ProximoEvento.ToString() ?? "-",
                     evento.Cierre.ToString() ?? "-",
                     evento.Apertura.ToString() ?? "-",
-                    evento.Aprendiz.Estado,
+                    evento.Aprendiz.Estado.ToString(),
                     evento.Aprendiz.ColaClientes.Count().ToString() ?? "-",
-                    evento.VeteranoA.Estado,
+                    evento.VeteranoA.Estado.ToString(),
                     evento.VeteranoA.ColaClientes.Count().ToString() ?? "-",
-                    evento.VeteranoB.Estado,
+                    evento.VeteranoB.Estado.ToString(),
                     evento.VeteranoB.ColaClientes.Count().ToString() ?? "-",
                     evento.AcumuladorRecaudacionTotal.ToString() ?? "-",
                     evento.ContadorDiasTrabajados.ToString() ?? "-",
                     evento.ClientesEnCola.ToString() ?? "-",
                     evento.MaximoClientesEnCola.ToString() ?? "-"
-                 );
+                };
                 foreach (ClienteDto cliente in evento.Clientes)
                 {
-                    this.dgvPeluqueria.Rows.Add(
-                        cliente.Estado.ToString() ?? "-",
-                        cliente.HoraRefrigerio.ToString() ?? "-",
-                        cliente.ConRefrigerio.ToString() ?? "-"
-                    );
+                    rowValues.Add(cliente.Estado.ToString() ?? "-");
+                    rowValues.Add(cliente.HoraRefrigerio.ToString() ?? "-");
+                    rowValues.Add(cliente.ConRefrigerio.ToString() ?? "-");
                 }
-
+                this.dgvPeluqueria.Rows.Add(rowValues.ToArray());
             }
         }
         private int numeroClientes(List<PeluqueriaEventoDto> eventos)
