@@ -32,7 +32,8 @@ namespace sim_tp2.Views
 
         private void simularPeluqueriaVIP()
         {
-
+            dgvPeluqueria.Rows.Clear();
+            dgvPeluqueria.Columns.Clear();
             var dias = Convert.ToInt32(inputDias.Value);
             var cantIteraciones = Convert.ToInt32(inputIteraciones.Value);
             var hora = Convert.ToInt32(inputHora.Value);

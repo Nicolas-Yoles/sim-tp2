@@ -25,10 +25,10 @@ namespace sim_tp2.Views
             InitializeComponent();
             this.numericUpDownAprendizLimiteInferior.Value = Convert.ToDecimal(20);
             this.numericUpDownAprendizLimiteSuperior.Value = Convert.ToDecimal(30);
-            this.numericUpDownProbabilidadAprendiz.Value = Convert.ToDecimal(15);
+            this.numericUpDownProbabilidadAprendiz.Value = 0.15M;
             this.numericUpDownLimiteInferiorVeteranoA.Value = Convert.ToDecimal(11);
             this.numericUpDownLimiteSuperiorVeteranoA.Value = Convert.ToDecimal(13);
-            this.numericUpDownProbabilidadVeteranoA.Value = Convert.ToDecimal(45);
+            this.numericUpDownProbabilidadVeteranoA.Value = 0.45M;
             this.numericUpDownLimiteInferiorVeteranoB.Value = Convert.ToDecimal(12);
             this.numericUpDownLimiteSuperiorVeteranoB.Value = Convert.ToDecimal(18);
             this.numericUpDownLimiteInferiorCliente.Value = Convert.ToDecimal(2);
