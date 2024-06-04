@@ -1,4 +1,5 @@
-﻿using sim_tp2.Distribution;
+﻿using Newtonsoft.Json;
+using sim_tp2.Distribution;
 using sim_tp2.DTOs.Peluqueria;
 using sim_tp2.Utilities;
 using System;
@@ -42,13 +43,20 @@ namespace sim_tp2.Services
                 if (iteracion.Reloj >= horaDesdeAMostrar && mostrarIteracionHasta >= iteracion.NumeroIteracion)
                 {
                     mostrarIteracionHasta = mostrarIteracionHasta == int.MaxValue ? iteracion.NumeroIteracion + iteracionesAMostrar : mostrarIteracionHasta;
-                    iteracionesAImprimir.Add(iteracion);
+                    iteracionesAImprimir.Add(DeepCopyIteracion(iteracion));
                     ultimaIteracionAgragada = true;
                 }
             }
 
             if(!ultimaIteracionAgragada) iteracionesAImprimir.Add(iteracionAnterior);
             return iteracionesAImprimir;
+        }
+
+        private PeluqueriaEventoDto DeepCopyIteracion(PeluqueriaEventoDto iteracion)
+        {
+            string json = JsonConvert.SerializeObject(iteracion);
+            return JsonConvert.DeserializeObject<PeluqueriaEventoDto>(json);
+
         }
 
         private PeluqueriaEventoDto SimularEvento(PeluqueriaEventoDto iteracionAnterior)
