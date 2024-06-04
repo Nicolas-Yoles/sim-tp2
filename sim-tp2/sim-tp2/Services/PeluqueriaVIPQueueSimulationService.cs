@@ -36,7 +36,7 @@ namespace sim_tp2.Services
                 Apertura = 24 * 60
             };
 
-            while (iteracion.ContadorDiasTrabajados < numeroDiasASimular)
+            while (iteracion.ContadorDiasTrabajados <= numeroDiasASimular)
             {
                 ultimaIteracionAgragada = false;
                 iteracionAnterior = iteracion;
@@ -119,9 +119,7 @@ namespace sim_tp2.Services
                 ? iteracionActual.ClientesEnCola 
                 : iteracionActual.MaximoClientesEnCola;
 
-            iteracionActual.PromedioRecuadacionPorDia = iteracionActual.ContadorDiasTrabajados > 0
-                ? iteracionActual.AcumuladorRecaudacionTotal / iteracionActual.ContadorDiasTrabajados
-                : 0;
+            iteracionActual.PromedioRecuadacionPorDia = iteracionActual.AcumuladorRecaudacionTotal / iteracionActual.ContadorDiasTrabajados;
 
             return iteracionActual;
         }
@@ -245,6 +243,7 @@ namespace sim_tp2.Services
                     }
 
                     cliente.Estado = EstadoClienteEnum.SiendoAtendidoAprendiz;
+                    cliente.HoraRefrigerio = null;
                     iteracionActual.Aprendiz.Estado = EstadoServidorEnum.Ocupado;
                     iteracionActual.AprendizFinAtencion = CalcularFinAtencionAprendiz(iteracionActual.Reloj);
                     break;
@@ -258,6 +257,7 @@ namespace sim_tp2.Services
                     }
 
                     cliente.Estado = EstadoClienteEnum.SiendoAtendidoVeteranoA;
+                    cliente.HoraRefrigerio = null;
                     iteracionActual.VeteranoA.Estado = EstadoServidorEnum.Ocupado;
                     iteracionActual.VeteranoAFinAtencion = CalcularFinAtencionVeteranoA(iteracionActual.Reloj);
                     break;
@@ -271,6 +271,7 @@ namespace sim_tp2.Services
                     }
 
                     cliente.Estado = EstadoClienteEnum.SiendoAtendidoVeteranoB;
+                    cliente.HoraRefrigerio = null;
                     iteracionActual.VeteranoB.Estado = EstadoServidorEnum.Ocupado;
                     iteracionActual.VeteranoBFinAtencion = CalcularFinAtencionVeteranoB(iteracionActual.Reloj);
                     break;

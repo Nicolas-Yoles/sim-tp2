@@ -143,7 +143,7 @@ namespace sim_tp2.Views
                     evento.VeteranoB.ColaClientes.Count().ToString() ?? string.Empty,
                     evento.AcumuladorRecaudacionTotal.ToString() ?? string.Empty,
                     evento.ContadorDiasTrabajados.ToString() ?? string.Empty,
-                    evento.AcumuladorRecaudacionTotal.ToString() ?? string.Empty,
+                    evento.PromedioRecuadacionPorDia.ToString() ?? string.Empty,
                     evento.ClientesEnCola.ToString() ?? string.Empty,
                     evento.MaximoClientesEnCola.ToString() ?? string.Empty
                 };

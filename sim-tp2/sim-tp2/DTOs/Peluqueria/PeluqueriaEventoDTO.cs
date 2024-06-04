@@ -38,7 +38,7 @@ namespace sim_tp2.DTOs.Peluqueria
 
         public int AcumuladorRecaudacionTotal { get; set; } = 0;
 
-        public int ContadorDiasTrabajados { get; set; } = 0;
+        public int ContadorDiasTrabajados { get; set; } = 1;
 
         public decimal PromedioRecuadacionPorDia { get; set; } = 0;
 
