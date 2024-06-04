@@ -22,6 +22,8 @@ namespace sim_tp2.Services
         /// <returns></returns>
         public List<PeluqueriaEventoDto> SimularPeluqueria(int numeroDiasASimular, int iteracionesAMostrar, double horaDesdeAMostrar, PeluqueriaParametrizacionDto parametrizacion)
         {
+            ClienteDto.UltimoId = 0;
+
             _parametrizacion = parametrizacion;
             var iteracionesAImprimir = new List<PeluqueriaEventoDto>();
             var mostrarIteracionHasta = int.MaxValue;
@@ -56,7 +58,6 @@ namespace sim_tp2.Services
         {
             string json = JsonConvert.SerializeObject(iteracion);
             return JsonConvert.DeserializeObject<PeluqueriaEventoDto>(json);
-
         }
 
         private PeluqueriaEventoDto SimularEvento(PeluqueriaEventoDto iteracionAnterior)
@@ -146,11 +147,11 @@ namespace sim_tp2.Services
         private void FinalizarAtencionVeteranoB(ref PeluqueriaEventoDto iteracionActual)
         {
             iteracionActual.AcumuladorRecaudacionTotal += 3500;
+            iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoVeteranoB).ToList();
 
             if (!iteracionActual.VeteranoB.ColaClientes.Any())
             {
                 iteracionActual.VeteranoB.Estado = EstadoServidorEnum.Libre;
-                iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoVeteranoB).ToList();
                 iteracionActual.VeteranoBFinAtencion = new PeluqueriaObtencionTiempoDto();
                 return;
             }
@@ -165,11 +166,11 @@ namespace sim_tp2.Services
         private void FinalizarAtencionVeteranoA(ref PeluqueriaEventoDto iteracionActual)
         {
             iteracionActual.AcumuladorRecaudacionTotal += 3500;
+            iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoVeteranoA).ToList();
 
             if (!iteracionActual.VeteranoA.ColaClientes.Any())
             {
                 iteracionActual.VeteranoA.Estado = EstadoServidorEnum.Libre;
-                iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoVeteranoA).ToList();
                 iteracionActual.VeteranoAFinAtencion = new PeluqueriaObtencionTiempoDto();
                 return;
             }
@@ -184,11 +185,11 @@ namespace sim_tp2.Services
         private void FinalizarAtencionAprendiz(ref PeluqueriaEventoDto iteracionActual)
         {
             iteracionActual.AcumuladorRecaudacionTotal += 1800;
+            iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoAprendiz).ToList();
 
             if (!iteracionActual.Aprendiz.ColaClientes.Any())
             {
                 iteracionActual.Aprendiz.Estado = EstadoServidorEnum.Libre;
-                iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoAprendiz).ToList();
                 iteracionActual.AprendizFinAtencion = new PeluqueriaObtencionTiempoDto();
                 return;
             }

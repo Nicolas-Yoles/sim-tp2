@@ -101,10 +101,13 @@ namespace sim_tp2.Views
             dgvPeluqueria.Columns.Add("VeteranoBColaClientes", "Veterano B Cola Clientes");
             dgvPeluqueria.Columns.Add("AcumuladorRecaudacionTotal", "Acumulador Recaudación Total");
             dgvPeluqueria.Columns.Add("ContadorDiasTrabajados", "Contador Días Trabajados");
+            dgvPeluqueria.Columns.Add("PromedioRecuadacionPorDia", "Promedio Recuadacion Por Dia");
             dgvPeluqueria.Columns.Add("ClientesEnCola", "Clientes En Cola");
             dgvPeluqueria.Columns.Add("MaximoClientesEnCola", "Máximo Clientes En Cola");
-            for(int i = 0; i < eventos.Max(x => x.MaximoClientesEnCola + 3); i++)
+           
+            for (int i = 0; i < eventos.Max(x => x.MaximoClientesEnCola + 3); i++)
             {
+                dgvPeluqueria.Columns.Add($"ClienteId", $"ClienteId{i + 1}");
                 dgvPeluqueria.Columns.Add($"Estado", $"Estado{i + 1}");
                 dgvPeluqueria.Columns.Add($"HoraRefrigerio", $"HoraRefrigerio{i + 1}");
                 dgvPeluqueria.Columns.Add($"ConRefrigerio", $"ConRefrigerio{i + 1}");
@@ -114,41 +117,43 @@ namespace sim_tp2.Views
             {
                 var rowValues = new List<string>
                 {
-                    evento.EventoNombre ?? "-",
-                    evento.Reloj.ToString() ?? "-",
-                    evento.LlegadaCliente.Random?.ToString() ?? "-",
-                    evento.LlegadaCliente.Tiempo?.ToString() ?? "-",
-                    evento.LlegadaCliente.ProximoEvento.ToString() ?? "-",
-                    evento.RandomPeluquero?.ToString() ?? "-",
-                    evento.Peluquero ?? "-",
-                    evento.AprendizFinAtencion.Random.ToString() ?? "-",
-                    evento.AprendizFinAtencion.Tiempo.ToString() ?? "-",
-                    evento.AprendizFinAtencion.ProximoEvento.ToString() ?? "-",
-                    evento.VeteranoAFinAtencion.Random.ToString() ?? "-",
-                    evento.VeteranoAFinAtencion.Tiempo.ToString() ?? "-",
-                    evento.VeteranoAFinAtencion.ProximoEvento.ToString() ?? "-",
-                    evento.VeteranoBFinAtencion.Random.ToString() ?? "-",
-                    evento.VeteranoBFinAtencion.Tiempo.ToString() ?? "-",
-                    evento.VeteranoBFinAtencion.ProximoEvento.ToString() ?? "-",
-                    evento.Cierre.ToString() ?? "-",
-                    evento.Apertura.ToString() ?? "-",
+                    evento.EventoNombre ?? string.Empty,
+                    evento.Reloj.ToString() ?? string.Empty,
+                    evento.LlegadaCliente.Random?.ToString() ?? string.Empty,
+                    evento.LlegadaCliente.Tiempo?.ToString() ?? string.Empty,
+                    evento.LlegadaCliente.ProximoEvento.ToString() ?? string.Empty,
+                    evento.RandomPeluquero?.ToString() ?? string.Empty,
+                    evento.Peluquero ?? string.Empty,
+                    evento.AprendizFinAtencion.Random.ToString() ?? string.Empty,
+                    evento.AprendizFinAtencion.Tiempo.ToString() ?? string.Empty,
+                    evento.AprendizFinAtencion.ProximoEvento.ToString() ?? string.Empty,
+                    evento.VeteranoAFinAtencion.Random.ToString() ?? string.Empty,
+                    evento.VeteranoAFinAtencion.Tiempo.ToString() ?? string.Empty,
+                    evento.VeteranoAFinAtencion.ProximoEvento.ToString() ?? string.Empty,
+                    evento.VeteranoBFinAtencion.Random.ToString() ?? string.Empty,
+                    evento.VeteranoBFinAtencion.Tiempo.ToString() ?? string.Empty,
+                    evento.VeteranoBFinAtencion.ProximoEvento.ToString() ?? string.Empty,
+                    evento.Cierre.ToString() ?? string.Empty,
+                    evento.Apertura.ToString() ?? string.Empty,
                     evento.Aprendiz.Estado.ToString(),
-                    evento.Aprendiz.ColaClientes.Count().ToString() ?? "-",
+                    evento.Aprendiz.ColaClientes.Count().ToString() ?? string.Empty,
                     evento.VeteranoA.Estado.ToString(),
-                    evento.VeteranoA.ColaClientes.Count().ToString() ?? "-",
+                    evento.VeteranoA.ColaClientes.Count().ToString() ?? string.Empty,
                     evento.VeteranoB.Estado.ToString(),
-                    evento.VeteranoB.ColaClientes.Count().ToString() ?? "-",
-                    evento.AcumuladorRecaudacionTotal.ToString() ?? "-",
-                    evento.ContadorDiasTrabajados.ToString() ?? "-",
-                    evento.ClientesEnCola.ToString() ?? "-",
-                    evento.MaximoClientesEnCola.ToString() ?? "-"
+                    evento.VeteranoB.ColaClientes.Count().ToString() ?? string.Empty,
+                    evento.AcumuladorRecaudacionTotal.ToString() ?? string.Empty,
+                    evento.ContadorDiasTrabajados.ToString() ?? string.Empty,
+                    evento.AcumuladorRecaudacionTotal.ToString() ?? string.Empty,
+                    evento.ClientesEnCola.ToString() ?? string.Empty,
+                    evento.MaximoClientesEnCola.ToString() ?? string.Empty
                 };
 
                 foreach (ClienteDto cliente in evento.Clientes)
                 {
-                    rowValues.Add(cliente.Estado.ToString() ?? "-");
-                    rowValues.Add(cliente.HoraRefrigerio.ToString() ?? "-");
-                    rowValues.Add(cliente.ConRefrigerio.ToString() ?? "-");
+                    rowValues.Add(cliente.Id.ToString() ?? string.Empty);
+                    rowValues.Add(cliente.Estado.ToString() ?? string.Empty);
+                    rowValues.Add(cliente.HoraRefrigerio.ToString() ?? string.Empty);
+                    rowValues.Add(cliente.ConRefrigerio.ToString() ?? string.Empty);
                 }
 
                 this.dgvPeluqueria.Rows.Add(rowValues.ToArray());
