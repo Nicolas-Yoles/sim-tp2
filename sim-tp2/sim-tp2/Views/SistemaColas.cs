@@ -103,13 +103,13 @@ namespace sim_tp2.Views
             dgvPeluqueria.Columns.Add("ContadorDiasTrabajados", "Contador Días Trabajados");
             dgvPeluqueria.Columns.Add("ClientesEnCola", "Clientes En Cola");
             dgvPeluqueria.Columns.Add("MaximoClientesEnCola", "Máximo Clientes En Cola");
-            int numclientes = numeroClientes( eventos);
-            for (int i = 0; i < numclientes; i++)
+            for(int i = 0; i < eventos.Max(x => x.MaximoClientesEnCola + 3); i++)
             {
                 dgvPeluqueria.Columns.Add($"Estado", $"Estado{i + 1}");
                 dgvPeluqueria.Columns.Add($"HoraRefrigerio", $"HoraRefrigerio{i + 1}");
                 dgvPeluqueria.Columns.Add($"ConRefrigerio", $"ConRefrigerio{i + 1}");
             }
+
             foreach (PeluqueriaEventoDto evento in eventos)
             {
                 var rowValues = new List<string>
@@ -143,23 +143,16 @@ namespace sim_tp2.Views
                     evento.ClientesEnCola.ToString() ?? "-",
                     evento.MaximoClientesEnCola.ToString() ?? "-"
                 };
+
                 foreach (ClienteDto cliente in evento.Clientes)
                 {
                     rowValues.Add(cliente.Estado.ToString() ?? "-");
                     rowValues.Add(cliente.HoraRefrigerio.ToString() ?? "-");
                     rowValues.Add(cliente.ConRefrigerio.ToString() ?? "-");
                 }
+
                 this.dgvPeluqueria.Rows.Add(rowValues.ToArray());
             }
-        }
-        private int numeroClientes(List<PeluqueriaEventoDto> eventos)
-        {
-            int numcliente = new int();
-            foreach(PeluqueriaEventoDto evento in eventos)
-            {
-                numcliente = evento.Clientes.Count();
-            }
-            return numcliente;
         }
         private void button1_Click(object sender, EventArgs e)
         {
