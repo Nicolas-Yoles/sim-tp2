@@ -58,7 +58,7 @@ namespace sim_tp2.Utilities
                 x += h;
             }
 
-            result.Yf = y;
+            result.Xf = x;
             return result;
         }
     }
@@ -83,7 +83,7 @@ namespace sim_tp2.Utilities
         #region Resultados
         public int Id { get; set; }
         public List<EulerIntegrationIterationDto> EulerIntegrationIterations { get; set; } = new List<EulerIntegrationIterationDto>();
-        public double Yf { get; set; }
+        public double Xf { get; set; }
         #endregion
     }
 }

@@ -290,7 +290,7 @@ namespace sim_tp2.Services
             var eulerResult = EulerIntegration.Integrate(_eulerFunc, _parametrizacion.TVeteranos, _parametrizacion.H, personasEnCola);
             EulersResults.Add(eulerResult);
 
-            finAtencion.Tiempo = eulerResult.Yf;
+            finAtencion.Tiempo = eulerResult.Xf;
             finAtencion.EulerIntegrationId = eulerResult.Id;
             finAtencion.ProximoEvento = reloj + finAtencion.Tiempo;
 
@@ -304,7 +304,7 @@ namespace sim_tp2.Services
             var eulerResult = EulerIntegration.Integrate(_eulerFunc, _parametrizacion.TAprendiz, _parametrizacion.H, personasEnCola);
             EulersResults.Add(eulerResult);
 
-            finAtencion.Tiempo = eulerResult.Yf;
+            finAtencion.Tiempo = eulerResult.Xf;
             finAtencion.EulerIntegrationId = eulerResult.Id;
             finAtencion.ProximoEvento = reloj + finAtencion.Tiempo;
 
