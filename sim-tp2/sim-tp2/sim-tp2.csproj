@@ -74,7 +74,9 @@
     <Compile Include="DTOs\Peluqueria\PeluqueriaParametrizacionDTO.cs" />
     <Compile Include="DTOs\Peluqueria\ServidorDTO.cs" />
     <Compile Include="Services\BowlingMontecarloSimulationService.cs" />
+    <Compile Include="Services\PeluqueriaVipContinuousQueueSimulationService.cs" />
     <Compile Include="Services\PeluqueriaVIPQueueSimulationService.cs" />
+    <Compile Include="Utilities\EulerIntegration.cs" />
     <Compile Include="Views\Distribuciones.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,0 +1,353 @@
+﻿using Newtonsoft.Json;
+using sim_tp2.Distribution;
+using sim_tp2.DTOs.Peluqueria;
+using sim_tp2.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace sim_tp2.Services
+{
+    public class PeluqueriaVipContinuousQueueSimulationService
+    {
+        public List<EulerIntegrationResultDto> EulersResults { get; private set; } = new List<EulerIntegrationResultDto>();
+
+        private PeluqueriaParametrizacionDto _parametrizacion;
+        private readonly Func<double, double, int, double> _eulerFunc = (T, t, C) => C + 0.2 * T + t*t;
+
+        /// <summary>
+        /// Realiza la simulación de un sistemas de colas de una peluqueria.
+        /// </summary>
+        /// <param name="numeroDiasASimular"></param>
+        /// <param name="iteracionesAMostrar"></param>
+        /// <param name="horaDesdeAMostrar"></param>
+        /// <param name="parametrizacion"></param>
+        /// <returns></returns>
+        public List<PeluqueriaEventoDto> SimularPeluqueria(int numeroDiasASimular, int iteracionesAMostrar, double horaDesdeAMostrar, PeluqueriaParametrizacionDto parametrizacion)
+        {
+            ClienteDto.UltimoId = 0;
+
+            _parametrizacion = parametrizacion;
+            var iteracionesAImprimir = new List<PeluqueriaEventoDto>();
+            var mostrarIteracionHasta = int.MaxValue;
+            PeluqueriaEventoDto iteracionAnterior = null;
+            var ultimaIteracionAgragada = false;
+
+            var iteracion = new PeluqueriaEventoDto()
+            {
+                Cierre = 8 * 60,
+                Apertura = 24 * 60
+            };
+
+            while (iteracion.ContadorDiasTrabajados <= numeroDiasASimular)
+            {
+                ultimaIteracionAgragada = false;
+                iteracionAnterior = iteracion;
+                iteracion = SimularEvento(iteracionAnterior);
+
+                if (iteracion.Reloj >= horaDesdeAMostrar && mostrarIteracionHasta >= iteracion.NumeroIteracion)
+                {
+                    mostrarIteracionHasta = mostrarIteracionHasta == int.MaxValue ? iteracion.NumeroIteracion + iteracionesAMostrar : mostrarIteracionHasta;
+                    iteracionesAImprimir.Add(DeepCopyIteracion(iteracion));
+                    ultimaIteracionAgragada = true;
+                }
+            }
+
+            if(!ultimaIteracionAgragada) iteracionesAImprimir.Add(iteracionAnterior);
+            return iteracionesAImprimir;
+        }
+
+        private PeluqueriaEventoDto DeepCopyIteracion(PeluqueriaEventoDto iteracion)
+        {
+            string json = JsonConvert.SerializeObject(iteracion);
+            return JsonConvert.DeserializeObject<PeluqueriaEventoDto>(json);
+        }
+
+        private PeluqueriaEventoDto SimularEvento(PeluqueriaEventoDto iteracionAnterior)
+        {
+            var iteracionActual = new PeluqueriaEventoDto()
+            {
+                LlegadaCliente = new PeluqueriaObtencionTiempoDto() { ProximoEvento = iteracionAnterior.LlegadaCliente.ProximoEvento },
+                AprendizFinAtencion = new PeluqueriaObtencionTiempoDto { ProximoEvento = iteracionAnterior.AprendizFinAtencion.ProximoEvento },
+                VeteranoAFinAtencion = new PeluqueriaObtencionTiempoDto { ProximoEvento = iteracionAnterior.VeteranoAFinAtencion.ProximoEvento },
+                VeteranoBFinAtencion = new PeluqueriaObtencionTiempoDto { ProximoEvento = iteracionAnterior.VeteranoBFinAtencion.ProximoEvento },
+                Cierre = iteracionAnterior.Cierre,
+                Apertura = iteracionAnterior.Apertura,
+                Aprendiz = iteracionAnterior.Aprendiz,
+                VeteranoA = iteracionAnterior.VeteranoA,
+                VeteranoB = iteracionAnterior.VeteranoB,
+                AcumuladorRecaudacionTotal = iteracionAnterior.AcumuladorRecaudacionTotal,
+                ContadorDiasTrabajados = iteracionAnterior.ContadorDiasTrabajados,
+                MaximoClientesEnCola = iteracionAnterior.MaximoClientesEnCola,
+                Clientes = iteracionAnterior.Clientes,
+                NumeroIteracion = iteracionAnterior.NumeroIteracion + 1
+            };
+
+            DeterminarEventoASimular(ref iteracionActual);
+
+            switch(iteracionActual.EventoNombre)
+            {
+                case nameof(iteracionActual.LlegadaCliente):
+                    LlegarCliente(ref iteracionActual);
+                    break;
+                case nameof(iteracionActual.AprendizFinAtencion):
+                    FinalizarAtencionAprendiz(ref iteracionActual);
+                    break;
+                case nameof(iteracionActual.VeteranoAFinAtencion):
+                    FinalizarAtencionVeteranoA(ref iteracionActual);
+                    break;
+                case nameof(iteracionActual.VeteranoBFinAtencion):
+                    FinalizarAtencionVeteranoB(ref iteracionActual);
+                    break;
+                case nameof(iteracionActual.Cierre):
+                    iteracionActual.LlegadaCliente.ProximoEvento = null;
+                    iteracionActual.Cierre = iteracionActual.Apertura + 8 * 60;
+                    break;
+                case nameof(iteracionActual.Apertura):
+                    iteracionActual.ContadorDiasTrabajados++;
+                    CalcularLlegadaCliente(ref iteracionActual);
+                    iteracionActual.Apertura += 24 * 60;
+                    break;
+                case "Refrigerio":
+                    DarRefrigerio(ref iteracionActual);
+                    break;
+                case "Inicializacion":
+                    CalcularLlegadaCliente(ref iteracionActual);
+                    break;
+            }
+
+            var estadosAtencion = new List<EstadoClienteEnum> { EstadoClienteEnum.SiendoAtendidoVeteranoA, EstadoClienteEnum.SiendoAtendidoAprendiz, EstadoClienteEnum.SiendoAtendidoVeteranoB };
+            iteracionActual.ClientesEnCola = iteracionActual.Clientes.Count(x => !estadosAtencion.Contains(x.Estado));
+            iteracionActual.MaximoClientesEnCola = iteracionActual.ClientesEnCola > iteracionActual.MaximoClientesEnCola 
+                ? iteracionActual.ClientesEnCola 
+                : iteracionActual.MaximoClientesEnCola;
+
+            iteracionActual.PromedioRecuadacionPorDia = iteracionActual.AcumuladorRecaudacionTotal / iteracionActual.ContadorDiasTrabajados;
+
+            return iteracionActual;
+        }
+
+        private void CalcularLlegadaCliente(ref PeluqueriaEventoDto iteracionActual)
+        {
+            iteracionActual.LlegadaCliente.Random = NumerosUtility.GetAleatorio();
+            iteracionActual.LlegadaCliente.Tiempo = Uniform.GenerarAleatorio(
+                _parametrizacion.LlegadaClienteLimiteInferior,
+                _parametrizacion.LlegadaClienteLimiteSuperior,
+                iteracionActual.LlegadaCliente.Random);
+            iteracionActual.LlegadaCliente.ProximoEvento = iteracionActual.Reloj + iteracionActual.LlegadaCliente.Tiempo;
+        }
+
+        private void DarRefrigerio(ref PeluqueriaEventoDto iteracionActual)
+        {
+            var cliente = iteracionActual.Clientes.Where(x => !x.ConRefrigerio && x.HoraRefrigerio != null).OrderBy(x => x.HoraRefrigerio).First();
+            cliente.ConRefrigerio = true;
+            cliente.HoraRefrigerio = null;
+            iteracionActual.AcumuladorRecaudacionTotal += 1500;
+        }
+
+        private void FinalizarAtencionVeteranoB(ref PeluqueriaEventoDto iteracionActual)
+        {
+            iteracionActual.AcumuladorRecaudacionTotal += 3500;
+            iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoVeteranoB).ToList();
+
+            if (!iteracionActual.VeteranoB.ColaClientes.Any())
+            {
+                iteracionActual.VeteranoB.Estado = EstadoServidorEnum.Libre;
+                iteracionActual.VeteranoBFinAtencion = new PeluqueriaObtencionTiempoDto();
+                return;
+            }
+
+            var cliente = iteracionActual.VeteranoB.ColaClientes.First();
+            iteracionActual.VeteranoB.ColaClientes.Remove(cliente);
+            iteracionActual.Clientes.Find(x => x.Id == cliente.Id).Estado = EstadoClienteEnum.SiendoAtendidoVeteranoB;
+            iteracionActual.Clientes.Find(x => x.Id == cliente.Id).HoraRefrigerio = null;
+            iteracionActual.VeteranoBFinAtencion = CalcularFinAtencionVeterano(iteracionActual.Reloj, iteracionActual.VeteranoB.ColaClientes.Count);
+        }
+
+        private void FinalizarAtencionVeteranoA(ref PeluqueriaEventoDto iteracionActual)
+        {
+            iteracionActual.AcumuladorRecaudacionTotal += 3500;
+            iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoVeteranoA).ToList();
+
+            if (!iteracionActual.VeteranoA.ColaClientes.Any())
+            {
+                iteracionActual.VeteranoA.Estado = EstadoServidorEnum.Libre;
+                iteracionActual.VeteranoAFinAtencion = new PeluqueriaObtencionTiempoDto();
+                return;
+            }
+
+            var cliente = iteracionActual.VeteranoA.ColaClientes.First();
+            iteracionActual.VeteranoA.ColaClientes.Remove(cliente);
+            iteracionActual.Clientes.Find(x => x.Id == cliente.Id).Estado = EstadoClienteEnum.SiendoAtendidoVeteranoA;
+            iteracionActual.Clientes.Find(x => x.Id == cliente.Id).HoraRefrigerio = null;
+            iteracionActual.VeteranoAFinAtencion = CalcularFinAtencionVeterano(iteracionActual.Reloj, iteracionActual.VeteranoA.ColaClientes.Count);
+        }
+
+        private void FinalizarAtencionAprendiz(ref PeluqueriaEventoDto iteracionActual)
+        {
+            iteracionActual.AcumuladorRecaudacionTotal += 1800;
+            iteracionActual.Clientes = iteracionActual.Clientes.Where(x => x.Estado != EstadoClienteEnum.SiendoAtendidoAprendiz).ToList();
+
+            if (!iteracionActual.Aprendiz.ColaClientes.Any())
+            {
+                iteracionActual.Aprendiz.Estado = EstadoServidorEnum.Libre;
+                iteracionActual.AprendizFinAtencion = new PeluqueriaObtencionTiempoDto();
+                return;
+            }
+
+            var cliente = iteracionActual.Aprendiz.ColaClientes.First();
+            iteracionActual.Aprendiz.ColaClientes.Remove(cliente);
+            iteracionActual.Clientes.Find(x => x.Id == cliente.Id).Estado = EstadoClienteEnum.SiendoAtendidoAprendiz;
+            iteracionActual.Clientes.Find(x => x.Id == cliente.Id).HoraRefrigerio = null;
+            iteracionActual.AprendizFinAtencion = CalcularFinAtencionAprendiz(iteracionActual.Reloj, iteracionActual.Aprendiz.ColaClientes.Count);
+        }
+
+        private void LlegarCliente(ref PeluqueriaEventoDto iteracionActual)
+        {
+            ClienteDto.UltimoId++;
+            var cliente = new ClienteDto()
+            {
+                HoraRefrigerio = iteracionActual.Reloj + 30,
+                ConRefrigerio = false,
+                Id = ClienteDto.UltimoId
+            };
+
+            CalcularLlegadaCliente(ref iteracionActual);
+
+            iteracionActual.RandomPeluquero = NumerosUtility.GetAleatorio();
+
+            if (iteracionActual.RandomPeluquero < _parametrizacion.AprendizProbabilidadAtender)
+            {
+                iteracionActual.Peluquero = nameof(iteracionActual.Aprendiz);
+                LlegarClienteAServidor(ref iteracionActual, nameof(iteracionActual.Aprendiz), cliente);
+            }
+            else if (iteracionActual.RandomPeluquero < (_parametrizacion.AprendizProbabilidadAtender + _parametrizacion.VeteranoAProbabilidadAtender))
+            {
+                iteracionActual.Peluquero = nameof(iteracionActual.VeteranoA);
+                LlegarClienteAServidor(ref iteracionActual, nameof(iteracionActual.VeteranoA), cliente);
+            }
+            else
+            {
+                iteracionActual.Peluquero = nameof(iteracionActual.VeteranoB);
+                LlegarClienteAServidor(ref iteracionActual, nameof(iteracionActual.VeteranoB), cliente);
+            }
+        }
+
+        private void LlegarClienteAServidor(ref PeluqueriaEventoDto iteracionActual, string servidor, ClienteDto cliente)
+        {
+            switch (servidor) 
+            {
+                case nameof(iteracionActual.Aprendiz):
+                    if(iteracionActual.Aprendiz.Estado == EstadoServidorEnum.Ocupado)
+                    {
+                        cliente.Estado = EstadoClienteEnum.EsperandoAtencionAprendiz;
+                        iteracionActual.Aprendiz.ColaClientes.Add(cliente);
+                        break;
+                    }
+
+                    cliente.Estado = EstadoClienteEnum.SiendoAtendidoAprendiz;
+                    cliente.HoraRefrigerio = null;
+                    iteracionActual.Aprendiz.Estado = EstadoServidorEnum.Ocupado;
+                    iteracionActual.AprendizFinAtencion = CalcularFinAtencionAprendiz(iteracionActual.Reloj, iteracionActual.Aprendiz.ColaClientes.Count);
+                    break;
+
+                case nameof(iteracionActual.VeteranoA):
+                    if (iteracionActual.VeteranoA.Estado == EstadoServidorEnum.Ocupado)
+                    {
+                        cliente.Estado = EstadoClienteEnum.EsperandoAtencionVeteranoA;
+                        iteracionActual.VeteranoA.ColaClientes.Add(cliente);
+                        break;
+                    }
+
+                    cliente.Estado = EstadoClienteEnum.SiendoAtendidoVeteranoA;
+                    cliente.HoraRefrigerio = null;
+                    iteracionActual.VeteranoA.Estado = EstadoServidorEnum.Ocupado;
+                    iteracionActual.VeteranoAFinAtencion = CalcularFinAtencionVeterano(iteracionActual.Reloj, iteracionActual.VeteranoA.ColaClientes.Count);
+                    break;
+
+                case nameof(iteracionActual.VeteranoB):
+                    if (iteracionActual.VeteranoB.Estado == EstadoServidorEnum.Ocupado)
+                    {
+                        cliente.Estado = EstadoClienteEnum.EsperandoAtencionVeteranoB;
+                        iteracionActual.VeteranoB.ColaClientes.Add(cliente);
+                        break;
+                    }
+
+                    cliente.Estado = EstadoClienteEnum.SiendoAtendidoVeteranoB;
+                    cliente.HoraRefrigerio = null;
+                    iteracionActual.VeteranoB.Estado = EstadoServidorEnum.Ocupado;
+                    iteracionActual.VeteranoBFinAtencion = CalcularFinAtencionVeterano(iteracionActual.Reloj, iteracionActual.VeteranoB.ColaClientes.Count);
+                    break;
+            }
+
+            iteracionActual.Clientes.Add(cliente);
+        }
+
+        private PeluqueriaObtencionTiempoDto CalcularFinAtencionVeterano(double reloj, int personasEnCola)
+        {
+            var finAtencion = new PeluqueriaObtencionTiempoDto();
+
+            var eulerResult = EulerIntegration.Integrate(_eulerFunc, _parametrizacion.TVeteranos, _parametrizacion.H, personasEnCola);
+            EulersResults.Add(eulerResult);
+
+            finAtencion.Tiempo = eulerResult.Yf;
+            finAtencion.EulerIntegrationId = eulerResult.Id;
+            finAtencion.ProximoEvento = reloj + finAtencion.Tiempo;
+
+            return finAtencion;
+        }
+
+        private PeluqueriaObtencionTiempoDto CalcularFinAtencionAprendiz(double reloj, int personasEnCola)
+        {
+            var finAtencion = new PeluqueriaObtencionTiempoDto();
+
+            var eulerResult = EulerIntegration.Integrate(_eulerFunc, _parametrizacion.TAprendiz, _parametrizacion.H, personasEnCola);
+            EulersResults.Add(eulerResult);
+
+            finAtencion.Tiempo = eulerResult.Yf;
+            finAtencion.EulerIntegrationId = eulerResult.Id;
+            finAtencion.ProximoEvento = reloj + finAtencion.Tiempo;
+
+            return finAtencion;
+        }
+
+        /// <summary>
+        /// Determina cual es el siguiente evento y adelanta el reloj a ese evento.
+        /// </summary>
+        /// <param name="iteracionAnterior"></param>
+        /// <param name="iteracionActual"></param>
+        private void DeterminarEventoASimular(ref PeluqueriaEventoDto iteracionActual)
+        {
+            if (iteracionActual.NumeroIteracion == 0)
+            {
+                iteracionActual.EventoNombre = "Inicializacion";
+                return;
+            }
+
+            var diccionarioEventos = new Dictionary<string, double?>
+            {
+                {nameof(iteracionActual.LlegadaCliente), iteracionActual.LlegadaCliente.ProximoEvento },
+                {nameof(iteracionActual.AprendizFinAtencion), iteracionActual.AprendizFinAtencion.ProximoEvento },
+                {nameof(iteracionActual.VeteranoAFinAtencion), iteracionActual.VeteranoAFinAtencion.ProximoEvento },
+                {nameof(iteracionActual.VeteranoBFinAtencion), iteracionActual.VeteranoBFinAtencion.ProximoEvento },
+                {nameof(iteracionActual.Cierre), iteracionActual.Cierre },
+                {nameof(iteracionActual.Apertura), iteracionActual.Apertura },
+                {"Refrigerio", iteracionActual.Clientes.Where(x => !x.ConRefrigerio).Min(x => x.HoraRefrigerio)}
+            };
+
+            var nombreEvento = string.Empty;
+            var menorTimeSpan = double.PositiveInfinity;
+            foreach (var kvp in diccionarioEventos.Where(x => x.Value.HasValue))
+            {
+                if (kvp.Value.Value < menorTimeSpan)
+                {
+                    menorTimeSpan = kvp.Value.Value;
+                    nombreEvento = kvp.Key;
+                }
+            }
+
+            iteracionActual.Reloj = menorTimeSpan;
+            iteracionActual.EventoNombre = nombreEvento;
+        }
+    }
+}

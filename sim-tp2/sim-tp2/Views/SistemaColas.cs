@@ -51,8 +51,7 @@ namespace sim_tp2.Views
                 MessageBox.Show("Error: Los días deben ser mayor a 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            // TODO: Crear inputs para parametros de reglas y probabilidades (mostrar valores por defecto)
-            // TODO: Crear propiedades del servicio con los valores tomados de interfaz grafica.
+
             var peluqueriaService = new PeluqueriaVipQueueSimulationService();
 
             var simulacion = peluqueriaService.SimularPeluqueria(dias, cantIteraciones, hora, this.param);

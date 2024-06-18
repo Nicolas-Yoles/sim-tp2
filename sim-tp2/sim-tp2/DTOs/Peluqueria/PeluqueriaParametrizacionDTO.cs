@@ -65,5 +65,22 @@ namespace sim_tp2.DTOs.Peluqueria
         /// Indica la probabilidad de que un cliente sea atendido por el Veterano A.
         /// </summary>
         public double VeteranoAProbabilidadAtender { get; set; } = 0.45;
+
+        /// <summary>
+        /// Indica la constante de corte de integración según la experiencia del aprendiz
+        /// para la obtención del tiempo de demora por el método de Euler
+        /// </summary>
+        public int TAprendiz = 180;
+
+        /// <summary>
+        /// Indica la constante de corte de integración según la experiencia de los veteranos
+        /// para la obtención del tiempo de demora por el método de Euler
+        /// </summary>
+        public int TVeteranos = 130;
+
+        /// <summary>
+        /// Tamaño del paso de integración del método de Euler.
+        /// </summary>
+        public double H = 0.1;
     }
 }
