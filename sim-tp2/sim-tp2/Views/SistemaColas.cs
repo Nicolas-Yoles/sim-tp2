@@ -19,7 +19,6 @@ namespace sim_tp2.Views
     public partial class SistemaColas : Form
     {
         public PeluqueriaParametrizacionDto param = new PeluqueriaParametrizacionDto();
-        public DataGridView Grilla = new DataGridView();
         public SistemaColas()
         {
             InitializeComponent();
