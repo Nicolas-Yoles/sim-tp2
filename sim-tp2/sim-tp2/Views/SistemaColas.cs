@@ -152,7 +152,6 @@ namespace sim_tp2.Views
                 };
 
                 var valuesEstaticos = rowValues.Count;
-                var clienteNuevo = false;
 
                 foreach (ClienteDto cliente in evento.Clientes)
                 {
