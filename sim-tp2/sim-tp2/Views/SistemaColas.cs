@@ -73,6 +73,8 @@ namespace sim_tp2.Views
         }
         private void creardgvPeluqueria(List<PeluqueriaEventoDto> eventos)
         {
+            var posicionesClientes = new Dictionary<int, int>();
+
             dgvPeluqueria.Columns.Add("EventoNombre", "Evento Nombre");
             dgvPeluqueria.Columns.Add("Reloj", "Reloj");
             dgvPeluqueria.Columns.Add("LlegadaClienteRandom", "Llegada Cliente Random");
@@ -103,7 +105,7 @@ namespace sim_tp2.Views
             dgvPeluqueria.Columns.Add("ClientesEnCola", "Clientes En Cola");
             dgvPeluqueria.Columns.Add("MaximoClientesEnCola", "Máximo Clientes En Cola");
            
-            for (int i = 0; i < eventos.Max(x => x.MaximoClientesEnCola + 3); i++)
+            for (int i = 0; i < eventos.Max(x => x.MaximoClientesEnCola + 5); i++)
             {
                 dgvPeluqueria.Columns.Add($"ClienteId", $"ClienteId{i + 1}");
                 dgvPeluqueria.Columns.Add($"Estado", $"Estado{i + 1}");
@@ -113,6 +115,9 @@ namespace sim_tp2.Views
 
             foreach (PeluqueriaEventoDto evento in eventos)
             {
+                var clientesIds = evento.Clientes.Select(x => x.Id).ToList();
+                posicionesClientes = posicionesClientes.Where(x => clientesIds.Contains(x.Key)).ToDictionary(x => x.Key, x => x.Value);
+
                 var rowValues = new List<string>
                 {
                     evento.EventoNombre ?? string.Empty,
@@ -146,12 +151,39 @@ namespace sim_tp2.Views
                     evento.MaximoClientesEnCola.ToString() ?? string.Empty
                 };
 
+                var valuesEstaticos = rowValues.Count;
+                var clienteNuevo = false;
+
                 foreach (ClienteDto cliente in evento.Clientes)
                 {
-                    rowValues.Add(cliente.Id.ToString() ?? string.Empty);
-                    rowValues.Add(cliente.Estado.ToString() ?? string.Empty);
-                    rowValues.Add(cliente.HoraRefrigerio.ToString() ?? string.Empty);
-                    rowValues.Add(cliente.ConRefrigerio.ToString() ?? string.Empty);
+                    if (!posicionesClientes.ContainsKey(cliente.Id))
+                    {
+                        if (!posicionesClientes.ContainsValue(valuesEstaticos))
+                        {
+                            posicionesClientes.Add(cliente.Id, valuesEstaticos);
+                        }
+                        else
+                        {
+                            while (posicionesClientes.ContainsValue(valuesEstaticos))
+                            {
+                                valuesEstaticos += 4;
+                            }
+                            posicionesClientes.Add(cliente.Id, valuesEstaticos);
+                        }
+
+                        clienteNuevo = true;
+                    }
+
+                    while (rowValues.Count < posicionesClientes[cliente.Id] + 4)
+                    {
+                        rowValues.Add(string.Empty);
+                    }
+
+                    rowValues.RemoveRange(posicionesClientes[cliente.Id], 4);
+                    rowValues.Insert(posicionesClientes[cliente.Id], cliente.Id.ToString() ?? string.Empty);
+                    rowValues.Insert(posicionesClientes[cliente.Id] + 1, cliente.Estado.ToString() ?? string.Empty);
+                    rowValues.Insert(posicionesClientes[cliente.Id] + 2, cliente.HoraRefrigerio.ToString() ?? string.Empty);
+                    rowValues.Insert(posicionesClientes[cliente.Id] + 3, cliente.ConRefrigerio.ToString() ?? string.Empty);
                 }
 
                 this.dgvPeluqueria.Rows.Add(rowValues.ToArray());
