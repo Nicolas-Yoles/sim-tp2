@@ -169,8 +169,6 @@ namespace sim_tp2.Views
                             }
                             posicionesClientes.Add(cliente.Id, valuesEstaticos);
                         }
-
-                        clienteNuevo = true;
                     }
 
                     while (rowValues.Count < posicionesClientes[cliente.Id] + 4)
