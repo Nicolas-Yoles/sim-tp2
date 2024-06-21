@@ -33,8 +33,19 @@ namespace sim_tp2.Views
 
         private void button_colas_Click(object sender, EventArgs e)
         {
-            SistemaColas sistemaColasForm = new SistemaColas();
+            SistemaColas sistemaColasForm = new SistemaColas(false);
             sistemaColasForm.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            SistemaColas sistemaColasForm = new SistemaColas(true);
+            sistemaColasForm.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
