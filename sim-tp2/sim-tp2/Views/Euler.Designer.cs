@@ -30,10 +30,10 @@
         {
             this.nroEulerInput = new System.Windows.Forms.TextBox();
             this.nroEulerLabel = new System.Windows.Forms.Label();
-            this.eulerDataGridView = new System.Windows.Forms.DataGridView();
+            this.dgvEuler = new System.Windows.Forms.DataGridView();
             this.consultarEulerButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.eulerDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEuler)).BeginInit();
             this.SuspendLayout();
             // 
             // nroEulerInput
@@ -52,13 +52,13 @@
             this.nroEulerLabel.TabIndex = 1;
             this.nroEulerLabel.Text = "Nro. de Euler:";
             // 
-            // eulerDataGridView
+            // dgvEuler
             // 
-            this.eulerDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.eulerDataGridView.Location = new System.Drawing.Point(12, 45);
-            this.eulerDataGridView.Name = "eulerDataGridView";
-            this.eulerDataGridView.Size = new System.Drawing.Size(240, 393);
-            this.eulerDataGridView.TabIndex = 2;
+            this.dgvEuler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEuler.Location = new System.Drawing.Point(12, 45);
+            this.dgvEuler.Name = "dgvEuler";
+            this.dgvEuler.Size = new System.Drawing.Size(240, 393);
+            this.dgvEuler.TabIndex = 2;
             // 
             // consultarEulerButton
             // 
@@ -68,6 +68,7 @@
             this.consultarEulerButton.TabIndex = 3;
             this.consultarEulerButton.Text = "Consultar";
             this.consultarEulerButton.UseVisualStyleBackColor = true;
+            this.consultarEulerButton.Click += new System.EventHandler(this.consultarEulerButton_Click);
             // 
             // button1
             // 
@@ -86,14 +87,14 @@
             this.ClientSize = new System.Drawing.Size(374, 450);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.consultarEulerButton);
-            this.Controls.Add(this.eulerDataGridView);
+            this.Controls.Add(this.dgvEuler);
             this.Controls.Add(this.nroEulerLabel);
             this.Controls.Add(this.nroEulerInput);
             this.Name = "Euler";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Euler";
             this.Load += new System.EventHandler(this.Euler_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.eulerDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEuler)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,7 +104,7 @@
 
         private System.Windows.Forms.TextBox nroEulerInput;
         private System.Windows.Forms.Label nroEulerLabel;
-        private System.Windows.Forms.DataGridView eulerDataGridView;
+        private System.Windows.Forms.DataGridView dgvEuler;
         private System.Windows.Forms.Button consultarEulerButton;
         private System.Windows.Forms.Button button1;
     }

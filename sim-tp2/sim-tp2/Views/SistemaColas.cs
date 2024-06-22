@@ -20,7 +20,8 @@ namespace sim_tp2.Views
     public partial class SistemaColas : Form
     {
         public PeluqueriaParametrizacionDto param = new PeluqueriaParametrizacionDto();
-
+        
+        public List<EulerIntegrationIterationDto> _datosEuler = new List<EulerIntegrationIterationDto>();
         private bool EsConEuler = false;
         public SistemaColas(bool esConEuler)
         {
@@ -263,6 +264,7 @@ namespace sim_tp2.Views
 
         private void eulerButton_Click(object sender, EventArgs e)
         {
+            //Euler eulerForm = new Euler(_datosEuler);
             Euler eulerForm = new Euler();
             eulerForm.Show();
         }
