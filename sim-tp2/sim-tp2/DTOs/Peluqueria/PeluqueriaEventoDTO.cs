@@ -47,5 +47,7 @@ namespace sim_tp2.DTOs.Peluqueria
         public int MaximoClientesEnCola { get; set; } = 0;
 
         public List<ClienteDto> Clientes { get; set; } = new List<ClienteDto>();
+
+        public int IdDeEuler { get; set; } = 0;
     }
 }

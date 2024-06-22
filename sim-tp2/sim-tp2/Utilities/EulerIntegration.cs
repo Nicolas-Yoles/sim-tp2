@@ -11,7 +11,7 @@ namespace sim_tp2.Utilities
     /// </summary>
     public static class EulerIntegration
     {
-        private static int _ultimoId = 0;
+        public static int _ultimoId = 0;
 
         /// <summary>
         /// Integra utilizando el método de Euler según los parámetros
@@ -37,10 +37,11 @@ namespace sim_tp2.Utilities
             double y = 0;
             double dydx;
 
-            while (y > expectedY)
+            while (y < expectedY)
             {
                 dydx = f(x, y, c);
                 double hdydx = h * dydx;
+                //double hdydx = x + h;
                 double y_next = y + hdydx;
 
                 var iterationResultDto = new EulerIntegrationIterationDto
