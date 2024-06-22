@@ -13,11 +13,13 @@ namespace sim_tp2.Views
 {
     public partial class Euler : Form
     {
-        //public Euler(List<EulerIntegrationIterationDto> _datosEuler)
-        public Euler()
+        public List<EulerIntegrationResultDto> EulersResults { get; set; }
+
+
+        public Euler(List<EulerIntegrationResultDto> eulersResults)
         {
             InitializeComponent();
-            //crearDgvEuler(_datosEuler);
+            EulersResults = eulersResults;
         }
 
         private void Euler_Load(object sender, EventArgs e)
@@ -33,12 +35,11 @@ namespace sim_tp2.Views
 
         private void crearDgvEuler(List<EulerIntegrationIterationDto> listadoEuler)
         {
-            dgvEuler.Columns.Add("Id", "Id de Euler");
-            dgvEuler.Columns.Add("X", "X inicial");
-            dgvEuler.Columns.Add("Y", "Y inicial");
-            dgvEuler.Columns.Add("DyDx", "Derivada de Y");
-            dgvEuler.Columns.Add("H_dyDx", "X próxima");
-            dgvEuler.Columns.Add("YNext", "Y próxima");
+            dgvEuler.Columns.Add("X", "X");
+            dgvEuler.Columns.Add("Yi", "Yi");
+            dgvEuler.Columns.Add("Yi'", "Yi'");
+            dgvEuler.Columns.Add("h * Yi''", "h * Yi'");
+            dgvEuler.Columns.Add("Yi+1", "Yi+1");
 
             foreach(EulerIntegrationIterationDto euler in listadoEuler)
             {
@@ -51,15 +52,22 @@ namespace sim_tp2.Views
                     euler.YNext.ToString()
                 };
 
-                this.dgvEuler.Rows.Add(rowValues);
+                this.dgvEuler.Rows.Add(rowValues.ToArray());
             }
 
         }
 
         private void consultarEulerButton_Click(object sender, EventArgs e)
         {
-            //eulerDataGridView.Rows.Clear();
-            //eulerDataGridView.Columns.Clear();
+            dgvEuler.Rows.Clear();
+            dgvEuler.Columns.Clear();
+
+            var idEuler = int.Parse(nroEulerInput.Text);
+            var euler = EulersResults.FirstOrDefault(x => x.Id == idEuler)?.EulerIntegrationIterations;
+
+            if (euler is null) return;
+
+            crearDgvEuler(euler);
         }
     }
 }

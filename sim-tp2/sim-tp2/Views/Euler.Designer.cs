@@ -38,33 +38,38 @@
             // 
             // nroEulerInput
             // 
-            this.nroEulerInput.Location = new System.Drawing.Point(87, 19);
+            this.nroEulerInput.Location = new System.Drawing.Point(116, 23);
+            this.nroEulerInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nroEulerInput.Name = "nroEulerInput";
-            this.nroEulerInput.Size = new System.Drawing.Size(84, 20);
+            this.nroEulerInput.Size = new System.Drawing.Size(111, 22);
             this.nroEulerInput.TabIndex = 0;
             // 
             // nroEulerLabel
             // 
             this.nroEulerLabel.AutoSize = true;
-            this.nroEulerLabel.Location = new System.Drawing.Point(9, 22);
+            this.nroEulerLabel.Location = new System.Drawing.Point(12, 27);
+            this.nroEulerLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.nroEulerLabel.Name = "nroEulerLabel";
-            this.nroEulerLabel.Size = new System.Drawing.Size(72, 13);
+            this.nroEulerLabel.Size = new System.Drawing.Size(88, 16);
             this.nroEulerLabel.TabIndex = 1;
             this.nroEulerLabel.Text = "Nro. de Euler:";
             // 
             // dgvEuler
             // 
             this.dgvEuler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEuler.Location = new System.Drawing.Point(12, 45);
+            this.dgvEuler.Location = new System.Drawing.Point(16, 55);
+            this.dgvEuler.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvEuler.Name = "dgvEuler";
-            this.dgvEuler.Size = new System.Drawing.Size(240, 393);
+            this.dgvEuler.RowHeadersWidth = 51;
+            this.dgvEuler.Size = new System.Drawing.Size(923, 462);
             this.dgvEuler.TabIndex = 2;
             // 
             // consultarEulerButton
             // 
-            this.consultarEulerButton.Location = new System.Drawing.Point(177, 16);
+            this.consultarEulerButton.Location = new System.Drawing.Point(236, 20);
+            this.consultarEulerButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.consultarEulerButton.Name = "consultarEulerButton";
-            this.consultarEulerButton.Size = new System.Drawing.Size(75, 23);
+            this.consultarEulerButton.Size = new System.Drawing.Size(100, 28);
             this.consultarEulerButton.TabIndex = 3;
             this.consultarEulerButton.Text = "Consultar";
             this.consultarEulerButton.UseVisualStyleBackColor = true;
@@ -72,9 +77,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(284, 415);
+            this.button1.Location = new System.Drawing.Point(839, 525);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 4;
             this.button1.Text = "Volver";
             this.button1.UseVisualStyleBackColor = true;
@@ -82,14 +88,15 @@
             // 
             // Euler
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(374, 450);
+            this.ClientSize = new System.Drawing.Size(952, 566);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.consultarEulerButton);
             this.Controls.Add(this.dgvEuler);
             this.Controls.Add(this.nroEulerLabel);
             this.Controls.Add(this.nroEulerInput);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Euler";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Euler";

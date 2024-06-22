@@ -21,8 +21,10 @@ namespace sim_tp2.Views
     {
         public PeluqueriaParametrizacionDto param = new PeluqueriaParametrizacionDto();
         
-        public List<EulerIntegrationIterationDto> _datosEuler = new List<EulerIntegrationIterationDto>();
+        public List<EulerIntegrationResultDto> EulerResults {  get; set; }
+
         private bool EsConEuler = false;
+
         public SistemaColas(bool esConEuler)
         {
             InitializeComponent();
@@ -66,6 +68,9 @@ namespace sim_tp2.Views
             {
                 var peluqueriaService = new PeluqueriaVipContinuousQueueSimulationService();
                 var simulacion = peluqueriaService.SimularPeluqueria(dias, cantIteraciones, hora, this.param);
+
+                EulerResults = peluqueriaService.EulersResults;
+
                 creardgvPeluqueria(simulacion);
             }
             
@@ -264,8 +269,7 @@ namespace sim_tp2.Views
 
         private void eulerButton_Click(object sender, EventArgs e)
         {
-            //Euler eulerForm = new Euler(_datosEuler);
-            Euler eulerForm = new Euler();
+            var eulerForm = new Euler(EulerResults);
             eulerForm.Show();
         }
 

@@ -13,7 +13,7 @@ namespace sim_tp2.Services
         public List<EulerIntegrationResultDto> EulersResults { get; private set; } = new List<EulerIntegrationResultDto>();
 
         private PeluqueriaParametrizacionDto _parametrizacion;
-        private readonly Func<double, double, int, double> _eulerFunc = (T, t, C) => C + 0.2 * T + t*t;
+        private readonly Func<double, double, int, double> _eulerFunc = (t, T, C) => C + 0.2 * T + t*t;
 
         /// <summary>
         /// Realiza la simulación de un sistemas de colas de una peluqueria.

@@ -35,31 +35,40 @@ namespace sim_tp2.Utilities
 
             double x = 0;
             double y = 0;
+            double y_next = 0;
             double dydx;
+            double hdydx;
+            var primeraVuelta = true;
 
             while (y < expectedY)
             {
+                y = y_next;
+                x += h;
+
+                if (primeraVuelta)
+                {
+                    y = 0;
+                    x = 0;
+                    primeraVuelta = false;
+                }
+
                 dydx = f(x, y, c);
-                double hdydx = h * dydx;
-                //double hdydx = x + h;
-                double y_next = y + hdydx;
+                hdydx = h * dydx;
+                y_next = y + hdydx;
 
                 var iterationResultDto = new EulerIntegrationIterationDto
                 {
-                    X = x,
-                    Y = y,
-                    DyDx = dydx,
-                    H_DyDx = hdydx,
-                    YNext = y_next
+                    X = Math.Round(x, 4),
+                    Y = Math.Round(y, 4),
+                    DyDx = Math.Round(dydx, 4),
+                    H_DyDx = Math.Round(hdydx, 4),
+                    YNext = Math.Round(y_next, 4)
                 };
 
                 result.EulerIntegrationIterations.Add(iterationResultDto);
-
-                y = y_next;
-                x += h;
             }
 
-            result.Xf = x;
+            result.Xf = Math.Round(x, 4);
             return result;
         }
     }
