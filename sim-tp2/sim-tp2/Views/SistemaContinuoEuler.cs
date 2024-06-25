@@ -67,6 +67,14 @@ namespace sim_tp2.Views
             this.Close();
         }
 
+        private void label3_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+             
+        }
     }
 }
