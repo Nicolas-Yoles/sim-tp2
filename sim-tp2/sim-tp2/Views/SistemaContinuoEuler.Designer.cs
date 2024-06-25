@@ -43,12 +43,15 @@
             this.label15 = new System.Windows.Forms.Label();
             this.numericUpDownLimiteSuperiorCliente = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.numericUpDownH = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownProbabilidadAprendiz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVeteranoA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTiempoAprendiz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTiempoCorteVeterano)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLimiteInferiorCliente)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLimiteSuperiorCliente)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownH)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -153,7 +156,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(479, 286);
+            this.label13.Location = new System.Drawing.Point(479, 293);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(48, 16);
             this.label13.TabIndex = 22;
@@ -214,11 +217,36 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(305, 267);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(164, 16);
+            this.label6.TabIndex = 28;
+            this.label6.Text = "Tiempo de corte Veterano";
+            // 
+            // numericUpDownH
+            // 
+            this.numericUpDownH.DecimalPlaces = 2;
+            this.numericUpDownH.Location = new System.Drawing.Point(611, 265);
+            this.numericUpDownH.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.numericUpDownH.Maximum = new decimal(new int[] {
+            1215752192,
+            23,
+            0,
+            0});
+            this.numericUpDownH.Name = "numericUpDownH";
+            this.numericUpDownH.Size = new System.Drawing.Size(120, 22);
+            this.numericUpDownH.TabIndex = 29;
+            // 
             // SistemaContinuoEuler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(988, 418);
+            this.Controls.Add(this.numericUpDownH);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.numericUpDownLimiteSuperiorCliente);
             this.Controls.Add(this.label15);
@@ -242,6 +270,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTiempoCorteVeterano)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLimiteInferiorCliente)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLimiteSuperiorCliente)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownH)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,5 +293,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.NumericUpDown numericUpDownLimiteSuperiorCliente;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown numericUpDownH;
     }
 }

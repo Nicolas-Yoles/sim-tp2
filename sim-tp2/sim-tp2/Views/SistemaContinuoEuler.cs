@@ -28,6 +28,7 @@ namespace sim_tp2.Views
             this.numericUpDownTiempoCorteVeterano.Value = Convert.ToDecimal(130);
             this.numericUpDownLimiteInferiorCliente.Value = Convert.ToDecimal(2);
             this.numericUpDownLimiteSuperiorCliente.Value = Convert.ToDecimal(12);
+            this.numericUpDownH.Value = 0.1M;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -38,6 +39,7 @@ namespace sim_tp2.Views
             var tiempoVeterano = (double)numericUpDownTiempoCorteVeterano.Value;
             var limiteInferiorCliente = (double) numericUpDownLimiteInferiorCliente.Value;
             var limiteSuperiorCliente = (double)numericUpDownLimiteSuperiorCliente.Value;
+            var h = (double) numericUpDownH.Value;
             var sumaProbailidades = probabilidadAprendiz + probabilidadVeterano;
             if (sumaProbailidades == 1)
             {
@@ -60,8 +62,11 @@ namespace sim_tp2.Views
             parametros.TVeteranos = Convert.ToInt32(tiempoVeterano);
             parametros.LlegadaClienteLimiteInferior = Convert.ToInt32(limiteInferiorCliente);
             parametros.LlegadaClienteLimiteSuperior = Convert.ToInt32(limiteSuperiorCliente);
+            parametros.H = h;
             sistemaColaForm.RecibirProbabilidades(parametros);
             this.Close();
         }
+
+
     }
 }
