@@ -95,6 +95,12 @@
     <Compile Include="Views\Euler.Designer.cs">
       <DependentUpon>Euler.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\SistemaContinuoEuler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SistemaContinuoEuler.Designer.cs">
+      <DependentUpon>SistemaContinuoEuler.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\SistemaColasDistribucion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SistemaColas.resx">
       <DependentUpon>SistemaColas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SistemaContinuoEuler.resx">
+      <DependentUpon>SistemaContinuoEuler.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\sim_tp2.DTOs.Peluqueria.ClienteDto.datasource" />

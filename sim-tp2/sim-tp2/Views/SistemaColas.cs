@@ -258,9 +258,20 @@ namespace sim_tp2.Views
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            SistemaColasDistribucion form2 = new SistemaColasDistribucion();
-            form2.FormularioPadre = this;
-            form2.Show();
+            if (!EsConEuler)
+            {
+                SistemaColasDistribucion form2 = new SistemaColasDistribucion();
+                form2.FormularioPadre = this;
+                form2.Show();
+            }
+            else
+            {
+                SistemaContinuoEuler form3 = new SistemaContinuoEuler();
+                form3.FormularioPadre = this;
+                form3.Show();
+            }
+            
+            
         }
         public void RecibirProbabilidades(PeluqueriaParametrizacionDto param)
         {
